@@ -1,10 +1,9 @@
-import Image from 'next/image'
-import { FaGithub, FaTwitter } from 'react-icons/fa'
+import { FaGithub } from 'react-icons/fa'
 import { SOCIAL_GITHUB, SOCIAL_TWITTER } from '@/utils/config'
 
 export function Footer() {
   return (
-    <footer className="flex h-20 items-center justify-center bg-zinc-900 px-5 text-center text-lg">
+    <footer className="flex h-20 items-center justify-center bg-zinc-900 px-5 text-center text-lg text-white">
       <h4 className="mr-2">
         Made with ❤️ by{' '}
         <a
