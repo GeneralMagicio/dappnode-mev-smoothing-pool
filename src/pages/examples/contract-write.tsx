@@ -1,10 +1,10 @@
-import { Head } from '@/components/layout/Head'
 import {
   usePrepareContractWrite,
   useContractWrite,
   useWaitForTransaction,
   useNetwork,
 } from 'wagmi'
+import { Head } from '@/components/layout/Head'
 
 export default function ContractWrite() {
   const { chain } = useNetwork()

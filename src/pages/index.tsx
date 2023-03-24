@@ -1,5 +1,5 @@
-import { Head } from '@/components/layout/Head'
 import Link from 'next/link'
+import { Head } from '@/components/layout/Head'
 
 export default function Home() {
   return (
@@ -12,8 +12,8 @@ export default function Home() {
         <ul className="mt-2 list-inside list-disc text-xl">
           {items.map(({ title, url }) => (
             <li
-              className="transition duration-200 hover:opacity-60"
-              key={title}>
+              key={title}
+              className="transition duration-200 hover:opacity-60">
               <Link href={url}>{title}</Link>
             </li>
           ))}

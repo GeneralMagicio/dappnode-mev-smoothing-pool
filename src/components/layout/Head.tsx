@@ -1,5 +1,6 @@
 import NextHead from 'next/head'
 import { SITE_DESCRIPTION, SITE_NAME } from '@/utils/config'
+
 interface HeadProps {
   title?: string
   description?: string

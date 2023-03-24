@@ -1,8 +1,8 @@
 import { configureChains, createClient, WagmiConfig } from 'wagmi'
 import { publicProvider } from 'wagmi/providers/public'
 import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit'
-import { SITE_NAME, WEB3_CHAINS } from '@/utils/config'
 import { ReactNode } from 'react'
+import { SITE_NAME, WEB3_CHAINS } from '@/utils/config'
 import '@rainbow-me/rainbowkit/styles.css'
 
 const { chains, provider } = configureChains(WEB3_CHAINS, [publicProvider()])

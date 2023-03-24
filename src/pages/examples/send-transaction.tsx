@@ -50,20 +50,20 @@ export default function SendTransaction() {
             aria-label="Recipient"
             className="rounded-xl p-3 font-medium text-gray-700"
             id="recipient"
-            onChange={(e) => setTo(e.target.value)}
             placeholder="0xA0Cf…251e"
             type="text"
             value={to}
+            onChange={(e) => setTo(e.target.value)}
           />
           <label htmlFor="amount">Amount (ether)</label>
           <input
             aria-label="Amount (ether)"
             className="rounded-xl p-3 font-medium text-gray-700"
             id="amount"
-            onChange={(e) => setAmount(e.target.value)}
             placeholder="0.05"
             type="number"
             value={amount}
+            onChange={(e) => setAmount(e.target.value)}
           />
           <button
             className="mt-3 rounded-xl bg-indigo-200 p-3 text-lg font-semibold text-indigo-700 transition  duration-300 focus:ring-2 focus:ring-indigo-500 enabled:hover:bg-indigo-300 disabled:opacity-70"

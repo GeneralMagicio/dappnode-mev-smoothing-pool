@@ -1,11 +1,11 @@
 import React from 'react'
+import { DefaultSeo } from 'next-seo'
 import {
   SITE_DESCRIPTION,
   SITE_NAME,
   SITE_URL,
   SOCIAL_TWITTER,
 } from '@/utils/config'
-import { DefaultSeo } from 'next-seo'
 
 export function Seo() {
   const origin =
@@ -19,6 +19,8 @@ export function Seo() {
       defaultOpenGraphImageWidth={1200}
       defaultTitle={SITE_NAME}
       description={SITE_DESCRIPTION}
+      title={SITE_NAME}
+      titleTemplate={`%s | ${SITE_NAME}`}
       openGraph={{
         type: 'website',
         siteName: SITE_NAME,
@@ -30,8 +32,6 @@ export function Seo() {
           },
         ],
       }}
-      title={SITE_NAME}
-      titleTemplate={`%s | ${SITE_NAME}`}
       twitter={{
         handle: `@${SOCIAL_TWITTER}`,
         site: `@${SOCIAL_TWITTER}`,
