@@ -26,7 +26,10 @@ const config: StorybookConfig = {
       ...config.resolve.alias,
       '@': path.resolve(__dirname, '../src'),
     }
-
+    config.resolve.roots = [
+      path.resolve(__dirname, '../public'),
+      'node_modules',
+    ]
     return config
   },
   docs: {

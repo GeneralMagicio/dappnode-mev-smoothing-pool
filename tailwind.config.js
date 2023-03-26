@@ -16,7 +16,11 @@ module.exports = {
         DAppGray: '#A8A8A8',
       },
       fontFamily: {
-        sans: ['var(--font-inter)', ...fontFamily.sans],
+        inter: ['var(--font-inter)', ...fontFamily.sans],
+      },
+      fontSize: {
+        '2xl': '1.375rem',
+        '3xl': '1.5rem',
       },
       minHeight: {
         'screen-content': 'calc(100vh - 176px)',

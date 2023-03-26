@@ -15,7 +15,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Seo />
       <Web3Provider>
-        <MainLayout className={`${inter.variable} font-sans`}>
+        <MainLayout className={`${inter.variable} font-inter`}>
           <Component {...pageProps} />
         </MainLayout>
       </Web3Provider>
