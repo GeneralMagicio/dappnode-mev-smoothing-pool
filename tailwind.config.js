@@ -12,11 +12,17 @@ module.exports = {
         card: '0px 4px 8px rgba(224, 224, 224, 0.3)',
       },
       colors: {
+        DappBackgroundLight: '#F8F8F8',
+        'DAppPurple/900': '#7A27D3',
         DAppDeep: '#002C41',
         DAppGray: '#A8A8A8',
       },
       fontFamily: {
         inter: ['var(--font-inter)', ...fontFamily.sans],
+        urbanist: ['var(--font-urbanist)'],
+      },
+      backgroundImage: {
+        'DApppurple-linear': 'linear-gradient(to right, #9731dd ,#c237ea)',
       },
       fontSize: {
         '2xl': '1.375rem',
