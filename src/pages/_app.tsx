@@ -1,5 +1,5 @@
 import '@/styles/globals.css'
-import { Inter } from '@next/font/google'
+import { Inter, Urbanist } from '@next/font/google'
 import { MainLayout } from '@/components/layout/MainLayout'
 import { Seo } from '@/components/layout/Seo'
 import { Web3Provider } from '@/providers/Web3'
@@ -10,12 +10,18 @@ const inter = Inter({
   variable: '--font-inter',
 })
 
+const urbanist = Urbanist({
+  subsets: ['latin'],
+  variable: '--font-urbanist',
+})
+
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Seo />
       <Web3Provider>
-        <MainLayout className={`${inter.variable} font-inter`}>
+        <MainLayout
+          className={`${inter.variable} ${urbanist.variable} font-inter`}>
           <Component {...pageProps} />
         </MainLayout>
       </Web3Provider>

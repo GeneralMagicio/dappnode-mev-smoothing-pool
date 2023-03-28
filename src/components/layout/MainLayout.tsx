@@ -10,7 +10,7 @@ interface MainLayoutProps {
 
 export function MainLayout({ children, className }: MainLayoutProps) {
   return (
-    <div className={clsx('min-h-screen bg-zinc-800 text-white', className)}>
+    <div className={clsx('min-h-screen bg-DappBackgroundLight', className)}>
       <Header />
       <div className="mx-auto min-h-screen-content max-w-7xl p-8">
         {children}

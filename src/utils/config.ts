@@ -9,6 +9,25 @@ export const SOCIAL_GITHUB = 'GeneralMagicio/next-web3-starter'
 
 export const WEB3_CHAINS = [mainnet, goerli]
 
+export const PAGES = [
+  {
+    name: 'Dashboard',
+    path: '/',
+  },
+  {
+    name: 'How to use',
+    path: '/about',
+  },
+  {
+    name: 'Donate',
+    path: '/donate',
+  },
+  {
+    name: 'Analytics',
+    path: 'https://dappnode.com/',
+  },
+]
+
 export const IRON_SESSION_CONFIG = {
   cookieName: `siwe ${SITE_NAME}`,
   password:
