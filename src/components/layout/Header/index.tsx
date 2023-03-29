@@ -2,9 +2,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import clsx from 'clsx'
-import { ConnectButton } from '@rainbow-me/rainbowkit'
 import { RxExternalLink } from 'react-icons/rx'
 import { PAGES } from '@/utils/config'
+import { ConnectWalletButton } from '@/components/common/ConnectWalletButton'
 
 export function Header() {
   const router = useRouter()
@@ -48,7 +48,7 @@ justify-between border-b bg-white p-6">
           )
         })}
       </nav>
-      <ConnectButton />
+      <ConnectWalletButton />
     </header>
   )
 }
