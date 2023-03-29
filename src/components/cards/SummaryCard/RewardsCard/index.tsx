@@ -12,6 +12,8 @@ interface RewardsCardProps
 }
 
 export function RewardsCard({
+  isError,
+  isLoading,
   title,
   secondaryRewardTitle,
   secondaryReward,
@@ -22,6 +24,8 @@ export function RewardsCard({
     <SummaryCard
       bottomLeftText={secondaryRewardTitle}
       bottomRightText={`${String(secondaryReward)} ETH`}
+      isError={isError}
+      isLoading={isLoading}
       title={title}
       tooltip={tooltip}>
       <div className="flex items-center">
