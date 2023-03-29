@@ -1,6 +1,6 @@
-import { Tooltip } from './Tooltip'
 import { Error } from './Error'
 import { Skeleton } from './Skeleton'
+import { Tooltip } from '../../common/Tooltip'
 
 export interface SummaryCardProps {
   bottomLeftText?: string
