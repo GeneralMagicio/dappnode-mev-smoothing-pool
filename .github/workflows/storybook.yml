@@ -1,4 +1,4 @@
-name: Storybook Deploy
+name: Mirror Storybook Branch
 
 on:
   workflow_dispatch:
@@ -10,30 +10,14 @@ on:
       - main
 
 jobs:
-  build:
+  mirror_job:
     runs-on: ubuntu-latest
+    name: Mirror main branch to storybook branch
     steps:
-      - uses: actions/checkout@v3
-
-      - uses: pnpm/action-setup@v2
+      - name: Mirror action step
+        id: mirror
+        uses: google/mirror-branch-action@v1.0
         with:
-          version: 7
-
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: 'pnpm'
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Build Storybook
-        run: pnpm build-storybook
-
-      - name: Push changes to Storybook branch
-        uses: ad-m/github-push-action@master
-        with:
-          force_with_lease: true
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: storybook
-          directory: storybook-static
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          source: 'main'
+          dest: 'storybook'
