@@ -1,25 +1,49 @@
-import { FaGithub } from 'react-icons/fa'
-import { SOCIAL_GITHUB, SOCIAL_TWITTER } from '@/utils/config'
+import Image from 'next/image'
+import Link from 'next/link'
+import { IoLogoDiscord } from 'react-icons/io5'
+import { FaGithubSquare, FaLinkedin, FaTwitterSquare } from 'react-icons/fa'
+import { MAIN_SITE_URL, SOCIALS } from '@/utils/config'
+
+const socialIcons = {
+  Discord: IoLogoDiscord,
+  GitHub: FaGithubSquare,
+  LinkedIn: FaLinkedin,
+  Twitter: FaTwitterSquare,
+}
 
 export function Footer() {
   return (
-    <footer className="flex h-20 items-center justify-center bg-zinc-900 px-5 text-center text-lg text-white">
-      <h4 className="mr-2">
-        Made with ❤️ by{' '}
-        <a
-          className="font-bold"
-          href={`https://twitter.com/${SOCIAL_TWITTER}`}
-          rel="noreferrer"
-          target="_blank">
-          General Magic
-        </a>
-      </h4>{' '}
-      <a
-        href={`https://github.com/${SOCIAL_GITHUB}`}
-        rel="noreferrer"
+    <footer className="flex h-20 items-center justify-between border-t bg-white px-12">
+      <Link
+        className="flex items-center"
+        href={MAIN_SITE_URL}
+        rel="noopener noreferrer"
         target="_blank">
-        <FaGithub />
-      </a>
+        <Image
+          alt="Dappnode logo"
+          height={26}
+          src="/dappnode-logo.svg"
+          width={26}
+        />
+        <h4 className="ml-3 text-xs">
+          Dappnode | Decentralized P2P Networking | © 2023
+        </h4>
+      </Link>
+      <nav className="flex gap-x-5">
+        {SOCIALS.map(({ name, path }) => {
+          const Icon = socialIcons[name]
+          return (
+            <Link
+              key={name}
+              className="flex items-center"
+              href={path}
+              rel="noopener noreferrer"
+              target="_blank">
+              <Icon className="h-5 w-5 text-DAppDeep" />
+            </Link>
+          )
+        })}
+      </nav>
     </footer>
   )
 }
