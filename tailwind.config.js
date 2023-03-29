@@ -16,6 +16,7 @@ module.exports = {
         'DAppPurple/900': '#7A27D3',
         DAppDeep: '#002C41',
         DAppGray: '#A8A8A8',
+        DappDarkGray: '#5F5F5F',
         DAppLight: '#F8F8F8',
         DappOrange: '#FC9E22',
       },

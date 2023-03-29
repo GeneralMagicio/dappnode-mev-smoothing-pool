@@ -11,12 +11,29 @@ type Story = StoryObj<typeof Button>
 
 export const Primary: Story = {
   args: {
+    buttonType: 'primary',
     text: 'Button',
   },
 }
 
-export const Disabled: Story = {
+export const PrimaryDisabled: Story = {
   args: {
+    buttonType: 'primary',
+    text: 'Button',
+    isDisabled: true,
+  },
+}
+
+export const Secondary: Story = {
+  args: {
+    buttonType: 'secondary',
+    text: 'Button',
+  },
+}
+
+export const SecondaryDisabled: Story = {
+  args: {
+    buttonType: 'secondary',
     text: 'Button',
     isDisabled: true,
   },
