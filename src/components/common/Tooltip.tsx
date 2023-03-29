@@ -1,17 +1,32 @@
-import { AiOutlineInfoCircle } from 'react-icons/ai'
+import { AiOutlineInfoCircle, AiOutlineQuestionCircle } from 'react-icons/ai'
 import * as RadixTooltip from '@radix-ui/react-tooltip'
+import clsx from 'clsx'
 
 interface TooltipProps {
+  className?: string
+  iconType?: 'info' | 'question'
   tooltip: string
 }
 
-export function Tooltip({ tooltip }: TooltipProps) {
+export function Tooltip({
+  className,
+  iconType = 'info',
+  tooltip,
+}: TooltipProps) {
   return (
     <RadixTooltip.Provider delayDuration={300}>
       <RadixTooltip.Root>
         <RadixTooltip.Trigger asChild>
           <button type="button">
-            <AiOutlineInfoCircle className="h-[17px] w-[17px] text-DAppDeep" />
+            {iconType === 'info' ? (
+              <AiOutlineInfoCircle
+                className={clsx('h-[17px] w-[17px] text-DAppDeep', className)}
+              />
+            ) : (
+              <AiOutlineQuestionCircle
+                className={clsx('h-[17px] w-[17px] text-DAppDeep', className)}
+              />
+            )}
           </button>
         </RadixTooltip.Trigger>
         <RadixTooltip.Portal>
