@@ -17,5 +17,4 @@ jobs:
       - name: Mirror action step
         uses: zofrex/mirror-branch@v1
         with:
-          force: false
           target-branch: storybook
