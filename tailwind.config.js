@@ -23,6 +23,7 @@ module.exports = {
       },
       backgroundImage: {
         'DApppurple-linear': 'linear-gradient(to right, #9731dd ,#c237ea)',
+        'wave-pattern': "url('/images/wave-pattern.svg')",
       },
       fontSize: {
         '2xl': '1.375rem',
