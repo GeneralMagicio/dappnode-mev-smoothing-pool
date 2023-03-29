@@ -1,12 +1,15 @@
-import { SummaryCard } from '..'
+import { SummaryCard, SummaryCardProps } from '..'
 import { subtractDates } from '@/utils/dateTime'
 
-interface LastCheckpointCardProps {
+interface LastCheckpointCardProps
+  extends Pick<SummaryCardProps, 'isError' | 'isLoading'> {
   nextCheckpointDate: Date
   lastCheckpointDate: Date
 }
 
 export function LastCheckpointCard({
+  isError,
+  isLoading,
   nextCheckpointDate,
   lastCheckpointDate,
 }: LastCheckpointCardProps) {
@@ -32,6 +35,8 @@ export function LastCheckpointCard({
     // Add tooltip prop to SummaryCard
     <SummaryCard
       bottomLeftText={`Next in: ${nextCheckpointString}`}
+      isError={isError}
+      isLoading={isLoading}
       title="Last Checkpoint"
       tooltip="Last checkpoint lorem ipsum">
       <h4 className="text-base font-normal leading-7 text-DAppDeep ">
