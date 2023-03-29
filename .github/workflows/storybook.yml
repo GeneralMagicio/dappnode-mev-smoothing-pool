@@ -1,0 +1,33 @@
+name: Storybook Deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build Storybook
+        run: pnpm build-storybook
+
+      - name: Push changes to Storybook branch
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: storybook
+          directory: storybook-static
