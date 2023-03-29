@@ -38,3 +38,18 @@ export const SecondaryDisabled: Story = {
     isDisabled: true,
   },
 }
+
+export const Warning: Story = {
+  args: {
+    buttonType: 'warning',
+    text: 'Button',
+  },
+}
+
+export const WarningDisabled: Story = {
+  args: {
+    buttonType: 'warning',
+    text: 'Button',
+    isDisabled: true,
+  },
+}
