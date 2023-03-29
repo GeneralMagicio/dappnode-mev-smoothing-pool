@@ -15,9 +15,7 @@ jobs:
     name: Mirror main branch to storybook branch
     steps:
       - name: Mirror action step
-        id: mirror
-        uses: google/mirror-branch-action@v1.0
+        uses: zofrex/mirror-branch@v1
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          source: 'main'
-          dest: 'storybook'
+          force: false
+          target-branch: deployment
