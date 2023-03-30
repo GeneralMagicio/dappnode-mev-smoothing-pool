@@ -20,9 +20,9 @@ export function ConnectWalletButton() {
             <Button
               buttonType="primary"
               className="max-w-fit"
-              text="Connect Wallet"
-              onPress={openConnectModal}
-            />
+              onPress={openConnectModal}>
+              Connect Wallet
+            </Button>
           )
         }
 
@@ -31,9 +31,9 @@ export function ConnectWalletButton() {
             <Button
               buttonType="warning"
               className="max-w-fit"
-              text="Wrong Network"
-              onPress={openChainModal}
-            />
+              onPress={openChainModal}>
+              Wrong Network
+            </Button>
           )
         }
 
@@ -41,9 +41,9 @@ export function ConnectWalletButton() {
           <Button
             buttonType="secondary"
             className="max-w-fit"
-            text={shortenEthAddress(account.address as `0x${string}`)}
-            onPress={openAccountModal}
-          />
+            onPress={openAccountModal}>
+            {shortenEthAddress(account.address as `0x${string}`)}
+          </Button>
         )
       }}
     </ConnectButton.Custom>
