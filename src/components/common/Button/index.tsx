@@ -3,16 +3,16 @@ import { useRef } from 'react'
 import clsx from 'clsx'
 
 interface ButtonProps extends AriaButtonProps {
+  children: React.ReactNode
   className?: string
   isLoading?: boolean
-  text: string
   buttonType?: 'primary' | 'secondary' | 'warning'
 }
 
 export function Button(props: ButtonProps) {
   const ref = useRef<HTMLButtonElement>(null)
   const { buttonProps } = useButton(props, ref)
-  const { buttonType = 'primary', className, text } = props
+  const { buttonType = 'primary', children, className } = props
 
   return (
     <button
@@ -22,12 +22,12 @@ export function Button(props: ButtonProps) {
         buttonType === 'primary'
           ? 'bg-DApppurple-linear text-white '
           : buttonType === 'secondary'
-          ? 'border-2 border-DAppGray bg-white text-DappDarkGray'
+          ? 'border-2 border-DAppGray bg-white text-DAppDarkGray'
           : 'bg-red-500 text-white ',
         className
       )}
       {...buttonProps}>
-      {text}
+      {children}
     </button>
   )
 }

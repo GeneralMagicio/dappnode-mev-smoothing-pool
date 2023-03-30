@@ -53,7 +53,7 @@ export function MyRewards({
         title="Pending"
         tooltip="Rewards that are still pending to be claimed"
       />
-      <Button isDisabled={isDisabled} text="Claim all" />
+      <Button isDisabled={isDisabled}>Claim all</Button>
     </BaseCard>
   )
 }

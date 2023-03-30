@@ -12,14 +12,14 @@ type Story = StoryObj<typeof Button>
 export const Primary: Story = {
   args: {
     buttonType: 'primary',
-    text: 'Button',
+    children: 'Button',
   },
 }
 
 export const PrimaryDisabled: Story = {
   args: {
     buttonType: 'primary',
-    text: 'Button',
+    children: 'Button',
     isDisabled: true,
   },
 }
@@ -27,14 +27,14 @@ export const PrimaryDisabled: Story = {
 export const Secondary: Story = {
   args: {
     buttonType: 'secondary',
-    text: 'Button',
+    children: 'Button',
   },
 }
 
 export const SecondaryDisabled: Story = {
   args: {
     buttonType: 'secondary',
-    text: 'Button',
+    children: 'Button',
     isDisabled: true,
   },
 }
@@ -42,14 +42,14 @@ export const SecondaryDisabled: Story = {
 export const Warning: Story = {
   args: {
     buttonType: 'warning',
-    text: 'Button',
+    children: 'Button',
   },
 }
 
 export const WarningDisabled: Story = {
   args: {
     buttonType: 'warning',
-    text: 'Button',
+    children: 'Button',
     isDisabled: true,
   },
 }
