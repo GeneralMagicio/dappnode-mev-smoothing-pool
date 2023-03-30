@@ -13,6 +13,7 @@ specifiers:
   '@storybook/nextjs': ^7.0.0-rc.7
   '@storybook/react': ^7.0.0-rc.7
   '@storybook/testing-library': ^0.0.14-next.1
+  '@tanstack/react-table': ^8.8.4
   '@types/node': 18.14.0
   '@types/react': 18.0.28
   '@types/react-dom': 18.0.11
@@ -54,6 +55,7 @@ dependencies:
   '@next/font': 13.1.6
   '@radix-ui/react-tooltip': 1.0.5_zula6vjvt3wdocc4mwcxqa6nzi
   '@rainbow-me/rainbowkit': 0.11.1_n6t5aahpmtkwjlwfqif42jvo7q
+  '@tanstack/react-table': 8.8.4_biqbaboplfbrettd7655fr4n2y
   '@types/react': 18.0.28
   '@types/react-dom': 18.0.11
   '@wagmi/chains': 0.2.14_typescript@4.9.5
@@ -6423,6 +6425,23 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       use-sync-external-store: 1.2.0_react@18.2.0
+    dev: false
+
+  /@tanstack/react-table/8.8.4_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-5w2AoBnDBJYuUa80sLOqelcG/eJdGwIPFBRnEiU3RCAEeZ1QIhYse/0vzhTY8VAcTXa2sjWhXNDWci4VlktNmg==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      '@tanstack/table-core': 8.8.4
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /@tanstack/table-core/8.8.4:
+    resolution: {integrity: sha512-4gq0A/Qz/JFuclxPd1UnNi5P57vbVF10mPK743Iuv2ORLLgF/O/XkaYjYDGw5SHMof8CgiT/nfdJdlgHsOfRIg==}
+    engines: {node: '>=12'}
     dev: false
 
   /@testing-library/dom/8.20.0:
