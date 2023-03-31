@@ -7,6 +7,8 @@ interface BaseDialogProps {
   children: React.ReactNode
   title?: string
   subtitle?: string
+  open?: boolean
+  handleOpenChange: (open: boolean) => void
 }
 
 export function BaseDialog({
@@ -14,9 +16,11 @@ export function BaseDialog({
   subtitle,
   title,
   triggerText,
+  open,
+  handleOpenChange,
 }: BaseDialogProps) {
   return (
-    <Dialog.Root>
+    <Dialog.Root open={open} onOpenChange={handleOpenChange}>
       <Dialog.Trigger asChild>
         <Button>{triggerText}</Button>
       </Dialog.Trigger>
