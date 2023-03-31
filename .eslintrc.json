@@ -30,6 +30,7 @@
     "no-nested-ternary": "off",
     "import/prefer-default-export": "off",
     "import/no-extraneous-dependencies": "off",
+    "react/display-name": "off",
     "react/require-default-props": "off",
     "react/jsx-props-no-spreading": "off",
     "@typescript-eslint/no-explicit-any": "error",
