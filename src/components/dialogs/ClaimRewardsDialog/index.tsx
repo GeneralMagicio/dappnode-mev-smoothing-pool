@@ -16,9 +16,13 @@ export function ClaimRewardsDialog() {
     setDialogState('initial')
   }
 
+  const handleOpenChangeDialog = (newOpen: boolean) => {
+    handleOpenChange(newOpen)
+    if (!newOpen) setDialogState('initial')
+  }
   return (
     <BaseDialog
-      handleOpenChange={handleOpenChange}
+      handleOpenChange={handleOpenChangeDialog}
       open={open}
       subtitle="Claim rewards"
       triggerText="Claim All">

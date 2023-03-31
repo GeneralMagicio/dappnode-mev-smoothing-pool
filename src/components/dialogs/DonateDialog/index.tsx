@@ -16,9 +16,14 @@ export function DonateDialog() {
     setDialogState('initial')
   }
 
+  const handleOpenChangeDialog = (newOpen: boolean) => {
+    handleOpenChange(newOpen)
+    if (!newOpen) setDialogState('initial')
+  }
+
   return (
     <BaseDialog
-      handleOpenChange={handleOpenChange}
+      handleOpenChange={handleOpenChangeDialog}
       open={open}
       subtitle="Donate to DAppNode"
       triggerText="Donate now">
