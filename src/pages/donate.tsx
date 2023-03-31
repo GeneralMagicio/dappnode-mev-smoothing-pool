@@ -1,6 +1,6 @@
 import Image from 'next/image'
-import { Button } from '@/components/common/Button'
 import { Head } from '@/components/layout/Head'
+import { DonateDialog } from '@/components/dialogs/DonateDialog'
 
 export default function Donate() {
   return (
@@ -98,9 +98,9 @@ export default function Donate() {
             habitasse. Orci leo id amet sit. Feugiat quisque mi auctor pharetra.
             Diam purus lorem ut felis adipiscing dis cras.
           </p>
-          <Button className="mt-8 max-w-[220px]">
-            <p className="text-base font-medium">Donate now</p>
-          </Button>
+          <div className="mt-8 max-w-[220px]">
+            <DonateDialog />
+          </div>
         </article>
       </main>
     </>
