@@ -27,7 +27,7 @@ export function usePagination({
   }
 
   const paginationRange = useMemo(() => {
-    const totalPageNumbers = 5
+    const totalPageNumbers = 6
 
     if (totalPageNumbers >= totalPageCount) {
       return range(1, totalPageCount)
@@ -40,7 +40,8 @@ export function usePagination({
     )
 
     const shouldShowLeftDots = leftSiblingIndex > 3
-    const shouldShowRightDots = rightSiblingIndex < totalPageCount - 3
+    const shouldShowRightDots = rightSiblingIndex < totalPageCount - 2
+
     const firstPageIndex = 1
     const lastPageIndex = totalPageCount
 
