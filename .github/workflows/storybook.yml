@@ -1,20 +1,21 @@
-name: Mirror Storybook Branch
+name: Build and Deploy Storybook
 
 on:
   workflow_dispatch:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
-  mirror_job:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    name: Mirror main branch to storybook branch
+    name: Deploy Storybook
     steps:
-      - name: Mirror action step
-        uses: zofrex/mirror-branch@v1
+      - uses: actions/checkout@v3
+      - name: Merge main -> storybook
+        uses: devmasx/merge-branch@1.4.0
         with:
-          target-branch: storybook
+          type: now
+          from_branch: main
+          target_branch: storybook
+          github_token: ${{ github.token }}

@@ -12,12 +12,14 @@ module.exports = {
         card: '0px 4px 8px rgba(224, 224, 224, 0.3)',
       },
       colors: {
-        DappBackgroundLight: '#F8F8F8',
+        DAppBlue: '#007DFC',
+        DAppBackgroundLight: '#F8F8F8',
         'DAppPurple/900': '#7A27D3',
         DAppDeep: '#002C41',
         DAppGray: '#A8A8A8',
-        DappDarkGray: '#5F5F5F',
+        DAppDarkGray: '#5F5F5F',
         DAppLight: '#F8F8F8',
+        'DAppNeutral/500': '#737992',
         DappOrange: '#FC9E22',
       },
       fontFamily: {
