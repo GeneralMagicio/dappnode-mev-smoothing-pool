@@ -1,8 +1,9 @@
 import { mainnet, goerli } from '@wagmi/chains'
 
-export const SITE_NAME = 'Next.js Web3 Starter'
-export const SITE_DESCRIPTION = 'Next.js + Web3 powered by General Magic.'
-export const SITE_URL = 'https://starter.generalmagic.io/'
+export const SITE_NAME = 'Dappnode MEV Smoothing Pool'
+export const SITE_DESCRIPTION =
+  'Dappnode MEV Smoothing Pool is a dashboard for Ethereum validators to join and receive a share of block proposal fees, ensuring a more stable and predictable return on investment.'
+export const SITE_URL = 'https://dappnode-mev-pool.vercel.app/'
 export const MAIN_SITE_URL = 'https://dappnode.com/'
 
 export const SOCIAL_DISCORD = 'dappnode'
