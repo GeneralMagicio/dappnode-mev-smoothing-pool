@@ -1,24 +1,27 @@
 import { Pagination } from './Pagination'
 import { TableDataTypes } from '../types'
+import clsx from 'clsx'
 import { flexRender, type Table as TableType } from '@tanstack/react-table'
 
 interface TableProps<T> {
+  className?: string
   data: T[]
   table: TableType<T>
   title: string
 }
 
-export function TableLayout({
+export function TableLayout<T extends TableDataTypes>({
+  className,
+  data,
   table,
   title,
-  data,
-}: TableProps<TableDataTypes>) {
+}: TableProps<T>) {
   return (
-    <div className="h-[548px] w-full overflow-hidden rounded-lg bg-white">
+    <div className={clsx('w-full overflow-hidden rounded-lg bg-white')}>
       <h3 className="p-6 text-2xl font-bold leading-8 text-DAppDeep">
         {title}
       </h3>
-      <div className="h-[410px]">
+      <div className={className}>
         <table className=" w-full table-auto">
           <thead className="w-full border-t-[0.5px] border-DAppNeutral/100 bg-DAppNeutral/50 px-[20px]">
             {table.getHeaderGroups().map((headerGroup) => (
@@ -46,7 +49,7 @@ export function TableLayout({
                 {row.getVisibleCells().map((cell) => (
                   <td
                     key={cell.id}
-                    className="py-2 px-7 text-sm font-normal text-DAppDeep">
+                    className="py-3 px-7 text-sm font-normal text-DAppDeep">
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}

@@ -3,7 +3,7 @@ import { Web3Decorator } from 'storybook/decorators/Web3Decorator'
 import type { Validator } from '../types'
 import type { Meta, StoryObj } from '@storybook/react'
 
-const data = [
+const data: Validator[] = [
   {
     address: '0x95222290DD7278Aa3Ddd389Cc1E1d165CC4BAfe5',
     pending: 1.21,
@@ -53,7 +53,7 @@ const data = [
     warning: 'yellow',
     subscribed: false,
   },
-] as Validator[]
+]
 
 const meta: Meta<typeof MyValidatorsTable> = {
   title: 'table/MyValidatorsTable',
