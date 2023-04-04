@@ -1,10 +1,10 @@
 export type Warnings = 'none' | 'yellow' | 'red'
 
-interface WarningProps {
+interface WarningIconProps {
   warning: Warnings
 }
 
-export function Warning({ warning }: WarningProps) {
+export function WarningIcon({ warning }: WarningIconProps) {
   if (warning === 'none') {
     return null
   }

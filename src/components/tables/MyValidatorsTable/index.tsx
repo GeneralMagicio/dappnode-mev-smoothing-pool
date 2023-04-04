@@ -1,4 +1,6 @@
-import { Warning } from './components/Warning'
+import { WarningIcon } from './components/WarningIcon'
+import { Skeleton } from './components/Skeleton'
+import { NotConnectedWarning } from './components/NotConnectedWarning'
 import { headerTooltip, PAGE_SIZE } from './config'
 import { TableLayout } from '../components/Table'
 import { HeaderTooltip } from '../components/HeaderTooltip'
@@ -37,7 +39,7 @@ const columns = [
     header: () => (
       <HeaderTooltip header="Warning" tooltip={headerTooltip?.warning} />
     ),
-    cell: (info) => <Warning warning={info.getValue()} />,
+    cell: (info) => <WarningIcon warning={info.getValue()} />,
   }),
   columnHelper.accessor('subscribed', {
     header: '',
@@ -57,13 +59,14 @@ const columns = [
 ]
 
 interface MyValidatorsTableProps {
-  data: Validator[]
+  data?: Validator[]
+  state: 'loading' | 'not connected' | 'success'
 }
 
-export function MyValidatorsTable({ data }: MyValidatorsTableProps) {
+export function MyValidatorsTable({ data, state }: MyValidatorsTableProps) {
   const table = useReactTable({
     columns,
-    data,
+    data: data ?? [],
     initialState: {
       pagination: {
         pageSize: PAGE_SIZE,
@@ -73,5 +76,13 @@ export function MyValidatorsTable({ data }: MyValidatorsTableProps) {
     getPaginationRowModel: getPaginationRowModel(),
   })
 
-  return <TableLayout data={data} table={table} title="My Validators" />
+  if (state === 'not connected') {
+    return <NotConnectedWarning title="My Validators" />
+  }
+
+  if (state === 'loading') {
+    return <Skeleton title="My Validators" />
+  }
+
+  return <TableLayout data={data ?? []} table={table} title="My Validators" />
 }

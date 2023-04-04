@@ -1,4 +1,4 @@
-import type { Warnings } from './MyValidatorsTable/components/Warning'
+import type { Warnings } from './MyValidatorsTable/components/WarningIcon'
 
 export interface Validator {
   address: `0x${string}`

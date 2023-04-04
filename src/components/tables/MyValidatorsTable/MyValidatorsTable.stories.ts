@@ -1,8 +1,9 @@
 import { MyValidatorsTable } from '.'
+import { Web3Decorator } from 'storybook/decorators/Web3Decorator'
 import type { Validator } from '../types'
 import type { Meta, StoryObj } from '@storybook/react'
 
-export const data = [
+const data = [
   {
     address: '0x95222290DD7278Aa3Ddd389Cc1E1d165CC4BAfe5',
     pending: 1.21,
@@ -63,7 +64,9 @@ export default meta
 type Story = StoryObj<typeof MyValidatorsTable>
 
 export const Primary: Story = {
+  decorators: [Web3Decorator],
   args: {
+    state: 'success',
     data,
   },
 }
