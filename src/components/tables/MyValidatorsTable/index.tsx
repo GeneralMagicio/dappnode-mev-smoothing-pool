@@ -84,5 +84,12 @@ export function MyValidatorsTable({ data, state }: MyValidatorsTableProps) {
     return <Skeleton title="My Validators" />
   }
 
-  return <TableLayout data={data ?? []} table={table} title="My Validators" />
+  return (
+    <TableLayout
+      className="h-[410px]"
+      data={data ?? []}
+      table={table}
+      title="My Validators"
+    />
+  )
 }
