@@ -3,7 +3,7 @@ import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 
 const meta: Meta<typeof Pagination> = {
-  title: 'table/Pagination',
+  title: 'table/components/Pagination',
   component: Pagination,
 
   decorators: [

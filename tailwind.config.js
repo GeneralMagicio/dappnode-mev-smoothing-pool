@@ -19,8 +19,12 @@ module.exports = {
         DAppGray: '#A8A8A8',
         DAppDarkGray: '#5F5F5F',
         DAppLight: '#F8F8F8',
+        'DAppNeutral/50': '#F0F2F6',
+        'DAppNeutral/100': '#D9DDEA',
         'DAppNeutral/500': '#737992',
-        DappOrange: '#FC9E22',
+        DAppOrange: '#FC9E22',
+        'DAppOrange/800': '#FFAE43',
+        DAppRed: '#FB2047',
       },
       fontFamily: {
         inter: ['var(--font-inter)', ...fontFamily.sans],

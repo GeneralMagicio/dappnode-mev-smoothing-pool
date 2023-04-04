@@ -18,8 +18,8 @@ export function Pagination({
   totalItems,
   itemsPerPage,
 }: PaginationProps) {
-  const isFirstPage = currentPage === 1
-  const isLastPage = currentPage === totalPages
+  const isFirstPage = currentPage === 0
+  const isLastPage = currentPage === totalPages - 1
 
   const { paginationRange, handleSetPage } = usePagination({
     currentPage,
@@ -46,12 +46,13 @@ export function Pagination({
             type="button"
             className={clsx(
               'rounded py-2 px-3',
-              page === currentPage && 'bg-DAppLight hover:bg-DAppLight',
+              currentPage === Number(page) - 1 &&
+                'bg-DAppLight text-DAppBlue hover:bg-DAppLight',
               typeof page === 'number'
-                ? 'cursor-pointer hover:bg-DAppLight/50'
+                ? 'cursor-pointer hover:bg-DAppLight/80'
                 : 'cursor-default'
             )}
-            onClick={() => handleSetPage(page)}>
+            onClick={() => handleSetPage(Number(page) - 1)}>
             {page}
           </button>
         ))}
