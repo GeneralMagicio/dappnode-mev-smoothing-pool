@@ -41,14 +41,16 @@ export const SecondaryDisabled: Story = {
 
 export const Warning: Story = {
   args: {
-    buttonType: 'warning',
+    buttonType: 'secondary',
+    color: 'red',
     children: 'Button',
   },
 }
 
 export const WarningDisabled: Story = {
   args: {
-    buttonType: 'warning',
+    buttonType: 'secondary',
+    color: 'red',
     children: 'Button',
     isDisabled: true,
   },
