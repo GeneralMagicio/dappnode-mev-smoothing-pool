@@ -29,8 +29,9 @@ export function ConnectWalletButton() {
         if (chain.unsupported) {
           return (
             <Button
-              buttonType="warning"
+              buttonType="secondary"
               className="max-w-fit"
+              color="red"
               onPress={openChainModal}>
               Wrong Network
             </Button>
@@ -41,6 +42,7 @@ export function ConnectWalletButton() {
           <Button
             buttonType="secondary"
             className="max-w-fit"
+            color="gray"
             onPress={openAccountModal}>
             {shortenEthAddress(account.address as `0x${string}`)}
           </Button>
