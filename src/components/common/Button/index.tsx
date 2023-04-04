@@ -5,6 +5,7 @@ import clsx from 'clsx'
 interface ButtonProps extends AriaButtonProps {
   children: React.ReactNode
   color?: 'red' | 'blue' | 'linear-purple' | 'gray'
+  size?: 'sm' | 'md' | 'lg'
   className?: string
   isLoading?: boolean
   buttonType?: 'primary' | 'secondary' | 'tertiary'
@@ -18,13 +19,17 @@ export function Button(props: ButtonProps) {
     children,
     className,
     color = 'linear-purple',
+    size = 'lg',
   } = props
 
   return (
     <button
       type="button"
       className={clsx(
-        'w-full rounded py-4 px-8 text-sm font-semibold outline-none transition duration-200 hover:opacity-90 active:opacity-80 disabled:opacity-75',
+        'w-full rounded text-sm font-semibold outline-none transition duration-200 hover:opacity-90 active:opacity-80 disabled:opacity-75',
+        size === 'sm' && 'py-1.5 px-3',
+        size === 'md' && 'py-2 px-4',
+        size === 'lg' && 'py-4 px-8',
         buttonType === 'primary' && 'text-white',
         buttonType === 'secondary' && 'border-2  bg-white',
         buttonType === 'tertiary' && 'border-none bg-white',
@@ -50,7 +55,7 @@ const colors = {
   },
   blue: {
     primary: 'bg-DAppBlue',
-    secondary: 'border-DAppBluetext-DAppBlue',
+    secondary: 'border-DAppBlue text-DAppBlue',
     tertiary: 'text-DAppBlue',
   },
   gray: {
