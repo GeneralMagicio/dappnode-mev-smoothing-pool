@@ -30,7 +30,7 @@ export function Pagination({
   return (
     <div className="flex w-full items-center justify-between bg-white px-8 py-3">
       <p className="text-sm font-normal text-DAppNeutral/500 ">
-        Showing {itemsPerPage} of {totalItems} Results
+        Showing {Math.min(itemsPerPage, totalItems)} of {totalItems} Results
       </p>
       <div className="flex items-center gap-x-[2px] text-sm text-DAppDeep">
         <button
