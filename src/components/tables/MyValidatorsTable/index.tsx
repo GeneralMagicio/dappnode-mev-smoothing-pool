@@ -91,7 +91,7 @@ export function MyValidatorsTable({
 
   return (
     <TableLayout
-      className="h-[410px]"
+      className="h-[394px]"
       data={data ?? []}
       table={table}
       title="My Validators"

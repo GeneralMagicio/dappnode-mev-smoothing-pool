@@ -30,7 +30,7 @@ export function Pagination({
   })
 
   return (
-    <div className="flex w-full items-center justify-between bg-white px-8 py-3">
+    <div className="flex h-[60px]  w-full items-center justify-between bg-white px-8 py-3">
       <p className="text-sm font-normal text-DAppNeutral/500 ">
         Showing {Math.min(itemsPerPage, totalItems)} of {totalItems} Results
       </p>
