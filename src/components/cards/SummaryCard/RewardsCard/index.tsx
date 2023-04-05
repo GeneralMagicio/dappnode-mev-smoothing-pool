@@ -1,14 +1,15 @@
 import { SummaryCard, type SummaryCardProps } from '..'
 import { FaEthereum } from 'react-icons/fa'
+import { weiToEth } from '@/utils/web3'
 
 interface RewardsCardProps
   extends Omit<
     SummaryCardProps,
     'children' | 'bottomLeftText' | 'bottomRightText'
   > {
-  ethReward: number
+  ethRewardWei: number | undefined
   secondaryRewardTitle: string
-  secondaryReward: number
+  secondaryRewardWei: number | undefined
 }
 
 export function RewardsCard({
@@ -16,14 +17,17 @@ export function RewardsCard({
   isLoading,
   title,
   secondaryRewardTitle,
-  secondaryReward,
+  secondaryRewardWei,
   tooltip,
-  ethReward,
+  ethRewardWei,
 }: RewardsCardProps) {
+  const ethReward = weiToEth(ethRewardWei)
+  const secondaryReward = weiToEth(secondaryRewardWei)
+
   return (
     <SummaryCard
       bottomLeftText={secondaryRewardTitle}
-      bottomRightText={`${String(secondaryReward)} ETH`}
+      bottomRightText={`${String(secondaryReward.toFixed(4))} ETH`}
       isError={isError}
       isLoading={isLoading}
       title={title}
@@ -32,7 +36,7 @@ export function RewardsCard({
         <FaEthereum className="mr-2 h-[24px] w-[14px] text-DAppDeep" />
         <div className="flex items-baseline">
           <h4 className="mr-1 text-2xl font-bold leading-8 text-DAppDeep">
-            {ethReward}
+            {ethReward.toFixed(4)}
           </h4>
           <h5 className="text-lg font-normal leading-6 text-DAppGray">ETH</h5>
         </div>

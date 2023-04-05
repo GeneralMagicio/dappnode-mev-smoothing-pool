@@ -1,3 +1,5 @@
+import { BigNumber, utils } from 'ethers'
+
 /**
  * Shorten Ethereum address to 0x123...456 format
  * @param address Ethereum address
@@ -31,3 +33,10 @@ export const shortenEthAddress = (
  * // => '1.23 ETH'
  */
 export const addEthSuffix = (value: number) => `${value} ETH`
+
+export const weiToEth = (wei: string | number | undefined) => {
+  if (!wei) return 0
+  const weiAsBigNumber = BigNumber.from(String(wei))
+  const etherAsString = utils.formatEther(weiAsBigNumber)
+  return parseFloat(etherAsString)
+}

@@ -1,46 +1,26 @@
 import { SummaryCard, SummaryCardProps } from '..'
-import { subtractDates } from '@/utils/dateTime'
 
 interface LastCheckpointCardProps
   extends Pick<SummaryCardProps, 'isError' | 'isLoading'> {
-  nextCheckpointDate: Date
-  lastCheckpointDate: Date
+  lastCheckpoint: number | undefined
+  nextCheckpoint: number | undefined
 }
 
 export function LastCheckpointCard({
+  lastCheckpoint,
+  nextCheckpoint,
   isError,
   isLoading,
-  nextCheckpointDate,
-  lastCheckpointDate,
 }: LastCheckpointCardProps) {
-  const nextCheckpointString = subtractDates(
-    new Date(nextCheckpointDate),
-    new Date(),
-    'hh:mm:ss'
-  )
-  // convert lastCheckpointDate to 'dddd MMM DD YYYY HH:mm:ss Z'
-  const options = {
-    weekday: 'long',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-    timeZone: 'UTC',
-    timeZoneName: 'short',
-  } as const
-  const lastCheckpointString = new Date(lastCheckpointDate)
-    .toLocaleString('en-DE', options)
-    .replace(',', ' at ')
-
   return (
-    // Add tooltip prop to SummaryCard
     <SummaryCard
-      bottomLeftText={`Next in: ${nextCheckpointString}`}
+      bottomLeftText={`Next checkpoint: ${nextCheckpoint}`}
       isError={isError}
       isLoading={isLoading}
       title="Last Checkpoint"
       tooltip="Last checkpoint lorem ipsum">
       <h4 className="text-base font-normal leading-7 text-DAppDeep ">
-        {lastCheckpointString}
+        {lastCheckpoint}
       </h4>
     </SummaryCard>
   )
