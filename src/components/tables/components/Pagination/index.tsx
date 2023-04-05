@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid'
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io'
 import clsx from 'clsx'
 import { Dispatch, SetStateAction } from 'react'
@@ -42,7 +43,7 @@ export function Pagination({
         </button>
         {paginationRange?.map((page) => (
           <button
-            key={crypto.randomUUID()}
+            key={uuidv4()}
             type="button"
             className={clsx(
               'rounded py-2 px-3',
