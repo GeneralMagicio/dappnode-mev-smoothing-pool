@@ -11,9 +11,9 @@ export function HeaderTooltip({ header, tooltip }: HeaderTooltipProps) {
   }
 
   return (
-    <div className="flex items-center justify-center">
+    <span className="flex items-center justify-center">
       <span className="mr-2">{header}</span>
       <Tooltip tooltip={tooltip} />
-    </div>
+    </span>
   )
 }

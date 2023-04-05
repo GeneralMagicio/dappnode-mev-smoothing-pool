@@ -17,7 +17,7 @@ export function usePagination({
 }: UsePaginationProps) {
   const handleSetPage = (page: number | string) => {
     if (typeof page === 'number') {
-      setCurrentPage(page)
+      setCurrentPage(page - 1)
     }
   }
 

@@ -8,7 +8,7 @@ interface NotConnectedWarningProps {
 
 export function NotConnectedWarning({ title }: NotConnectedWarningProps) {
   return (
-    <div className="relative">
+    <div className="relative w-full">
       <Skeleton title={title} />
       <div className="absolute top-28 left-0 flex h-full w-full flex-col items-center">
         <CheckIcon />
