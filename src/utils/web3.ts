@@ -34,6 +34,16 @@ export const shortenEthAddress = (
  */
 export const addEthSuffix = (value: number) => `${value} ETH`
 
+/*
+ * Convert wei to ether
+ * @param wei Wei value
+ * @returns Ether value as a number. Returns 0 if number is undefined
+ * @example
+ * weiToEth(1234567890000000000)
+ * // => 1.23456789
+ * weiToEth(undefined)
+ * // => 0
+ */
 export const weiToEth = (wei: string | number | undefined) => {
   if (!wei) return 0
   const weiAsBigNumber = BigNumber.from(String(wei))
