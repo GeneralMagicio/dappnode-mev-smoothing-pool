@@ -21,9 +21,10 @@ export function Pagination({
 }: PaginationProps) {
   const isFirstPage = currentPage === 0
   const isLastPage = currentPage === totalPages - 1
+  const hasMultiplePages = totalPages > 1
 
   const { paginationRange, handleSetPage } = usePagination({
-    currentPage,
+    currentPage: currentPage + 1,
     totalPageCount: totalPages,
     setCurrentPage,
   })
@@ -34,16 +35,20 @@ export function Pagination({
         Showing {Math.min(itemsPerPage, totalItems)} of {totalItems} Results
       </p>
       <div className="flex items-center gap-x-[2px] text-sm text-DAppDeep">
-        <button
-          className={isFirstPage ? 'text-DAppNeutral/500' : ''}
-          disabled={isFirstPage}
-          type="button"
-          onClick={() => setCurrentPage(currentPage - 1)}>
-          <IoIosArrowBack />
-        </button>
+        {hasMultiplePages && (
+          <button
+            className={isFirstPage ? 'text-DAppNeutral/500' : ''}
+            disabled={isFirstPage}
+            type="button"
+            onClick={() => setCurrentPage(currentPage - 1)}>
+            <IoIosArrowBack />
+          </button>
+        )}
+
         {paginationRange?.map((page) => (
           <button
             key={uuidv4()}
+            disabled={typeof page === 'string'}
             type="button"
             className={clsx(
               'rounded py-2 px-3',
@@ -53,17 +58,19 @@ export function Pagination({
                 ? 'cursor-pointer hover:bg-DAppLight/80'
                 : 'cursor-default'
             )}
-            onClick={() => handleSetPage(Number(page) - 1)}>
+            onClick={() => handleSetPage(page)}>
             {page}
           </button>
         ))}
-        <button
-          className={isLastPage ? 'text-DAppNeutral/500' : ''}
-          disabled={isLastPage}
-          type="button"
-          onClick={() => setCurrentPage(currentPage + 1)}>
-          <IoIosArrowForward />
-        </button>
+        {hasMultiplePages && (
+          <button
+            className={isLastPage ? 'text-DAppNeutral/500' : ''}
+            disabled={isLastPage}
+            type="button"
+            onClick={() => setCurrentPage(currentPage + 1)}>
+            <IoIosArrowForward />
+          </button>
+        )}
       </div>
     </div>
   )
