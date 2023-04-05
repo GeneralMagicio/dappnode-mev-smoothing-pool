@@ -1,6 +1,5 @@
 import { Pagination } from './Pagination'
 import { TableDataTypes } from '../types'
-import clsx from 'clsx'
 import { flexRender, type Table as TableType } from '@tanstack/react-table'
 
 interface TableProps<T> {
@@ -17,7 +16,7 @@ export function TableLayout<T extends TableDataTypes>({
   title,
 }: TableProps<T>) {
   return (
-    <div className={clsx('w-full overflow-hidden rounded-lg bg-white')}>
+    <div className="w-full overflow-hidden rounded-lg bg-white">
       <h3 className="p-6 text-2xl font-bold leading-8 text-DAppDeep">
         {title}
       </h3>

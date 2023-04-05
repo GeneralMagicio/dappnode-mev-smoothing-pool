@@ -60,10 +60,15 @@ const columns = [
 
 interface MyValidatorsTableProps {
   data?: Validator[]
-  state: 'loading' | 'not connected' | 'success'
+  isConnected?: boolean
+  isLoading?: boolean
 }
 
-export function MyValidatorsTable({ data, state }: MyValidatorsTableProps) {
+export function MyValidatorsTable({
+  data,
+  isConnected,
+  isLoading,
+}: MyValidatorsTableProps) {
   const table = useReactTable({
     columns,
     data: data ?? [],
@@ -76,12 +81,16 @@ export function MyValidatorsTable({ data, state }: MyValidatorsTableProps) {
     getPaginationRowModel: getPaginationRowModel(),
   })
 
-  if (state === 'not connected') {
+  if (!isConnected) {
     return <NotConnectedWarning title="My Validators" />
   }
 
-  if (state === 'loading') {
-    return <Skeleton title="My Validators" />
+  if (isLoading) {
+    return (
+      <div>
+        <Skeleton title="My Validators" />
+      </div>
+    )
   }
 
   return (

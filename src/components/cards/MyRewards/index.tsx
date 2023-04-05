@@ -25,14 +25,17 @@ export function MyRewards({
 }: MyRewardsProps) {
   if (isLoading) {
     return (
-      <BaseCard className="max-w-xs">
+      <BaseCard className="h-[534px] max-w-xs">
         <Skeleton />
       </BaseCard>
     )
   }
 
   return (
-    <BaseCard className="max-w-xs text-DAppDeep">
+    <BaseCard className="h-[534px] max-w-xs text-DAppDeep">
+      <h3 className="mb-4 border-b border-DAppGray/20 pb-6 text-2xl font-bold leading-8 text-DAppDeep">
+        My Rewards
+      </h3>
       <MyRewardsSection
         icon={<AccumulatedRewardsIcon />}
         rewards={totalAccumulatedRewards}
@@ -40,14 +43,14 @@ export function MyRewards({
         tooltip="Total rewards earned from all your staking pools"
       />
       <MyRewardsSection
-        className="my-4"
+        className="my-6"
         icon={<ClaimableRewardsIcon />}
         rewards={claimableRewards}
         title="Claimable"
         tooltip="Rewards that are ready to be claimed"
       />
       <MyRewardsSection
-        className="mb-6"
+        className="mb-8"
         icon={<PendingRewardsIcon />}
         rewards={pendingRewards}
         title="Pending"
