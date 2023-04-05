@@ -6,7 +6,7 @@ export const BlockSchema = z.object({
   validatorKey: z.string(),
   blockType: z.string(),
   rewardWei: z.number(),
-  rewardType: z.string(),
+  rewardType: z.union([z.literal('mev'), z.literal('vanila')]),
   depositAddress: z.string(),
 })
 
@@ -15,7 +15,7 @@ export const ValidatorSchema = z.object({
   accumulatedRewardsWei: z.number(),
   pendingRewardsWei: z.number(),
   collateralWei: z.number(),
-  depositAddress: z.string().regex(/^0x[a-fA-F0-9]{40}$/),
+  depositAddress: z.string(),
   validatorIndex: z.number(),
   validatorKey: z.string(),
   proposedBlock: z.array(z.any()),
