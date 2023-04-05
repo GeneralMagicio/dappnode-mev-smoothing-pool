@@ -10,7 +10,7 @@ export function UserInfo() {
   const { isConnected, address } = useAccount()
 
   const { data, isLoading } = useQuery({
-    queryKey: ['proposed-blocks'],
+    queryKey: ['proposed-blocks', address],
     queryFn: () => fetchValidatorsByDepositor(address),
     enabled: !!address,
   })
