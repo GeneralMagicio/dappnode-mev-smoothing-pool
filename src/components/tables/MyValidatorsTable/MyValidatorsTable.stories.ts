@@ -66,7 +66,22 @@ type Story = StoryObj<typeof MyValidatorsTable>
 export const Primary: Story = {
   decorators: [Web3Decorator],
   args: {
-    state: 'success',
+    isConnected: true,
     data,
+  },
+}
+
+export const Loading: Story = {
+  decorators: [Web3Decorator],
+  args: {
+    isConnected: true,
+    isLoading: true,
+  },
+}
+
+export const NotConnected: Story = {
+  decorators: [Web3Decorator],
+  args: {
+    isConnected: false,
   },
 }

@@ -27,13 +27,13 @@ const columns = [
     header: () => (
       <HeaderTooltip header="Pending" tooltip={headerTooltip.pending} />
     ),
-    cell: (info) => addEthSuffix(info.getValue()),
+    cell: (info) => addEthSuffix(info.getValue().toFixed(4)),
   }),
   columnHelper.accessor('claimable', {
     header: () => (
       <HeaderTooltip header="Claimable" tooltip={headerTooltip.claimable} />
     ),
-    cell: (info) => addEthSuffix(info.getValue()),
+    cell: (info) => addEthSuffix(info.getValue().toFixed(4)),
   }),
   columnHelper.accessor('warning', {
     header: () => (
@@ -86,11 +86,7 @@ export function MyValidatorsTable({
   }
 
   if (isLoading) {
-    return (
-      <div>
-        <Skeleton title="My Validators" />
-      </div>
-    )
+    return <Skeleton title="My Validators" />
   }
 
   return (
