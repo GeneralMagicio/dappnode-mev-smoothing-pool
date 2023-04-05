@@ -87,7 +87,13 @@ type Story = StoryObj<typeof LatestBlocksTable>
 
 export const Primary: Story = {
   args: {
-    state: 'success',
+    isLoading: false,
     data,
+  },
+}
+
+export const Loading: Story = {
+  args: {
+    isLoading: true,
   },
 }

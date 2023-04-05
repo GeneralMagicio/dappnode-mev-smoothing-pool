@@ -40,10 +40,10 @@ const columns = [
 
 interface LatestBlocksTableProps {
   data?: Block[]
-  state: 'loading' | 'success'
+  isLoading: boolean
 }
 
-export function LatestBlocksTable({ data, state }: LatestBlocksTableProps) {
+export function LatestBlocksTable({ data, isLoading }: LatestBlocksTableProps) {
   const table = useReactTable({
     columns,
     data: data ?? [],
@@ -56,7 +56,7 @@ export function LatestBlocksTable({ data, state }: LatestBlocksTableProps) {
     getPaginationRowModel: getPaginationRowModel(),
   })
 
-  if (state === 'loading') return <Skeleton title="Latest Blocks to SP" />
+  if (isLoading) return <Skeleton title="Latest Blocks to SP" />
 
   return (
     <TableLayout
