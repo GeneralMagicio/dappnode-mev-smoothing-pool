@@ -23,18 +23,24 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 
 /**
  * Converts all keys in an object to camelCase
- * @param obj Object to convert
+ * @param input Object to convert
  * @returns Object with all keys converted to camelCase
  * @example
  * convertKeysToCamelCase({ foo_bar: 'baz' }) // returns { fooBar: 'baz' }
  * convertKeysToCamelCase({ foo_bar: { bar_baz: 'qux' } }) // returns { fooBar: { barBaz: 'qux' } }
  */
-export function convertKeysToCamelCase<T>(obj: Record<string, unknown>): T {
+export function convertKeysToCamelCase<T>(
+  input: Record<string, unknown> | Array<Record<string, unknown>>
+): T {
   const result: Record<string, unknown> = {}
 
-  Object.keys(obj).forEach((key) => {
+  if (Array.isArray(input)) {
+    return input.map(convertKeysToCamelCase) as unknown as T
+  }
+
+  Object.keys(input).forEach((key) => {
     const camelCaseKey = toCamelCase(key)
-    const value = obj[key]
+    const value = input[key]
 
     if (isRecord(value)) {
       result[camelCaseKey] = convertKeysToCamelCase(value)

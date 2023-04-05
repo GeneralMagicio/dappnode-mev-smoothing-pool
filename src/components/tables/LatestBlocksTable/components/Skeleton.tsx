@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid'
+
 interface SkeletonProps {
   title: string
 }
@@ -10,7 +12,7 @@ export function Skeleton({ title }: SkeletonProps) {
       </h3>
       {[...Array(7)].map(() => (
         <div
-          key={crypto.randomUUID()}
+          key={uuidv4()}
           className="mb-8 flex w-full items-center justify-between">
           <div>
             <div className="h-5 w-[500px] animate-pulse rounded-sm bg-DAppLight" />

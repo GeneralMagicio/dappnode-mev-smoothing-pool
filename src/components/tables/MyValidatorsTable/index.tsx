@@ -27,13 +27,13 @@ const columns = [
     header: () => (
       <HeaderTooltip header="Pending" tooltip={headerTooltip.pending} />
     ),
-    cell: (info) => addEthSuffix(info.getValue()),
+    cell: (info) => addEthSuffix(info.getValue().toFixed(4)),
   }),
   columnHelper.accessor('claimable', {
     header: () => (
       <HeaderTooltip header="Claimable" tooltip={headerTooltip.claimable} />
     ),
-    cell: (info) => addEthSuffix(info.getValue()),
+    cell: (info) => addEthSuffix(info.getValue().toFixed(4)),
   }),
   columnHelper.accessor('warning', {
     header: () => (
@@ -60,10 +60,15 @@ const columns = [
 
 interface MyValidatorsTableProps {
   data?: Validator[]
-  state: 'loading' | 'not connected' | 'success'
+  isConnected?: boolean
+  isLoading?: boolean
 }
 
-export function MyValidatorsTable({ data, state }: MyValidatorsTableProps) {
+export function MyValidatorsTable({
+  data,
+  isConnected,
+  isLoading,
+}: MyValidatorsTableProps) {
   const table = useReactTable({
     columns,
     data: data ?? [],
@@ -76,17 +81,17 @@ export function MyValidatorsTable({ data, state }: MyValidatorsTableProps) {
     getPaginationRowModel: getPaginationRowModel(),
   })
 
-  if (state === 'not connected') {
+  if (!isConnected) {
     return <NotConnectedWarning title="My Validators" />
   }
 
-  if (state === 'loading') {
+  if (isLoading) {
     return <Skeleton title="My Validators" />
   }
 
   return (
     <TableLayout
-      className="h-[410px]"
+      className="h-[394px]"
       data={data ?? []}
       table={table}
       title="My Validators"

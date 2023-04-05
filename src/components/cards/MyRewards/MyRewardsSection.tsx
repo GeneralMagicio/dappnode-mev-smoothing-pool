@@ -17,7 +17,7 @@ export function MyRewardsSection({
   tooltip,
 }: MyRewardsSectionProps) {
   return (
-    <section className={clsx('border-b border-DAppGray/20 pb-3', className)}>
+    <section className={clsx('border-b border-DAppGray/20 pb-4', className)}>
       <div className="flex items-center">
         {icon}
         <h3 className="ml-3 mr-2 text-sm">{title}</h3>
@@ -27,7 +27,7 @@ export function MyRewardsSection({
           tooltip={tooltip}
         />
       </div>
-      <p className="mt-4 text-2xl font-bold leading-8">
+      <p className="mt-5 text-2xl font-bold leading-8">
         {rewards}
         <span className="ml-2 text-lg font-normal text-DAppGray">ETH</span>
       </p>

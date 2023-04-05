@@ -32,7 +32,7 @@ export const shortenEthAddress = (
  * addEthSuffix(1.23)
  * // => '1.23 ETH'
  */
-export const addEthSuffix = (value: number) => `${value} ETH`
+export const addEthSuffix = (value: number | string) => `${value} ETH`
 
 /*
  * Convert wei to ether
