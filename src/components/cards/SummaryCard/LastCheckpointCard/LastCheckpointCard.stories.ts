@@ -11,15 +11,13 @@ type Story = StoryObj<typeof LastCheckpointCard>
 
 export const Primary: Story = {
   args: {
-    lastCheckpointDate: new Date('2023-03-20T00:00:00.000Z'),
-    nextCheckpointDate: new Date('2023-04-30T00:00:00.000Z'),
+    lastCheckpoint: 5360178,
+    nextCheckpoint: 5350176,
   },
 }
 
 export const Loading: Story = {
   args: {
-    lastCheckpointDate: new Date('2023-03-20T00:00:00.000Z'),
-    nextCheckpointDate: new Date('2023-04-30T00:00:00.000Z'),
     isError: false,
     isLoading: true,
   },
@@ -27,8 +25,6 @@ export const Loading: Story = {
 
 export const Error: Story = {
   args: {
-    lastCheckpointDate: new Date('2023-03-20T00:00:00.000Z'),
-    nextCheckpointDate: new Date('2023-04-30T00:00:00.000Z'),
     isError: true,
     isLoading: false,
   },

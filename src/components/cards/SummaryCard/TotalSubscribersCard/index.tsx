@@ -3,7 +3,7 @@ import { BsFillPersonFill } from 'react-icons/bs'
 
 interface TotalSubscribersCardProps
   extends Pick<SummaryCardProps, 'isError' | 'isLoading'> {
-  subscribers: number
+  subscribers: number | undefined
 }
 
 export function TotalSubscribersCard({

@@ -13,9 +13,9 @@ export const AverageRewards: Story = {
   args: {
     title: 'Average Rewards',
     tooltip: 'Average rewards over the last 30 days',
-    ethReward: 0.11,
+    ethRewardWei: Number('127222101808644357'),
     secondaryRewardTitle: 'SP Average',
-    secondaryReward: 0.004,
+    secondaryRewardWei: Number('227222101808644357'),
     isError: false,
     isLoading: false,
   },
@@ -25,9 +25,7 @@ export const AverageRewardsLoading: Story = {
   args: {
     title: 'Average Rewards',
     tooltip: 'Average rewards over the last 30 days',
-    ethReward: 0.11,
     secondaryRewardTitle: 'SP Average',
-    secondaryReward: 0.004,
     isError: false,
     isLoading: true,
   },
@@ -37,9 +35,7 @@ export const AverageRewardsError: Story = {
   args: {
     title: 'Average Rewards',
     tooltip: 'Average rewards over the last 30 days',
-    ethReward: 0.11,
     secondaryRewardTitle: 'SP Average',
-    secondaryReward: 0.004,
     isError: true,
     isLoading: false,
   },
@@ -49,9 +45,9 @@ export const TotalRewardsPrimary: Story = {
   args: {
     title: 'Total Rewards',
     tooltip: 'Total rewards over the last 30 days',
-    ethReward: 954.94,
+    ethRewardWei: Number('9549400000000000000'),
     secondaryRewardTitle: 'Last 7 days',
-    secondaryReward: 12.04,
+    secondaryRewardWei: Number('1204000000000000000'),
     isError: false,
     isLoading: false,
   },
@@ -61,9 +57,7 @@ export const TotalRewardsLoading: Story = {
   args: {
     title: 'Total Rewards',
     tooltip: 'Total rewards over the last 30 days',
-    ethReward: 954.94,
     secondaryRewardTitle: 'Last 7 days',
-    secondaryReward: 12.04,
     isError: false,
     isLoading: true,
   },
@@ -73,9 +67,7 @@ export const TotalRewardsError: Story = {
   args: {
     title: 'Total Rewards',
     tooltip: 'Total rewards over the last 30 days',
-    ethReward: 954.94,
     secondaryRewardTitle: 'Last 7 days',
-    secondaryReward: 12.04,
     isError: true,
     isLoading: false,
   },
