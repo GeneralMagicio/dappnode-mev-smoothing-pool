@@ -10,6 +10,7 @@ export interface Block {
 export interface Validator {
   address: `0x${string}`
   pending: number
+  validatorIndex: string
   claimable: number
   warning: Warnings
   subscribed: boolean

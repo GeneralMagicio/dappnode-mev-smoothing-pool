@@ -19,11 +19,18 @@ export function UserInfo() {
 
   if (data) {
     tableData = data.map(
-      ({ status, validatorKey, pendingRewardsWei, accumulatedRewardsWei }) => ({
+      ({
+        status,
+        validatorKey,
+        validatorIndex,
+        pendingRewardsWei,
+        accumulatedRewardsWei,
+      }) => ({
         address: validatorKey as `0x${string}`,
         pending: weiToEth(pendingRewardsWei || 0),
         claimable: weiToEth(accumulatedRewardsWei || 0),
         subscribed: status === 'active',
+        validatorIndex: String(validatorIndex),
         warning: 'none',
       })
     )

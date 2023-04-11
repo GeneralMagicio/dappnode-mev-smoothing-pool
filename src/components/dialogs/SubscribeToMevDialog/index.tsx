@@ -11,9 +11,12 @@ import { useDialog } from '@/hooks/useDialog'
 import type { IDialogStates } from './types'
 
 const steps = ['Fee recipient', 'Check MevBoost', 'Deposit', 'Done']
-const validator = '408120'
 
-export function SubscribeToMevDialog() {
+interface SubscribeToMevDialogProps {
+  validator: string
+}
+
+export function SubscribeToMevDialog({ validator }: SubscribeToMevDialogProps) {
   const [dialogState, setDialogState] = useState<IDialogStates>('initial')
 
   const { open, handleOpenChange, handleClose } = useDialog()
