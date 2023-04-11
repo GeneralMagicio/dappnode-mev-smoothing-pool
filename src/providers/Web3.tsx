@@ -14,6 +14,7 @@ const { connectors } = getDefaultWallets({
 const wagmiClient = createClient({
   connectors,
   provider,
+  autoConnect: true,
 })
 
 interface Web3ProviderProps {

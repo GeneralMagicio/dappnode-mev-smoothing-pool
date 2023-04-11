@@ -8,6 +8,7 @@ interface BaseDialogProps {
   title?: string
   subtitle?: string
   open?: boolean
+  triggerButtonProp?: 'regular' | 'outline'
   handleOpenChange: (open: boolean) => void
 }
 
@@ -17,12 +18,19 @@ export function BaseDialog({
   title,
   triggerText,
   open,
+  triggerButtonProp = 'regular',
   handleOpenChange,
 }: BaseDialogProps) {
   return (
     <Dialog.Root open={open} onOpenChange={handleOpenChange}>
       <Dialog.Trigger asChild>
-        <Button>{triggerText}</Button>
+        {triggerButtonProp === 'regular' ? (
+          <Button>{triggerText}</Button>
+        ) : (
+          <Button buttonType="secondary" color="blue" size="sm">
+            {triggerText}
+          </Button>
+        )}
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 h-full w-full bg-gray-600 opacity-30" />

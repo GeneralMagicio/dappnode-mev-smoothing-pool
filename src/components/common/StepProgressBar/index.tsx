@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import { BsCheck } from 'react-icons/bs'
 import { motion } from 'framer-motion'
 
-interface StepProgressBarProps {
+export interface StepProgressBarProps {
   steps: string[]
   currentStep: number
 }

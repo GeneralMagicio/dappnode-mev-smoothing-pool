@@ -10,7 +10,8 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { Button } from '@/components/common/Button'
+import { SubscribeToMevDialog } from '@/components/dialogs/SubscribeToMevDialog'
+import { UnsubscribeToMevDialog } from '@/components/dialogs/UnsubscribeToMevDialog'
 import { addEthSuffix, shortenEthAddress } from '@/utils/web3'
 import type { Validator } from '../types'
 
@@ -45,14 +46,10 @@ const columns = [
     header: '',
     cell: (info) => {
       const isSubscribed = info.getValue()
-      return (
-        <Button
-          buttonType={isSubscribed ? 'tertiary' : 'secondary'}
-          className="max-w-fit"
-          color="blue"
-          size="sm">
-          {isSubscribed ? 'Unsubscribe' : 'Subscribe'}
-        </Button>
+      return isSubscribed ? (
+        <UnsubscribeToMevDialog />
+      ) : (
+        <SubscribeToMevDialog />
       )
     },
   }),
@@ -91,7 +88,7 @@ export function MyValidatorsTable({
 
   return (
     <TableLayout
-      className="h-[394px]"
+      className="h-[440px]"
       data={data ?? []}
       table={table}
       title="My Validators"
