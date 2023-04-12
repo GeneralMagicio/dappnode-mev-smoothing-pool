@@ -24,7 +24,7 @@ export const fetchValidatorsByDepositor = async (
   return ValidatorSchema.array().parse(convertKeysToCamelCase(response.data))
 }
 
-export const fetchValidatorByIndex = async (index: string) => {
+export const fetchValidatorByIndex = async (index: number) => {
   const response = await apiClient.get(endpoints.memoryValidator(index))
   return ValidatorSchema.parse(convertKeysToCamelCase(response.data))
 }

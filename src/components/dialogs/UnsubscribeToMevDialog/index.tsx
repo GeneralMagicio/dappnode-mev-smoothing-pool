@@ -11,7 +11,14 @@ import { useDialog } from '@/hooks/useDialog'
 import type { IDialogStates } from './types'
 
 const steps = ['Confirmation', 'Claimable rewards', 'Withdraw', 'Done']
-export function UnsubscribeToMevDialog() {
+
+interface UnsubscribeToMevDialogProps {
+  validatorId: number
+}
+
+export function UnsubscribeToMevDialog({
+  validatorId,
+}: UnsubscribeToMevDialogProps) {
   const [dialogState, setDialogState] = useState<IDialogStates>('initial')
 
   const { open, handleOpenChange, handleClose } = useDialog()
@@ -46,12 +53,14 @@ export function UnsubscribeToMevDialog() {
               handleChangeDialogState={setDialogState}
               handleClose={handleCloseDialog}
               steps={steps}
+              validatorId={validatorId}
             />
           ) : dialogState === 'loading' ? (
             <WithdrawDialog
               handleChangeDialogState={setDialogState}
               handleClose={handleCloseDialog}
               steps={steps}
+              validatorId={validatorId}
             />
           ) : (
             <SuccessDialog

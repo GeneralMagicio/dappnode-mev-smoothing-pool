@@ -38,7 +38,7 @@ export function CheckMevBoostDialog({
             <div className="mx-auto mt-8 h-10 w-80 animate-pulse rounded bg-SkeletonGray" />
           </>
         ) : (
-          <div className="px-6">
+          <div>
             <div>
               <h4 className="mb-2 text-DAppNeutral/500">Your Validator</h4>
               <p className="h-8">{shortenEthAddress(validatorKey, 20, 20)}</p>

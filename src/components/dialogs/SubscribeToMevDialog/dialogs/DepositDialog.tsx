@@ -69,7 +69,7 @@ export function DepositDialog({
         <h3 className="mb-6 text-left text-2xl font-bold">Deposit</h3>
         <StepProgressBar currentStep={2} steps={steps} />
       </div>
-      {!waitForTransaction.isError && !contractWrite.isError ? (
+      {!waitForTransaction.isError ? (
         <div className="text-center">
           <h4 className="mb-4 text-lg font-normal">You are Depositing</h4>
           {configQuery.isLoading ? (

@@ -1,7 +1,7 @@
 import { DialogProps } from '../types'
 import { useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { useAccount, usePrepareContractWrite, useContractWrite } from 'wagmi'
+import { useAccount, useContractWrite } from 'wagmi'
 import { AiOutlineInfoCircle } from 'react-icons/ai'
 import { fetchOnChainProof } from '@/client/api/queryFunctions'
 import { weiToEth } from '@/utils/web3'
@@ -9,13 +9,18 @@ import { StepProgressBar } from '@/components/common/StepProgressBar'
 import { Button } from '@/components/common/Button'
 import contractInterface from '@/contract/abi.json'
 
+interface WithdrawDialogProps extends DialogProps {
+  validatorId: number
+}
+
 export function WithdrawDialog({
   steps,
+  validatorId,
   handleChangeDialogState,
   handleClose,
-}: DialogProps) {
+}: WithdrawDialogProps) {
   const { address } = useAccount()
-  const query = useQuery({
+  const onChainProofQuery = useQuery({
     queryKey: ['onchain-proof', address],
     queryFn: () => fetchOnChainProof(address as `0x${string}`),
     enabled: !!address,
@@ -25,16 +30,12 @@ export function WithdrawDialog({
   // @ts-ignore
   const abi = [...contractInterface] as const
 
-  const config = usePrepareContractWrite({
+  const config = useContractWrite({
     address: '0x553BD5a94bcC09FFab6550274d5db140a95AE9bC',
     abi,
-    functionName: 'claimRewards',
-    args: [
-      address,
-      (query.data?.totalAccumulatedRewardsWei as number) / 10 ** 9,
-      query.data?.merkleProofs as `0x${string}`[],
-    ],
-    enabled: !!query.isSuccess && !!address,
+    mode: 'recklesslyUnprepared',
+    functionName: 'suscribeValidator',
+    args: [validatorId],
   })
 
   // eslint-disable-next-line
@@ -55,7 +56,10 @@ export function WithdrawDialog({
         <div className="text-center">
           <h4 className="text-lg font-normal">You are withdrawing</h4>
           <p className="mt-4 text-2xl font-bold">
-            {weiToEth(query.data?.claimableRewardsWei || 0).toFixed(2)} ETH
+            {weiToEth(onChainProofQuery.data?.claimableRewardsWei || 0).toFixed(
+              2
+            )}{' '}
+            ETH
           </p>
           <p className="mt-4 text-lg font-normal tracking-wide">
             to your recipient wallet address

@@ -3,19 +3,32 @@ import { useQuery } from '@tanstack/react-query'
 import { useAccount } from 'wagmi'
 import { StepProgressBar } from '@/components/common/StepProgressBar'
 import { Button } from '@/components/common/Button'
-import { fetchOnChainProof } from '@/client/api/queryFunctions'
+import {
+  fetchOnChainProof,
+  fetchValidatorByIndex,
+} from '@/client/api/queryFunctions'
 import { weiToEth } from '@/utils/web3'
+
+interface ClaimableRewardsDialogProps extends DialogProps {
+  validatorId: number
+}
 
 export function ClaimableRewardsDialog({
   steps,
+  validatorId,
   handleChangeDialogState,
   handleClose,
-}: DialogProps) {
+}: ClaimableRewardsDialogProps) {
   const { address } = useAccount()
-  const { data, isLoading, isError } = useQuery({
+
+  const onChainProofQuery = useQuery({
     queryKey: ['onchain-proof', address],
     queryFn: () => fetchOnChainProof(address as `0x${string}`),
     enabled: !!address,
+  })
+  const validatorQuery = useQuery({
+    queryKey: ['validator', validatorId],
+    queryFn: () => fetchValidatorByIndex(validatorId),
   })
 
   return (
@@ -23,12 +36,12 @@ export function ClaimableRewardsDialog({
       <div className="-mt-2 text-DAppDeep">
         <h3 className="mb-6 text-left text-2xl font-bold">Claimable rewards</h3>
         <StepProgressBar currentStep={1} steps={steps} />
-        {isError ? (
+        {onChainProofQuery.isError ? (
           <div className="mt-24 text-center text-red-500">
             <h4 className="font-bold">An Error has occurred</h4>
             <p>Please try again later</p>
           </div>
-        ) : isLoading ? (
+        ) : onChainProofQuery.isLoading || validatorQuery.isLoading ? (
           <>
             <h4 className="mt-24 text-center">
               Checking Validator for your rewards...
@@ -43,11 +56,21 @@ export function ClaimableRewardsDialog({
             <div className="flex w-full flex-col gap-y-8 rounded-lg bg-violet-50 p-6 text-base font-normal text-DAppDeep">
               <div className="flex items-center justify-between">
                 <p>Claimable Rewards</p>
-                <p>{weiToEth(data?.claimableRewardsWei || 0).toFixed(2)} ETH</p>
+                <p>
+                  {weiToEth(
+                    onChainProofQuery.data?.claimableRewardsWei || 0
+                  ).toFixed(4)}{' '}
+                  ETH
+                </p>
               </div>
               <div className="flex items-center justify-between">
                 <p>Pending Rewards</p>
-                <p>{weiToEth(data?.pendingRewardsWei || 0).toFixed(2)} ETH</p>
+                <p>
+                  {weiToEth(
+                    validatorQuery.data?.pendingRewardsWei || 0
+                  ).toFixed(4)}{' '}
+                  ETH
+                </p>
               </div>
             </div>
           </>
@@ -56,7 +79,7 @@ export function ClaimableRewardsDialog({
       <div>
         <Button
           className="mt-7"
-          isDisabled={isLoading || isError}
+          isDisabled={onChainProofQuery.isLoading || onChainProofQuery.isError}
           onPress={() => handleChangeDialogState('loading')}>
           Next
         </Button>

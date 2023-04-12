@@ -48,7 +48,7 @@ const columns = [
       const isSubscribed = info.getValue()
       const { validatorKey, validatorId } = info.row.original
       return isSubscribed ? (
-        <UnsubscribeToMevDialog />
+        <UnsubscribeToMevDialog validatorId={validatorId} />
       ) : (
         <SubscribeToMevDialog
           validatorId={validatorId}

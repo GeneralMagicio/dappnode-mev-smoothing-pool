@@ -7,6 +7,6 @@ export const endpoints = {
   registeredRelays: (validatorKey: `0x${string}`) =>
     `registeredrelays/${validatorKey}`,
   onchainProof: (address: `0x${string}`) => `onchain/proof/${address}`,
-  memoryValidator: (index: string) => `memory/validator/${index}`,
+  memoryValidator: (index: number) => `memory/validator/${index}`,
   memoryValidators: (address: `0x${string}`) => `memory/validators/${address}`,
 }

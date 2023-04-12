@@ -1,5 +1,6 @@
 import { DialogProps } from '../types'
 import { useQuery } from '@tanstack/react-query'
+import { AiOutlineInfoCircle } from 'react-icons/ai'
 import { StepProgressBar } from '@/components/common/StepProgressBar'
 import { Button } from '@/components/common/Button'
 import {
@@ -28,6 +29,15 @@ export function InitialDialog({
     queryFn: () => fetchValidatorRegisteredRelays(validatorKey),
   })
 
+  const isCorrectFeeRecipient = registeredRelaysQuery.data?.correctFeeRecipients
+
+  const handleNext = () => {
+    if (!isCorrectFeeRecipient) {
+      handleClose()
+    }
+    handleChangeDialogState('confirm')
+  }
+
   return (
     <>
       <div className="-mt-2 text-DAppDeep">
@@ -39,35 +49,57 @@ export function InitialDialog({
           <h4 className="mb-2 text-DAppNeutral/500">Your Validator</h4>
           <p className="h-8">{shortenEthAddress(validatorKey, 20, 20)}</p>
         </div>
-        <div className="mt-8">
-          <h4 className="mb-2 text-DAppNeutral/500">
-            Current Fee Recipient address
-          </h4>
-          {registeredRelaysQuery.isLoading ? (
-            <div className="h-8 w-96 animate-pulse rounded bg-SkeletonGray" />
-          ) : (
-            <p className="h-8">
-              {registeredRelaysQuery.data?.correctFeeRelayers?.[0].feeRecipient}
+        {registeredRelaysQuery.isLoading ||
+        registeredRelaysQuery.data?.correctFeeRecipients ? (
+          <>
+            <div className="mt-8">
+              <h4 className="mb-2 text-DAppNeutral/500">
+                Current Fee Recipient address
+              </h4>
+              {registeredRelaysQuery.isLoading ? (
+                <div className="h-8 w-96 animate-pulse rounded bg-SkeletonGray" />
+              ) : (
+                <p className="h-8">
+                  {
+                    registeredRelaysQuery.data?.correctFeeRelayers?.[0]
+                      .feeRecipient
+                  }
+                </p>
+              )}
+            </div>
+            <div className="mt-8">
+              <h4 className="mb-2 text-DAppNeutral/500">
+                NEW Fee Recipient address
+              </h4>
+              {configQuery.isLoading ? (
+                <div className="h-8 w-96 animate-pulse rounded bg-SkeletonGray" />
+              ) : (
+                <p className="h-8">{configQuery.data?.poolAddress}</p>
+              )}
+              <div />
+            </div>
+          </>
+        ) : (
+          <div className="mt-6 overflow-auto text-center text-base text-red-500">
+            <AiOutlineInfoCircle className="mx-auto h-8 w-8" />
+            <h4 className="mt-3 font-bold">Fee recipient error!</h4>
+            <p className="mt-2 font-normal">
+              The fee recipient address is not set as{' '}
+              <span className="font-semibold">
+                {configQuery.data?.poolAddress}
+              </span>{' '}
+              Please change the fee recipient and try again.
             </p>
-          )}
-        </div>
-        <div className="mt-8">
-          <h4 className="mb-2 text-DAppNeutral/500">
-            NEW Fee Recipient address
-          </h4>
-          {configQuery.isLoading ? (
-            <div className="h-8 w-96 animate-pulse rounded bg-SkeletonGray" />
-          ) : (
-            <p className="h-8">{configQuery.data?.poolAddress}</p>
-          )}
-          <div />
-        </div>
+          </div>
+        )}
       </div>
       <div>
         <Button
           isDisabled={registeredRelaysQuery.isLoading}
-          onPress={() => handleChangeDialogState('confirm')}>
-          Change Fee Recipient Address
+          onPress={handleNext}>
+          {registeredRelaysQuery.isLoading || isCorrectFeeRecipient
+            ? 'Next'
+            : 'Change Fee Recipient Address'}
         </Button>
         <Button buttonType="secondary" className="mt-4" onPress={handleClose}>
           Cancel
