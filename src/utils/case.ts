@@ -44,6 +44,10 @@ export function convertKeysToCamelCase<T>(
 
     if (isRecord(value)) {
       result[camelCaseKey] = convertKeysToCamelCase(value)
+    } else if (Array.isArray(value)) {
+      result[camelCaseKey] = value.map((item) =>
+        isRecord(item) ? convertKeysToCamelCase(item) : item
+      )
     } else {
       result[camelCaseKey] = value
     }

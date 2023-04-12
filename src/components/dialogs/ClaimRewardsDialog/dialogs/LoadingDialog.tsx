@@ -1,18 +1,10 @@
 import { DialogProps } from '../types'
-import { useEffect } from 'react'
 import { Button } from '@/components/common/Button'
 
 export function LoadingDialog({
   handleClose,
   handleChangeDialogState,
 }: DialogProps) {
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      handleChangeDialogState('success')
-    }, 3000)
-    return () => clearTimeout(timer)
-  }, [handleChangeDialogState])
-
   return (
     <>
       <div className="px-10 text-center text-DAppDeep">

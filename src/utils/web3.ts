@@ -19,10 +19,14 @@ export const shortenEthAddress = (
   address: `0x${string}`,
   leftSideLength = 4,
   rightSideLength = 4
-) =>
-  `${address.slice(0, leftSideLength + 2)}...${
+) => {
+  if (!address) {
+    return ''
+  }
+  return `${address.slice(0, leftSideLength + 2)}...${
     rightSideLength === 0 ? '' : address.slice(-rightSideLength)
   }`
+}
 
 /**
  * Add ETH suffix to number
