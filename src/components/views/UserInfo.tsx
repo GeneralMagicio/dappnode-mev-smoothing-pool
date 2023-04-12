@@ -30,7 +30,8 @@ export function UserInfo() {
         pending: weiToEth(pendingRewardsWei || 0),
         claimable: weiToEth(accumulatedRewardsWei || 0),
         subscribed: status === 'active',
-        validatorIndex: String(validatorIndex),
+        validatorId: validatorIndex,
+        validatorKey: validatorKey as `0x${string}`,
         warning: 'none',
       })
     )

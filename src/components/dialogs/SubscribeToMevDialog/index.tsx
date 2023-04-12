@@ -13,10 +13,14 @@ import type { IDialogStates } from './types'
 const steps = ['Fee recipient', 'Check MevBoost', 'Deposit', 'Done']
 
 interface SubscribeToMevDialogProps {
-  validator: string
+  validatorId: number
+  validatorKey: `0x${string}`
 }
 
-export function SubscribeToMevDialog({ validator }: SubscribeToMevDialogProps) {
+export function SubscribeToMevDialog({
+  validatorId,
+  validatorKey,
+}: SubscribeToMevDialogProps) {
   const [dialogState, setDialogState] = useState<IDialogStates>('initial')
 
   const { open, handleOpenChange, handleClose } = useDialog()
@@ -45,21 +49,21 @@ export function SubscribeToMevDialog({ validator }: SubscribeToMevDialogProps) {
               handleChangeDialogState={setDialogState}
               handleClose={handleCloseDialog}
               steps={steps}
-              validator={validator}
+              validatorKey={validatorKey}
             />
           ) : dialogState === 'confirm' ? (
             <CheckMevBoostDialog
               handleChangeDialogState={setDialogState}
               handleClose={handleCloseDialog}
               steps={steps}
-              validator={validator}
+              validatorKey={validatorKey}
             />
           ) : dialogState === 'loading' ? (
             <DepositDialog
               handleChangeDialogState={setDialogState}
               handleClose={handleCloseDialog}
               steps={steps}
-              validator={validator}
+              validatorId={validatorId}
             />
           ) : (
             <SuccessDialog

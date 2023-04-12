@@ -2,34 +2,22 @@ import { DialogProps } from '../types'
 import { useQuery } from '@tanstack/react-query'
 import { StepProgressBar } from '@/components/common/StepProgressBar'
 import { Button } from '@/components/common/Button'
-import {
-  fetchValidatorByIndex,
-  fetchValidatorRegisteredRelays,
-} from '@/client/api/queryFunctions'
+import { fetchValidatorRegisteredRelays } from '@/client/api/queryFunctions'
 import { shortenEthAddress } from '@/utils/web3'
 
 interface CheckMevBoostDialogProps extends DialogProps {
-  validator: string
+  validatorKey: `0x${string}`
 }
 
 export function CheckMevBoostDialog({
   steps,
   handleChangeDialogState,
   handleClose,
-  validator,
+  validatorKey,
 }: CheckMevBoostDialogProps) {
-  const validatorQuery = useQuery({
-    queryKey: ['validator', validator],
-    queryFn: () => fetchValidatorByIndex(validator),
-  })
-
   const registeredRelaysQuery = useQuery({
     queryKey: ['registered-relays'],
-    queryFn: () =>
-      fetchValidatorRegisteredRelays(
-        validatorQuery.data?.validatorKey as `0x${string}`
-      ),
-    enabled: !!validatorQuery.data?.validatorKey,
+    queryFn: () => fetchValidatorRegisteredRelays(validatorKey),
   })
 
   return (
@@ -53,17 +41,7 @@ export function CheckMevBoostDialog({
           <div className="px-6">
             <div>
               <h4 className="mb-2 text-DAppNeutral/500">Your Validator</h4>
-              {validatorQuery.isLoading ? (
-                <div className="h-8 w-96 animate-pulse rounded bg-SkeletonGray" />
-              ) : (
-                <p className="h-8">
-                  {shortenEthAddress(
-                    validatorQuery.data?.validatorKey as `0x${string}`,
-                    20,
-                    20
-                  )}
-                </p>
-              )}
+              <p className="h-8">{shortenEthAddress(validatorKey, 20, 20)}</p>
             </div>
             <div className="mt-8">
               <h4 className="mb-2 text-DAppNeutral/500">Mev Boost Relayers</h4>

@@ -64,7 +64,7 @@ export function WithdrawDialog({
             <div className="mt-6 w-full rounded-lg bg-violet-50 px-4 py-8 text-sm font-normal text-DAppDeep">
               <div className="mx-auto flex w-fit items-center">
                 <AiOutlineInfoCircle />
-                <p className="ml-2">Yourwithdrawal is being processed.</p>
+                <p className="ml-2">Your withdrawal is being processed.</p>
               </div>
             </div>
           )}

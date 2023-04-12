@@ -46,11 +46,14 @@ const columns = [
     header: '',
     cell: (info) => {
       const isSubscribed = info.getValue()
-      const { validatorIndex } = info.row.original
+      const { validatorKey, validatorId } = info.row.original
       return isSubscribed ? (
         <UnsubscribeToMevDialog />
       ) : (
-        <SubscribeToMevDialog validator={validatorIndex} />
+        <SubscribeToMevDialog
+          validatorId={validatorId}
+          validatorKey={validatorKey}
+        />
       )
     },
   }),
