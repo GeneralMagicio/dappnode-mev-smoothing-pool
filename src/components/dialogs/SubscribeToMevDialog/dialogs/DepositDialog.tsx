@@ -22,7 +22,6 @@ interface DepositDialogProps extends DialogProps {
 
 export function DepositDialog({
   steps,
-  // validatorKey,
   validatorId,
   handleClose,
   handleChangeDialogState,
@@ -106,9 +105,7 @@ export function DepositDialog({
           </p>
           <h4 className="my-2  font-bold">Error:</h4>
           <div className="mb-4 h-32  overflow-scroll rounded-lg border border-red-400 p-2">
-            {waitForTransaction.isError
-              ? waitForTransaction.error?.message
-              : contractWrite.error?.message}
+            {waitForTransaction.error?.message}
           </div>
         </div>
       )}
@@ -116,7 +113,7 @@ export function DepositDialog({
         <Button
           isDisabled={contractWrite.isLoading || waitForTransaction.isLoading}
           onPress={() => contractWrite.write?.()}>
-          Deposit
+          {waitForTransaction.isError ? 'Try again' : 'Deposit'}
         </Button>
         <Button buttonType="secondary" className="mt-4" onPress={handleClose}>
           Cancel
