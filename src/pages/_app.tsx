@@ -1,5 +1,6 @@
 import '@/styles/globals.css'
 import { Inter, Urbanist } from '@next/font/google'
+import { useIsMounted } from '@/hooks/useIsMounted'
 import { MainLayout } from '@/components/layout/MainLayout'
 import { Seo } from '@/components/layout/Seo'
 import { ReactQueryProvider } from '@/providers/ReactQuery'
@@ -17,15 +18,18 @@ const urbanist = Urbanist({
 })
 
 export default function App({ Component, pageProps }: AppProps) {
+  const isMounted = useIsMounted()
   return (
     <>
       <Seo />
       <Web3Provider>
         <ReactQueryProvider>
-          <MainLayout
-            className={`${inter.variable} ${urbanist.variable} font-inter`}>
-            <Component {...pageProps} />
-          </MainLayout>
+          {isMounted && (
+            <MainLayout
+              className={`${inter.variable} ${urbanist.variable} font-inter`}>
+              <Component {...pageProps} />
+            </MainLayout>
+          )}
         </ReactQueryProvider>
       </Web3Provider>
     </>

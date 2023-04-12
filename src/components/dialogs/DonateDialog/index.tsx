@@ -1,7 +1,9 @@
-import { ConfirmDialog } from './dialogs/ConfirmDialog'
-import { LoadingDialog } from './dialogs/LoadingDialog'
-import { SuccessDialog } from './dialogs/SuccessDialog'
-import { InitialDialog } from './dialogs/InitialDialog'
+import {
+  ConfirmDialog,
+  LoadingDialog,
+  SuccessDialog,
+  InitialDialog,
+} from './dialogs'
 import { useState } from 'react'
 import { useDialog } from '@/hooks/useDialog'
 import { BaseDialog } from '@/components/dialogs/BaseDialog'

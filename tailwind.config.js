@@ -25,6 +25,7 @@ module.exports = {
         DAppOrange: '#FC9E22',
         'DAppOrange/800': '#FFAE43',
         DAppRed: '#FB2047',
+        SkeletonGray: '#EEE',
       },
       fontFamily: {
         inter: ['var(--font-inter)', ...fontFamily.sans],
