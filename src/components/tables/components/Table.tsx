@@ -1,6 +1,7 @@
 import { Pagination } from './Pagination'
 import { TableDataTypes } from '../types'
 import { flexRender, type Table as TableType } from '@tanstack/react-table'
+import clsx from 'clsx'
 
 interface TableProps<T> {
   className?: string
@@ -20,8 +21,8 @@ export function TableLayout<T extends TableDataTypes>({
       <h3 className="p-6 text-2xl font-bold leading-8 text-DAppDeep">
         {title}
       </h3>
-      <div className={className}>
-        <table className=" w-full table-auto">
+      <div className={clsx('overflow-y-hidden overflow-x-scroll', className)}>
+        <table className="w-full table-auto">
           <thead className="w-full border-t-[0.5px] border-DAppNeutral/100 bg-DAppNeutral/50 px-[20px]">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>

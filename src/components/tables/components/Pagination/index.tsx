@@ -21,7 +21,7 @@ export function Pagination({
 }: PaginationProps) {
   const isFirstPage = currentPage === 0
   const isLastPage = currentPage === totalPages - 1
-  const hasMultiplePages = totalPages > 1
+  const hamdultiplePages = totalPages > 1
 
   const { paginationRange, handleSetPage } = usePagination({
     currentPage: currentPage + 1,
@@ -30,12 +30,12 @@ export function Pagination({
   })
 
   return (
-    <div className="flex h-[60px]  w-full items-center justify-between bg-white px-8 py-3">
-      <p className="text-sm font-normal text-DAppNeutral/500 ">
+    <div className="flex h-[80px] w-full flex-col items-center justify-between bg-white px-4 py-3 md:h-[60px] md:flex-row md:px-8">
+      <p className="mr-2 text-center text-sm font-normal text-DAppNeutral/500 md:text-left ">
         Showing {Math.min(itemsPerPage, totalItems)} of {totalItems} Results
       </p>
-      <div className="flex items-center gap-x-[2px] text-sm text-DAppDeep">
-        {hasMultiplePages && (
+      <div className="flex items-center gap-x-[1px] px-1 text-sm text-DAppDeep md:gap-x-[2px]">
+        {hamdultiplePages && (
           <button
             className={isFirstPage ? 'text-DAppNeutral/500' : ''}
             disabled={isFirstPage}
@@ -44,14 +44,13 @@ export function Pagination({
             <IoIosArrowBack />
           </button>
         )}
-
         {paginationRange?.map((page) => (
           <button
             key={uuidv4()}
             disabled={typeof page === 'string'}
             type="button"
             className={clsx(
-              'rounded py-2 px-3',
+              'rounded p-2 md:px-3',
               currentPage === Number(page) - 1 &&
                 'bg-DAppLight text-DAppBlue hover:bg-DAppLight',
               typeof page === 'number'
@@ -62,7 +61,7 @@ export function Pagination({
             {page}
           </button>
         ))}
-        {hasMultiplePages && (
+        {hamdultiplePages && (
           <button
             className={isLastPage ? 'text-DAppNeutral/500' : ''}
             disabled={isLastPage}

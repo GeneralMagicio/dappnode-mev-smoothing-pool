@@ -52,15 +52,15 @@ export function UserInfo() {
   }
 
   return (
-    <div className="mt-8 grid w-full grid-cols-4 gap-6">
-      <div className="order-1 col-span-4 md:order-1 md:col-span-3">
+    <div className="mt-8 grid w-full grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6 lg:grid-cols-4">
+      <div className="order-1 col-span-4 sm:order-1 sm:col-span-2 lg:col-span-3">
         <MyValidatorsTable
           data={tableData}
           isConnected={isConnected}
           isLoading={validatorsQuery.isLoading}
         />
       </div>
-      <div className="col-span-4 md:order-2 md:col-span-1">
+      <div className="col-span-4 sm:order-2 sm:col-span-1">
         <MyRewards
           claimableRewards={claimableRewards}
           isLoading={!isConnected}

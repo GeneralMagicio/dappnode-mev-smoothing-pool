@@ -9,6 +9,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import { addEthSuffix } from '@/utils/web3'
+import { toFixedNoTrailingZeros } from '@/utils/decimals'
 import type { Block } from '../types'
 
 const columnHelper = createColumnHelper<Block>()
@@ -34,7 +35,7 @@ const columns = [
     header: () => (
       <HeaderTooltip header="Reward" tooltip={headerTooltip.reward} />
     ),
-    cell: (info) => addEthSuffix(info.getValue()),
+    cell: (info) => addEthSuffix(toFixedNoTrailingZeros(info.getValue(), 4)),
   }),
 ]
 
