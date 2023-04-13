@@ -11,7 +11,7 @@ export function Header() {
   const router = useRouter()
 
   return (
-    <header className="flex h-24 items-center justify-between border-b bg-white p-4 sm:p-6">
+    <header className="flex h-24 items-center justify-between border-b bg-white p-4 md:p-6">
       <Link className="flex items-center" href="/">
         <Image
           alt="Dappnode logo"
@@ -19,11 +19,11 @@ export function Header() {
           src="/images/dappnode-logo.svg"
           width={50}
         />
-        <h2 className="ml-4 hidden font-urbanist text-3xl font-bold text-DAppGray sm:inline">
+        <h2 className="ml-4 hidden font-urbanist text-2xl font-bold text-DAppGray lg:inline lg:text-3xl">
           MEV <span className="text-DAppDeep">Smoothing Pool</span>
         </h2>
       </Link>
-      <nav className="hidden gap-x-5 sm:flex">
+      <nav className="hidden md:flex md:gap-x-5">
         {PAGES.map(({ name, path }) => {
           const isExternalLink = path.includes('http')
           return (
@@ -49,7 +49,7 @@ export function Header() {
       </nav>
       <div className="flex items-center">
         <ConnectWalletButton />
-        <div className="sm:hidden">
+        <div className="md:hidden">
           <MobileMenuDialog />
         </div>
       </div>
