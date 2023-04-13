@@ -4,21 +4,35 @@ import { useQuery } from '@tanstack/react-query'
 import { useAccount } from 'wagmi'
 import { weiToEth } from '@/utils/web3'
 import type { Validator } from '@/components/tables/types'
-import { fetchValidatorsByDepositor } from '@/client/api/queryFunctions'
+import {
+  fetchOnChainProof,
+  fetchValidatorsByDepositor,
+} from '@/client/api/queryFunctions'
 
 export function UserInfo() {
   const { isConnected, address } = useAccount()
 
-  const { data, isLoading } = useQuery({
-    queryKey: ['user-validators', address],
+  const validatorsQuery = useQuery({
+    queryKey: ['user-validators', 'address'],
     queryFn: () => fetchValidatorsByDepositor(address),
     enabled: !!address,
   })
+  const onChainProofQuery = useQuery({
+    queryKey: ['onchain-proof', address],
+    queryFn: () => fetchOnChainProof(address),
+    enabled: !!address,
+  })
+
+  const totalAccumulatedRewards = weiToEth(
+    onChainProofQuery.data?.totalAccumulatedRewardsWei
+  )
+  const claimableRewards = weiToEth(onChainProofQuery.data?.claimableRewardsWei)
+  const pendingRewards = weiToEth(onChainProofQuery.data?.pendingRewardsWei)
 
   let tableData: Validator[] = []
 
-  if (data) {
-    tableData = data.map(
+  if (validatorsQuery.data) {
+    tableData = validatorsQuery.data.map(
       ({
         status,
         validatorKey,
@@ -43,16 +57,20 @@ export function UserInfo() {
         <MyValidatorsTable
           data={tableData}
           isConnected={isConnected}
-          isLoading={isLoading}
+          isLoading={validatorsQuery.isLoading}
         />
       </div>
       <div className="col-span-1">
         <MyRewards
-          claimableRewards={0}
-          isDisabled={false}
+          claimableRewards={claimableRewards}
           isLoading={!isConnected}
-          pendingRewards={0}
-          totalAccumulatedRewards={0}
+          pendingRewards={pendingRewards}
+          totalAccumulatedRewards={totalAccumulatedRewards}
+          isDisabled={
+            onChainProofQuery.isLoading ||
+            onChainProofQuery.isError ||
+            !onChainProofQuery.data?.claimableRewardsWei
+          }
         />
       </div>
     </div>

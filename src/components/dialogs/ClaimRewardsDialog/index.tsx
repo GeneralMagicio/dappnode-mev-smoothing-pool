@@ -1,15 +1,18 @@
-import {
-  ConfirmDialog,
-  LoadingDialog,
-  SuccessDialog,
-  InitialDialog,
-} from './dialogs'
+import { WithdrawDialog, SuccessDialog, InitialDialog } from './dialogs'
 import { BaseDialog } from '../BaseDialog'
 import { useState } from 'react'
 import { useDialog } from '@/hooks/useDialog'
 import type { IDialogStates } from './types'
 
-export function ClaimRewardsDialog() {
+interface ClaimRewardsDialogProps {
+  claimableRewards: number
+  disabledTrigger?: boolean
+}
+
+export function ClaimRewardsDialog({
+  claimableRewards,
+  disabledTrigger,
+}: ClaimRewardsDialogProps) {
   const { open, handleClose, handleOpenChange } = useDialog()
   const [dialogState, setDialogState] = useState<IDialogStates>('initial')
 
@@ -24,6 +27,7 @@ export function ClaimRewardsDialog() {
   }
   return (
     <BaseDialog
+      disabledTrigger={disabledTrigger}
       handleOpenChange={handleOpenChangeDialog}
       open={open}
       subtitle="Claim rewards"
@@ -34,12 +38,8 @@ export function ClaimRewardsDialog() {
           handleClose={handleCloseDialog}
         />
       ) : dialogState === 'confirm' ? (
-        <ConfirmDialog
-          handleChangeDialogState={setDialogState}
-          handleClose={handleCloseDialog}
-        />
-      ) : dialogState === 'loading' ? (
-        <LoadingDialog
+        <WithdrawDialog
+          claimableRewards={claimableRewards}
           handleChangeDialogState={setDialogState}
           handleClose={handleCloseDialog}
         />

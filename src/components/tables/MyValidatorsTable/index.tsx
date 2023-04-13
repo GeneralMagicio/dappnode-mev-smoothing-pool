@@ -13,6 +13,7 @@ import {
 import { SubscribeToMevDialog } from '@/components/dialogs/SubscribeToMevDialog'
 import { UnsubscribeToMevDialog } from '@/components/dialogs/UnsubscribeToMevDialog'
 import { addEthSuffix, shortenEthAddress } from '@/utils/web3'
+import { toFixedNoTrailingZeros } from '@/utils/decimals'
 import type { Validator } from '../types'
 
 const columnHelper = createColumnHelper<Validator>()
@@ -28,13 +29,13 @@ const columns = [
     header: () => (
       <HeaderTooltip header="Pending" tooltip={headerTooltip.pending} />
     ),
-    cell: (info) => addEthSuffix(info.getValue().toFixed(4)),
+    cell: (info) => addEthSuffix(toFixedNoTrailingZeros(info.getValue(), 4)),
   }),
   columnHelper.accessor('claimable', {
     header: () => (
       <HeaderTooltip header="Claimable" tooltip={headerTooltip.claimable} />
     ),
-    cell: (info) => addEthSuffix(info.getValue().toFixed(4)),
+    cell: (info) => addEthSuffix(toFixedNoTrailingZeros(info.getValue(), 4)),
   }),
   columnHelper.accessor('warning', {
     header: () => (

@@ -1,12 +1,12 @@
 import { MyRewardsSection } from './MyRewardsSection'
 import { Skeleton } from './Skeleton'
 import { BaseCard } from '../BaseCard'
+import { ClaimRewardsDialog } from '@/components/dialogs/ClaimRewardsDialog'
 import {
   AccumulatedRewardsIcon,
   ClaimableRewardsIcon,
   PendingRewardsIcon,
 } from '@/components/icons'
-import { Button } from '@/components/common/Button'
 
 interface MyRewardsProps {
   claimableRewards: number
@@ -56,7 +56,10 @@ export function MyRewards({
         title="Pending"
         tooltip="Rewards that are still pending to be claimed"
       />
-      <Button isDisabled={isDisabled}>Claim all</Button>
+      <ClaimRewardsDialog
+        claimableRewards={claimableRewards}
+        disabledTrigger={isDisabled}
+      />
     </BaseCard>
   )
 }

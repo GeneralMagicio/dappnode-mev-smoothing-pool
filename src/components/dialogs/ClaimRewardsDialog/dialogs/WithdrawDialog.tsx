@@ -1,26 +1,26 @@
 import { DialogProps } from '../types'
 import { useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
+import { utils } from 'ethers'
 import { useAccount, useContractWrite, useWaitForTransaction } from 'wagmi'
 import { AiOutlineInfoCircle } from 'react-icons/ai'
 import { fetchOnChainProof } from '@/client/api/queryFunctions'
-import { weiToEth } from '@/utils/web3'
-import { StepProgressBar } from '@/components/common/StepProgressBar'
 import { Button } from '@/components/common/Button'
-import contractInterface from '@/contract/abi.json'
+import { weiToEth } from '@/utils/web3'
 import { toFixedNoTrailingZeros } from '@/utils/decimals'
+import contractInterface from '@/contract/abi.json'
 
 interface WithdrawDialogProps extends DialogProps {
-  validatorId: number
+  claimableRewards: number
 }
 
 export function WithdrawDialog({
-  steps,
-  validatorId,
-  handleChangeDialogState,
+  claimableRewards,
   handleClose,
+  handleChangeDialogState,
 }: WithdrawDialogProps) {
   const { address } = useAccount()
+
   const onChainProofQuery = useQuery({
     queryKey: ['onchain-proof', address],
     queryFn: () => fetchOnChainProof(address as `0x${string}`),
@@ -35,8 +35,14 @@ export function WithdrawDialog({
     address: '0x553BD5a94bcC09FFab6550274d5db140a95AE9bC',
     abi,
     mode: 'recklesslyUnprepared',
-    functionName: 'unsuscribeValidator',
-    args: [validatorId],
+    functionName: 'claimRewards',
+    args: [
+      address,
+      utils.parseEther(
+        String(weiToEth(onChainProofQuery.data?.leafAccumulatedBalance || '0'))
+      ),
+      onChainProofQuery.data?.merkleProofs || [],
+    ],
   })
 
   const waitForTransaction = useWaitForTransaction({
@@ -50,19 +56,11 @@ export function WithdrawDialog({
 
   return (
     <>
-      <div className="-mt-2 text-DAppDeep">
-        <h3 className="mb-6 text-left text-2xl font-bold">Withdraw</h3>
-        <StepProgressBar currentStep={2} steps={steps} />
-      </div>
       {!waitForTransaction.isError ? (
-        <div className="text-center">
-          <h4 className="text-lg font-normal">You are withdrawing</h4>
+        <div className="px-10 text-center text-DAppDeep">
+          <h3 className="text-lg font-normal">You are withdrawing</h3>
           <p className="mt-4 text-2xl font-bold">
-            {toFixedNoTrailingZeros(
-              weiToEth(onChainProofQuery.data?.claimableRewardsWei || 0),
-              2
-            )}{' '}
-            ETH
+            {toFixedNoTrailingZeros(claimableRewards, 4)} ETH
           </p>
           <p className="mt-4 text-lg font-normal tracking-wide">
             to your recipient wallet address
@@ -89,16 +87,15 @@ export function WithdrawDialog({
           </div>
         </div>
       )}
-      <div>
-        <Button
-          isDisabled={contractWrite.isLoading || waitForTransaction.isLoading}
-          onPress={() => contractWrite.write?.()}>
-          {waitForTransaction.isError ? 'Try again' : 'Withdraw'}
-        </Button>
-        <Button buttonType="secondary" className="mt-4" onPress={handleClose}>
-          Cancel
-        </Button>
-      </div>
+      <Button
+        className="mt-7"
+        isDisabled={contractWrite.isLoading || waitForTransaction.isLoading}
+        onPress={() => contractWrite.write?.()}>
+        {waitForTransaction.isError ? 'Try again' : 'Withdraw'}
+      </Button>
+      <Button buttonType="secondary" className="mt-4" onPress={handleClose}>
+        Cancel
+      </Button>
     </>
   )
 }

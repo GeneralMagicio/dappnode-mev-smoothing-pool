@@ -48,7 +48,7 @@ export const addEthSuffix = (value: number | string) => `${value} ETH`
  * weiToEth(undefined)
  * // => 0
  */
-export const weiToEth = (wei: string | number | undefined) => {
+export const weiToEth = (wei: string | number | undefined | null) => {
   if (!wei) return 0
   const weiAsBigNumber = BigNumber.from(String(wei))
   const etherAsString = utils.formatEther(weiAsBigNumber)
