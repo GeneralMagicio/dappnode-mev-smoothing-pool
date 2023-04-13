@@ -25,15 +25,15 @@ export function MyRewards({
 }: MyRewardsProps) {
   if (isLoading) {
     return (
-      <BaseCard className="h-[580px] max-w-xs">
+      <BaseCard className="mx-auto h-[338px] max-w-xs md:h-[580px]">
         <Skeleton />
       </BaseCard>
     )
   }
 
   return (
-    <BaseCard className="flex h-[580px] max-w-xs flex-col justify-between text-DAppDeep">
-      <h3 className="mb-4 border-b border-DAppGray/20 pb-6 text-2xl font-bold leading-8 text-DAppDeep">
+    <BaseCard className="mx-auto flex h-[338px] w-full max-w-xs flex-col justify-between text-DAppDeep md:h-[580px]">
+      <h3 className="pb-6 text-2xl font-bold leading-8 text-DAppDeep md:mb-4 md:border-b md:border-DAppGray/20">
         My Rewards
       </h3>
       <MyRewardsSection

@@ -18,19 +18,23 @@ export function MyRewardsSection({
   tooltip,
 }: MyRewardsSectionProps) {
   return (
-    <section className={clsx('border-b border-DAppGray/20 pb-4', className)}>
+    <section
+      className={clsx(
+        'flex justify-between md:block md:border-b md:border-DAppGray/20 md:pb-4',
+        className
+      )}>
       <div className="flex items-center">
-        {icon}
-        <h3 className="ml-3 mr-2 text-sm">{title}</h3>
-        <Tooltip
-          className="h-[20px] w-[20px]"
-          iconType="question"
-          tooltip={tooltip}
-        />
+        <div className="hidden md:block">{icon}</div>
+        <h3 className="mx-1 max-w-fit text-xs sm:text-sm md:ml-3 md:mr-2">
+          {title}
+        </h3>
+        <Tooltip className="h-4 w-4" iconType="question" tooltip={tooltip} />
       </div>
-      <p className="mt-5 text-2xl font-bold leading-8">
+      <p className="text-lg font-bold leading-8 md:mt-5 md:text-2xl">
         {toFixedNoTrailingZeros(rewards, 4)}
-        <span className="ml-2 text-lg font-normal text-DAppGray">ETH</span>
+        <span className="ml-2 text-base font-normal text-DAppGray md:text-lg">
+          ETH
+        </span>
       </p>
     </section>
   )
