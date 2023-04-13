@@ -3,6 +3,7 @@ import { IoClose } from 'react-icons/io5'
 import { Button } from '@/components/common/Button'
 
 interface BaseDialogProps {
+  disabledTrigger?: boolean
   triggerText: string
   children: React.ReactNode
   title?: string
@@ -16,6 +17,7 @@ export function BaseDialog({
   children,
   subtitle,
   title,
+  disabledTrigger,
   triggerText,
   open,
   triggerButtonProp = 'regular',
@@ -25,9 +27,13 @@ export function BaseDialog({
     <Dialog.Root open={open} onOpenChange={handleOpenChange}>
       <Dialog.Trigger asChild>
         {triggerButtonProp === 'regular' ? (
-          <Button>{triggerText}</Button>
+          <Button isDisabled={disabledTrigger}>{triggerText}</Button>
         ) : (
-          <Button buttonType="secondary" color="blue" size="sm">
+          <Button
+            buttonType="secondary"
+            color="blue"
+            isDisabled={disabledTrigger}
+            size="sm">
             {triggerText}
           </Button>
         )}

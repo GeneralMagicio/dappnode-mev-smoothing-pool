@@ -6,6 +6,7 @@ import { Button } from '@/components/common/Button'
 import { fetchOnChainProof } from '@/client/api/queryFunctions'
 import { CongratulationsIcon } from '@/components/icons'
 import { weiToEth } from '@/utils/web3'
+import { toFixedNoTrailingZeros } from '@/utils/decimals'
 
 export function SuccessDialog({ steps, handleClose }: DialogProps) {
   const { address } = useAccount()
@@ -32,7 +33,10 @@ export function SuccessDialog({ steps, handleClose }: DialogProps) {
           {isLoading || isError ? (
             <div className="h-8 w-12 animate-pulse rounded bg-SkeletonGray" />
           ) : (
-            `${weiToEth(data?.claimableRewardsWei || 0).toFixed(2)} ETH`
+            `${toFixedNoTrailingZeros(
+              weiToEth(data?.claimableRewardsWei || 0),
+              2
+            )} ETH`
           )}
         </p>
         <p>

@@ -5,6 +5,7 @@ import { Button } from '@/components/common/Button'
 import { fetchConfig } from '@/client/api/queryFunctions'
 import { CongratulationsIcon } from '@/components/icons'
 import { weiToEth } from '@/utils/web3'
+import { toFixedNoTrailingZeros } from '@/utils/decimals'
 
 export function SuccessDialog({ steps, handleClose }: DialogProps) {
   const { data, isLoading, isError } = useQuery({
@@ -26,7 +27,7 @@ export function SuccessDialog({ steps, handleClose }: DialogProps) {
           {isLoading || isError ? (
             <div className="h-8 w-12 animate-pulse rounded bg-SkeletonGray" />
           ) : (
-            `${weiToEth(data?.collateralInWei).toFixed(2)} ETH`
+            `${toFixedNoTrailingZeros(weiToEth(data?.collateralInWei), 2)} ETH`
           )}
         </p>
         <p>to The MEV Smoothing Pool</p>

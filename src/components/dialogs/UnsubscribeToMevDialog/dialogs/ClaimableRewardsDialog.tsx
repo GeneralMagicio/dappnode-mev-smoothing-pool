@@ -8,6 +8,7 @@ import {
   fetchValidatorByIndex,
 } from '@/client/api/queryFunctions'
 import { weiToEth } from '@/utils/web3'
+import { toFixedNoTrailingZeros } from '@/utils/decimals'
 
 interface ClaimableRewardsDialogProps extends DialogProps {
   validatorId: number
@@ -57,18 +58,20 @@ export function ClaimableRewardsDialog({
               <div className="flex items-center justify-between">
                 <p>Claimable Rewards</p>
                 <p>
-                  {weiToEth(
-                    onChainProofQuery.data?.claimableRewardsWei || 0
-                  ).toFixed(4)}{' '}
+                  {toFixedNoTrailingZeros(
+                    weiToEth(onChainProofQuery.data?.claimableRewardsWei || 0),
+                    4
+                  )}{' '}
                   ETH
                 </p>
               </div>
               <div className="flex items-center justify-between">
                 <p>Pending Rewards</p>
                 <p>
-                  {weiToEth(
-                    validatorQuery.data?.pendingRewardsWei || 0
-                  ).toFixed(4)}{' '}
+                  {toFixedNoTrailingZeros(
+                    weiToEth(validatorQuery.data?.pendingRewardsWei || 0),
+                    4
+                  )}{' '}
                   ETH
                 </p>
               </div>
