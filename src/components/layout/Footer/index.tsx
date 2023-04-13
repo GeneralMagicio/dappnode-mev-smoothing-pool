@@ -13,9 +13,9 @@ const socialIcons = {
 
 export function Footer() {
   return (
-    <footer className="flex h-20 items-center justify-between border-t bg-white px-12">
+    <footer className="flex h-36 flex-col items-center justify-center gap-y-4 border-t bg-white px-12 sm:h-20 sm:flex-row sm:justify-between">
       <Link
-        className="flex items-center"
+        className="flex flex-col items-center gap-y-4 sm:flex-row"
         href={MAIN_SITE_URL}
         rel="noopener noreferrer"
         target="_blank">
@@ -25,7 +25,7 @@ export function Footer() {
           src="/dappnode-logo.svg"
           width={26}
         />
-        <h4 className="ml-3 text-xs">
+        <h4 className="text-xs sm:ml-3">
           Dappnode | Decentralized P2P Networking | © 2023
         </h4>
       </Link>
