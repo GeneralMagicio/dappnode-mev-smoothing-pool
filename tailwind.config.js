@@ -8,6 +8,9 @@ module.exports = {
 
   theme: {
     extend: {
+      screens: {
+        sm: '500px',
+      },
       boxShadow: {
         card: '0px 4px 8px rgba(224, 224, 224, 0.3)',
       },
