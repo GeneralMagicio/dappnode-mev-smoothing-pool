@@ -22,7 +22,7 @@ export function Footer() {
         <Image
           alt="Dappnode logo"
           height={26}
-          src="/dappnode-logo.svg"
+          src="/images/dappnode-logo.svg"
           width={26}
         />
         <h4 className="text-xs sm:ml-3">
