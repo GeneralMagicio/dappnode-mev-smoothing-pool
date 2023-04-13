@@ -1,6 +1,7 @@
 import { SummaryCard, type SummaryCardProps } from '..'
 import { FaEthereum } from 'react-icons/fa'
 import { weiToEth } from '@/utils/web3'
+import { toFixedNoTrailingZeros } from '@/utils/decimals'
 
 interface RewardsCardProps
   extends Omit<
@@ -27,7 +28,7 @@ export function RewardsCard({
   return (
     <SummaryCard
       bottomLeftText={secondaryRewardTitle}
-      bottomRightText={`${String(secondaryReward.toFixed(4))} ETH`}
+      bottomRightText={`${toFixedNoTrailingZeros(secondaryReward, 4)} ETH`}
       isError={isError}
       isLoading={isLoading}
       title={title}
@@ -36,7 +37,7 @@ export function RewardsCard({
         <FaEthereum className="mr-2 h-[24px] w-[14px] text-DAppDeep" />
         <div className="flex items-baseline">
           <h4 className="mr-1 text-2xl font-bold leading-8 text-DAppDeep">
-            {ethReward.toFixed(4)}
+            {toFixedNoTrailingZeros(ethReward, 4)}
           </h4>
           <h5 className="text-lg font-normal leading-6 text-DAppGray">ETH</h5>
         </div>

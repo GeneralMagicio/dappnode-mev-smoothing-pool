@@ -39,8 +39,8 @@ export const fetchStatistics = async () => {
   return StatisticsSchema.parse(convertKeysToCamelCase(response.data))
 }
 
-export const fetchOnChainProof = async (address: `0x${string}`) => {
-  const response = await apiClient.get(endpoints.onchainProof(address))
+export const fetchOnChainProof = async (address: `0x${string}` | undefined) => {
+  const response = await apiClient.get(endpoints.onchainProof(address || '0x0'))
   return onChainProofSchema.parse(convertKeysToCamelCase(response.data))
 }
 

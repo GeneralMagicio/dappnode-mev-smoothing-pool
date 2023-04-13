@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { Tooltip } from '@/components/common/Tooltip'
+import { toFixedNoTrailingZeros } from '@/utils/decimals'
 
 interface MyRewardsSectionProps {
   className?: string
@@ -28,7 +29,7 @@ export function MyRewardsSection({
         />
       </div>
       <p className="mt-5 text-2xl font-bold leading-8">
-        {rewards}
+        {toFixedNoTrailingZeros(rewards, 4)}
         <span className="ml-2 text-lg font-normal text-DAppGray">ETH</span>
       </p>
     </section>
