@@ -32,23 +32,25 @@ export function ClaimRewardsDialog({
       open={open}
       subtitle="Claim rewards"
       triggerText="Claim All">
-      {dialogState === 'initial' ? (
-        <InitialDialog
-          handleChangeDialogState={setDialogState}
-          handleClose={handleCloseDialog}
-        />
-      ) : dialogState === 'confirm' ? (
-        <WithdrawDialog
-          claimableRewards={claimableRewards}
-          handleChangeDialogState={setDialogState}
-          handleClose={handleCloseDialog}
-        />
-      ) : (
-        <SuccessDialog
-          handleChangeDialogState={setDialogState}
-          handleClose={handleCloseDialog}
-        />
-      )}
+      <div className="flex h-[320px] flex-col justify-between text-DAppDeep sm:h-[280px]">
+        {dialogState === 'initial' ? (
+          <InitialDialog
+            handleChangeDialogState={setDialogState}
+            handleClose={handleCloseDialog}
+          />
+        ) : dialogState === 'confirm' ? (
+          <WithdrawDialog
+            claimableRewards={claimableRewards}
+            handleChangeDialogState={setDialogState}
+            handleClose={handleCloseDialog}
+          />
+        ) : (
+          <SuccessDialog
+            handleChangeDialogState={setDialogState}
+            handleClose={handleCloseDialog}
+          />
+        )}
+      </div>
     </BaseDialog>
   )
 }
