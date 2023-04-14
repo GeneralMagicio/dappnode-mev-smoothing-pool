@@ -34,8 +34,9 @@ export function InitialDialog({
   const handleNext = () => {
     if (!isCorrectFeeRecipient) {
       handleClose()
+    } else {
+      handleChangeDialogState('confirm')
     }
-    handleChangeDialogState('confirm')
   }
 
   return (
