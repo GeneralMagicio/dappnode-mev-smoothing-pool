@@ -19,7 +19,7 @@ export function ConnectWalletButton() {
           return (
             <Button
               buttonType="primary"
-              className="max-w-fit"
+              className="min-w-[160px] max-w-fit"
               onPress={openConnectModal}>
               Connect Wallet
             </Button>

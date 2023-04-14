@@ -22,7 +22,7 @@ export function SummaryCard({
   tooltip,
 }: SummaryCardProps) {
   return (
-    <article className="h-36 w-full max-w-xs rounded-lg bg-white px-6 py-4 font-inter shadow-card">
+    <article className="mx-auto h-36 w-full max-w-md rounded-lg bg-white px-6 py-4 font-inter shadow-card">
       <div className="mb-3 flex items-center">
         <h3 className="mr-2 text-sm font-medium leading-7 text-DAppDeep">
           {title}

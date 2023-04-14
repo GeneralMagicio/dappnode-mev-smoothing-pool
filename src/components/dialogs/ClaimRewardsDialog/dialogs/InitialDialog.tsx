@@ -14,14 +14,14 @@ export function InitialDialog({
           address?
         </p>
       </div>
-      <Button
-        className="mt-7"
-        onPress={() => handleChangeDialogState('confirm')}>
-        Yes, Proceed
-      </Button>
-      <Button buttonType="secondary" className="mt-4" onPress={handleClose}>
-        Cancel
-      </Button>
+      <div>
+        <Button onPress={() => handleChangeDialogState('confirm')}>
+          Yes, Proceed
+        </Button>
+        <Button buttonType="secondary" className="mt-4" onPress={handleClose}>
+          Cancel
+        </Button>
+      </div>
     </>
   )
 }

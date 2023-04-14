@@ -22,7 +22,7 @@ export function MainLayout({ children, className }: MainLayoutProps) {
         className
       )}>
       <Header />
-      <div className="mx-auto min-h-screen-content max-w-7xl p-8">
+      <div className="mx-auto min-h-screen-content max-w-7xl p-4 md:p-8">
         {children}
       </div>
       <Footer />

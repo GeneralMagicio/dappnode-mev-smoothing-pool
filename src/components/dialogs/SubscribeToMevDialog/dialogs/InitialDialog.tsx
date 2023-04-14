@@ -45,10 +45,12 @@ export function InitialDialog({
         <h3 className="mb-6 text-left text-2xl font-bold">Warning</h3>
         <StepProgressBar currentStep={0} steps={steps} />
       </div>
-      <div className="px-6">
+      <div className="sm:px-6">
         <div>
           <h4 className="mb-2 text-DAppNeutral/500">Your Validator</h4>
-          <p className="h-8">{shortenEthAddress(validatorKey, 20, 20)}</p>
+          <p className="h-8 overflow-scroll">
+            {shortenEthAddress(validatorKey, 20, 20)}
+          </p>
         </div>
         {registeredRelaysQuery.isLoading ||
         registeredRelaysQuery.data?.correctFeeRecipients ? (
@@ -60,7 +62,7 @@ export function InitialDialog({
               {registeredRelaysQuery.isLoading ? (
                 <div className="h-8 w-96 animate-pulse rounded bg-SkeletonGray" />
               ) : (
-                <p className="h-8">
+                <p className="h-8 overflow-scroll">
                   {
                     registeredRelaysQuery.data?.correctFeeRelayers?.[0]
                       .feeRecipient
@@ -75,7 +77,9 @@ export function InitialDialog({
               {configQuery.isLoading ? (
                 <div className="h-8 w-96 animate-pulse rounded bg-SkeletonGray" />
               ) : (
-                <p className="h-8">{configQuery.data?.poolAddress}</p>
+                <p className="h-8 overflow-scroll">
+                  {configQuery.data?.poolAddress}
+                </p>
               )}
               <div />
             </div>
@@ -86,7 +90,7 @@ export function InitialDialog({
             <h4 className="mt-3 font-bold">Fee recipient error!</h4>
             <p className="mt-2 font-normal">
               The fee recipient address is not set as{' '}
-              <span className="font-semibold">
+              <span className="overflow-scroll font-semibold">
                 {configQuery.data?.poolAddress}
               </span>{' '}
               Please change the fee recipient and try again.
