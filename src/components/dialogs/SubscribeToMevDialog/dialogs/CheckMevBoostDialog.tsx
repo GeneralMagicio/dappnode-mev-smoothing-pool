@@ -26,7 +26,7 @@ export function CheckMevBoostDialog({
         <h3 className="mb-6 text-left text-2xl font-bold">Check MevBoost</h3>
         <StepProgressBar currentStep={1} steps={steps} />
       </div>
-      <div className="px-6">
+      <div className="sm:px-6">
         {registeredRelaysQuery.isError ? (
           <div className="text-center text-red-500">
             <h4 className="font-bold">An Error has occurred</h4>
@@ -41,7 +41,9 @@ export function CheckMevBoostDialog({
           <div>
             <div>
               <h4 className="mb-2 text-DAppNeutral/500">Your Validator</h4>
-              <p className="h-8">{shortenEthAddress(validatorKey, 20, 20)}</p>
+              <p className="h-8 overflow-scroll">
+                {shortenEthAddress(validatorKey, 20, 20)}
+              </p>
             </div>
             <div className="mt-8">
               <h4 className="mb-2 text-DAppNeutral/500">Mev Boost Relayers</h4>

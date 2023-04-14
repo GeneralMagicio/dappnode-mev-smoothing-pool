@@ -72,7 +72,7 @@ export function DepositDialog({
         <div className="text-center">
           <h4 className="mb-4 text-lg font-normal">You are Depositing</h4>
           {configQuery.isLoading ? (
-            <div className="h-8 w-20 animate-pulse rounded bg-SkeletonGray" />
+            <div className="mx-auto h-8 w-20 animate-pulse rounded bg-SkeletonGray" />
           ) : (
             <p className="text-2xl font-bold">
               {weiToEth(configQuery.data?.collateralInWei)} ETH
@@ -82,10 +82,12 @@ export function DepositDialog({
             to The MEV Smoothing Pool
           </p>
           {waitForTransaction.isLoading && (
-            <div className="mt-6 w-full rounded-lg bg-violet-50 px-4 py-8 text-sm font-normal text-DAppDeep">
-              <div className="mx-auto mb-2 flex w-fit items-center">
+            <div className="mt-6 w-full rounded-lg bg-violet-50 px-4 py-7 text-sm font-normal text-DAppDeep">
+              <div className="mx-auto mb-2 flex w-fit flex-col items-center sm:flex-row">
                 <AiOutlineInfoCircle />
-                <p className="ml-2">Your deposit is being processed.</p>
+                <p className="ml-2 mt-1 sm:mt-0">
+                  Your deposit is being processed.
+                </p>
               </div>
               <Link
                 className="text-violet-500 underline"
@@ -97,13 +99,13 @@ export function DepositDialog({
           )}
         </div>
       ) : (
-        <div className="px-8 text-center text-base text-red-500">
+        <div className="text-center text-base text-red-500 sm:px-8">
           <AiOutlineInfoCircle className="mx-auto h-8 w-8" />
-          <h4 className="mt-4 font-bold">Deposit error!</h4>
-          <p className="mt-4 font-normal">
+          <h4 className="mt-1 font-bold sm:mt-4">Deposit error!</h4>
+          <p className="mt-1 font-normal sm:mt-4">
             Your Deposit has failed. Please go back and try again.
           </p>
-          <h4 className="my-2  font-bold">Error:</h4>
+          <h4 className="my-2 font-bold">Error:</h4>
           <div className="mb-4 h-32  overflow-scroll rounded-lg border border-red-400 p-2">
             {waitForTransaction.error?.message}
           </div>
