@@ -37,24 +37,24 @@ export function ClaimableRewardsDialog({
       <div className="-mt-2 text-DAppDeep">
         <h3 className="mb-6 text-left text-2xl font-bold">Claimable rewards</h3>
         <StepProgressBar currentStep={1} steps={steps} />
+      </div>
+      <div>
         {onChainProofQuery.isError ? (
-          <div className="mt-24 text-center text-red-500">
+          <div className="text-center text-red-500">
             <h4 className="font-bold">An Error has occurred</h4>
             <p>Please try again later</p>
           </div>
         ) : onChainProofQuery.isLoading || validatorQuery.isLoading ? (
           <>
-            <h4 className="mt-24 text-center">
+            <h4 className="text-center">
               Checking Validator for your rewards...
             </h4>
-            <div className="mx-auto mt-8 h-10 w-80 animate-pulse rounded bg-SkeletonGray" />
+            <div className="mx-auto mt-8 h-10 w-80 max-w-full animate-pulse rounded bg-SkeletonGray" />
           </>
         ) : (
           <>
-            <h4 className="mt-10 mb-4 text-center text-lg font-semibold">
-              Rewards
-            </h4>
-            <div className="flex w-full flex-col gap-y-8 rounded-lg bg-violet-50 p-6 text-base font-normal text-DAppDeep">
+            <h4 className="mb-4 text-center text-lg font-semibold">Rewards</h4>
+            <div className=" flex w-full flex-col gap-y-8 rounded-lg bg-violet-50  p-6 text-sm font-normal text-DAppDeep sm:text-base">
               <div className="flex items-center justify-between">
                 <p>Claimable Rewards</p>
                 <p>
@@ -81,7 +81,6 @@ export function ClaimableRewardsDialog({
       </div>
       <div>
         <Button
-          className="mt-7"
           isDisabled={onChainProofQuery.isLoading || onChainProofQuery.isError}
           onPress={() => handleChangeDialogState('loading')}>
           Next
