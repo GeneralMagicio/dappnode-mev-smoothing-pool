@@ -56,7 +56,7 @@ export function StepProgressBar({ steps, currentStep }: StepProgressBarProps) {
             </motion.div>
             <p
               className={clsx(
-                'mt-1 text-xs font-normal',
+                'mx-1 mt-1 h-8 text-center text-xs font-normal',
                 status === 'unselected'
                   ? 'text-DAppGray'
                   : 'text-DAppPurple/900'

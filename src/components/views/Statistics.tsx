@@ -8,7 +8,7 @@ import { fetchStatistics } from '@/client/api/queryFunctions'
 export function Statistics() {
   const { data, isLoading, isError } = useQuery(['statistics'], fetchStatistics)
   return (
-    <div className="flex w-full items-center justify-between gap-x-6">
+    <div className="grid w-full grid-cols-1 items-center justify-center gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-6">
       <TotalSubscribersCard
         isError={isError}
         isLoading={isLoading}

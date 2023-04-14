@@ -5,26 +5,25 @@ import clsx from 'clsx'
 import { RxExternalLink } from 'react-icons/rx'
 import { PAGES } from '@/utils/config'
 import { ConnectWalletButton } from '@/components/common/ConnectWalletButton'
+import { MobileMenuDialog } from '@/components/dialogs/MobileMenuDialog'
 
 export function Header() {
   const router = useRouter()
 
   return (
-    <header
-      className="flex h-24 items-center
-justify-between border-b bg-white p-6">
+    <header className="flex h-24 items-center justify-between border-b bg-white p-4 md:p-6">
       <Link className="flex items-center" href="/">
         <Image
           alt="Dappnode logo"
           height={50}
-          src="/dappnode-logo.svg"
+          src="/images/dappnode-logo.svg"
           width={50}
         />
-        <h2 className="ml-4 font-urbanist text-3xl font-bold text-DAppGray">
+        <h2 className="ml-4 hidden font-urbanist text-2xl font-bold text-DAppGray lg:inline lg:text-3xl">
           MEV <span className="text-DAppDeep">Smoothing Pool</span>
         </h2>
       </Link>
-      <nav className="flex gap-x-5">
+      <nav className="hidden md:flex md:gap-x-5">
         {PAGES.map(({ name, path }) => {
           const isExternalLink = path.includes('http')
           return (
@@ -48,7 +47,12 @@ justify-between border-b bg-white p-6">
           )
         })}
       </nav>
-      <ConnectWalletButton />
+      <div className="flex items-center">
+        <ConnectWalletButton />
+        <div className="md:hidden">
+          <MobileMenuDialog />
+        </div>
+      </div>
     </header>
   )
 }
