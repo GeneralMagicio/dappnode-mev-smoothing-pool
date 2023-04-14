@@ -67,24 +67,26 @@ export function WithdrawDialog({
           <p className="mt-4 text-lg font-normal tracking-wide">
             to your recipient wallet address
           </p>
-          {waitForTransaction.isLoading && (
+          {true && (
             <div className="mt-6 w-full rounded-lg bg-violet-50 px-4 py-8 text-sm font-normal text-DAppDeep">
-              <div className="mx-auto flex w-fit items-center">
+              <div className="mx-auto mb-2 flex w-fit flex-col items-center sm:flex-row">
                 <AiOutlineInfoCircle />
-                <p className="ml-2">Your withdrawal is being processed.</p>
+                <p className="ml-2 mt-1 sm:mt-0">
+                  Your withdrawal is being processed.
+                </p>
               </div>
             </div>
           )}
         </div>
       ) : (
-        <div className="px-8 text-center text-base text-red-500">
+        <div className="mt-2 text-center text-base text-red-500 md:px-8">
           <AiOutlineInfoCircle className="mx-auto h-8 w-8" />
-          <h4 className="mt-4 font-bold">Withdrawal error!</h4>
-          <p className="mt-4 font-normal">
+          <h4 className="mt-1 font-bold">Withdrawal error!</h4>
+          <p className="mt-1 font-normal">
             Your Withdrawal has failed. Please go back and try again.
           </p>
-          <h4 className="my-2  font-bold">Error:</h4>
-          <div className="mb-4 h-32  overflow-scroll rounded-lg border border-red-400 p-2">
+          <h4 className="my-1 font-bold">Error:</h4>
+          <div className="mb-4 h-32 overflow-scroll rounded-lg border border-red-400 p-2">
             {waitForTransaction.error?.message}
           </div>
         </div>

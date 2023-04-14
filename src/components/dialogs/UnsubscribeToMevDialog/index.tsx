@@ -19,7 +19,7 @@ interface UnsubscribeToMevDialogProps {
 export function UnsubscribeToMevDialog({
   validatorId,
 }: UnsubscribeToMevDialogProps) {
-  const [dialogState, setDialogState] = useState<IDialogStates>('initial')
+  const [dialogState, setDialogState] = useState<IDialogStates>('success')
 
   const { open, handleOpenChange, handleClose } = useDialog()
 
@@ -41,7 +41,7 @@ export function UnsubscribeToMevDialog({
       triggerButtonProp="outline"
       triggerText="Unsubscribe">
       <AnimatePresence>
-        <div className="flex h-[500px] flex-col justify-between text-DAppDeep">
+        <div className="flex h-[550px] flex-col justify-between text-DAppDeep sm:h-[500px]">
           {dialogState === 'initial' ? (
             <InitialDialog
               handleChangeDialogState={setDialogState}

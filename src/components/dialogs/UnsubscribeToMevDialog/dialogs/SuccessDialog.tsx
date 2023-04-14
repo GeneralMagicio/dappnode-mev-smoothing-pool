@@ -22,7 +22,7 @@ export function SuccessDialog({ steps, handleClose }: DialogProps) {
         <h3 className="mb-6 text-left text-2xl font-bold">Success!</h3>
         <StepProgressBar currentStep={3} steps={steps} />
       </div>
-      <div className="mx-auto flex flex-col items-center gap-y-4 px-4 text-center text-lg">
+      <div className="mx-auto flex flex-col items-center gap-y-4 text-center text-lg sm:px-4">
         <CongratulationsIcon />
         <h4 className="font-bold">Congratulations!</h4>
         <p>
@@ -31,12 +31,15 @@ export function SuccessDialog({ steps, handleClose }: DialogProps) {
         </p>
         <p className="font-bold">
           {isLoading || isError ? (
-            <div className="h-8 w-12 animate-pulse rounded bg-SkeletonGray" />
+            <div className="h-8 w-24 animate-pulse rounded bg-SkeletonGray" />
           ) : (
-            `${toFixedNoTrailingZeros(
-              weiToEth(data?.claimableRewardsWei || 0),
-              2
-            )} ETH`
+            <p className="h-8">
+              {toFixedNoTrailingZeros(
+                weiToEth(data?.claimableRewardsWei || 0),
+                4
+              )}{' '}
+              ETH
+            </p>
           )}
         </p>
         <p>
