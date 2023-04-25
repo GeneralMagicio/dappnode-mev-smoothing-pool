@@ -6,8 +6,8 @@ export default function Donate() {
   return (
     <>
       <Head title="Support DAppNode" />
-      <main className="flex items-center justify-between pt-6">
-        <div className="relative ml-20 mt-20 h-[520px] w-[490px]">
+      <main className="mx-auto flex max-w-5xl items-center justify-between pt-6">
+        <div className="relative mt-20 hidden h-[520px] w-[490px] lg:block">
           <Image
             alt="ETH Circle"
             className="absolute left-36 bottom-14"
@@ -86,7 +86,7 @@ export default function Donate() {
             width={160}
           />
         </div>
-        <article className="flex max-w-fit flex-col">
+        <article className="mx-auto mt-14 flex max-w-fit flex-col text-center lg:mt-0 lg:text-left">
           <h1 className="mt-2 text-5xl font-bold leading-[56px] text-DAppDeep">
             Support DAppNode
           </h1>
@@ -98,7 +98,7 @@ export default function Donate() {
             habitasse. Orci leo id amet sit. Feugiat quisque mi auctor pharetra.
             Diam purus lorem ut felis adipiscing dis cras.
           </p>
-          <div className="mt-8 max-w-[220px]">
+          <div className="mx-auto mt-8 w-[220px] lg:mx-0">
             <DonateDialog />
           </div>
         </article>
