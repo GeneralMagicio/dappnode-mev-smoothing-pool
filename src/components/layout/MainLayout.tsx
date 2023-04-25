@@ -16,7 +16,7 @@ export function MainLayout({ children, className }: MainLayoutProps) {
     <div
       className={clsx(
         'min-h-screen bg-cover',
-        router.pathname === '/'
+        router.pathname === '/' || router.pathname === '/how-to'
           ? 'bg-wave-pattern bg-cover'
           : 'bg-DAppBackgroundLight',
         className

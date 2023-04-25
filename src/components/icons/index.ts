@@ -3,7 +3,9 @@ import { AlertIcon } from './AlertIcon'
 import { CheckIcon } from './CheckIcon'
 import { CongratulationsIcon } from './CongratulationsIcon'
 import { ClaimableRewardsIcon } from './ClaimableRewardsIcon'
+import { FeaturesIcon } from './FeaturesIcon'
 import { PendingRewardsIcon } from './PendingRewardsIcon'
+import { WalletIcon } from './WalletIcon'
 
 export {
   AccumulatedRewardsIcon,
@@ -11,5 +13,7 @@ export {
   CheckIcon,
   CongratulationsIcon,
   ClaimableRewardsIcon,
+  FeaturesIcon,
   PendingRewardsIcon,
+  WalletIcon,
 }
