@@ -20,7 +20,7 @@ export const PAGES = [
   },
   {
     name: 'How to use',
-    path: '/about',
+    path: '/how-to',
   },
   {
     name: 'Donate',
@@ -39,7 +39,7 @@ export const SOCIALS = [
   },
   {
     name: 'Discord',
-    path: `https://discord.gg/${SOCIAL_DISCORD}`,
+    path: SOCIAL_DISCORD,
   },
   {
     name: 'GitHub',
