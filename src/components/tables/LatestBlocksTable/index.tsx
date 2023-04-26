@@ -2,6 +2,7 @@ import { PAGE_SIZE, headerTooltip } from './config'
 import { Skeleton } from './components/Skeleton'
 import { TableLayout } from '../components/Table'
 import { HeaderTooltip } from '../components/HeaderTooltip'
+import Link from 'next/link'
 import {
   createColumnHelper,
   getCoreRowModel,
@@ -10,20 +11,43 @@ import {
 } from '@tanstack/react-table'
 import { addEthSuffix } from '@/utils/web3'
 import { toFixedNoTrailingZeros } from '@/utils/decimals'
+import { getBeaconChainExplorer } from '@/utils/config'
 import type { Block } from '../types'
 
 const columnHelper = createColumnHelper<Block>()
 
-const columns = [
+const getColumns = (chainId: number, blackExplorerUrl?: string) => [
   columnHelper.accessor('slot', {
     header: () => <HeaderTooltip header="Slot" tooltip={headerTooltip.slot} />,
-    cell: (info) => info.getValue().toLocaleString(),
+    cell: (info) => {
+      const slot = info.getValue()
+      return (
+        <Link
+          className="font-medium underline"
+          href={getBeaconChainExplorer(chainId, 'slot', slot)}
+          rel="noopener noreferrer"
+          target="_blank">
+          {slot.toLocaleString()}
+        </Link>
+      )
+    },
   }),
   columnHelper.accessor('proposer', {
     header: () => (
       <HeaderTooltip header="Proposer" tooltip={headerTooltip.proposer} />
     ),
-    cell: (info) => info.getValue(),
+    cell: (info) => {
+      const proposer = info.getValue()
+      return (
+        <Link
+          className="font-medium underline"
+          href={`${blackExplorerUrl}/address/${proposer}`}
+          rel="noopener noreferrer"
+          target="_blank">
+          {proposer.toLocaleString()}
+        </Link>
+      )
+    },
   }),
   columnHelper.accessor('rewardType', {
     header: () => (
@@ -40,13 +64,20 @@ const columns = [
 ]
 
 interface LatestBlocksTableProps {
+  blockExplorerUrl?: string
+  chainId: number
   data?: Block[]
   isLoading: boolean
 }
 
-export function LatestBlocksTable({ data, isLoading }: LatestBlocksTableProps) {
+export function LatestBlocksTable({
+  blockExplorerUrl,
+  chainId,
+  data,
+  isLoading,
+}: LatestBlocksTableProps) {
   const table = useReactTable({
-    columns,
+    columns: getColumns(chainId, blockExplorerUrl),
     data: data ?? [],
     initialState: {
       pagination: {

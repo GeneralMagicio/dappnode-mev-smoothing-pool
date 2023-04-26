@@ -4,6 +4,7 @@ import { NotConnectedWarning } from './components/NotConnectedWarning'
 import { headerTooltip, PAGE_SIZE } from './config'
 import { TableLayout } from '../components/Table'
 import { HeaderTooltip } from '../components/HeaderTooltip'
+import Link from 'next/link'
 import {
   createColumnHelper,
   getCoreRowModel,
@@ -14,16 +15,30 @@ import { SubscribeToMevDialog } from '@/components/dialogs/SubscribeToMevDialog'
 import { UnsubscribeToMevDialog } from '@/components/dialogs/UnsubscribeToMevDialog'
 import { addEthSuffix, shortenEthAddress } from '@/utils/web3'
 import { toFixedNoTrailingZeros } from '@/utils/decimals'
+import { getBeaconChainExplorer } from '@/utils/config'
 import type { Validator } from '../types'
 
 const columnHelper = createColumnHelper<Validator>()
 
-const columns = [
+const getColumns = (chainId: number) => [
   columnHelper.accessor('address', {
     header: () => (
       <HeaderTooltip header="Address" tooltip={headerTooltip.address} />
     ),
-    cell: (info) => shortenEthAddress(info.getValue(), 22, 0),
+    cell: (info) => {
+      const address = info.getValue()
+      const shortAddress = shortenEthAddress(address, 22, 0)
+
+      return (
+        <Link
+          className="font-medium underline"
+          href={getBeaconChainExplorer(chainId, 'validator', address)}
+          rel="noopener noreferrer"
+          target="_blank">
+          {shortAddress}
+        </Link>
+      )
+    },
   }),
   columnHelper.accessor('pending', {
     header: () => (
@@ -61,18 +76,20 @@ const columns = [
 ]
 
 interface MyValidatorsTableProps {
+  chainId: number
   data?: Validator[]
   isConnected?: boolean
   isLoading?: boolean
 }
 
 export function MyValidatorsTable({
+  chainId,
   data,
   isConnected,
   isLoading,
 }: MyValidatorsTableProps) {
   const table = useReactTable({
-    columns,
+    columns: getColumns(chainId),
     data: data ?? [],
     initialState: {
       pagination: {
