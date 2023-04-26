@@ -1,8 +1,11 @@
 import Image from 'next/image'
+import { useAccount } from 'wagmi'
 import { Head } from '@/components/layout/Head'
 import { DonateDialog } from '@/components/dialogs/DonateDialog'
+import { ConnectWalletButton } from '@/components/common/ConnectWalletButton'
 
 export default function Donate() {
+  const { isConnected } = useAccount()
   return (
     <>
       <Head title="Support DAppNode" />
@@ -99,7 +102,7 @@ export default function Donate() {
             Diam purus lorem ut felis adipiscing dis cras.
           </p>
           <div className="mx-auto mt-8 w-[220px] lg:mx-0">
-            <DonateDialog />
+            {isConnected ? <DonateDialog /> : <ConnectWalletButton />}
           </div>
         </article>
       </main>
