@@ -3,12 +3,14 @@ import { Skeleton } from './components/Skeleton'
 import { TableLayout } from '../components/Table'
 import { HeaderTooltip } from '../components/HeaderTooltip'
 import Link from 'next/link'
+import { useMemo } from 'react'
 import {
   createColumnHelper,
   getCoreRowModel,
   getPaginationRowModel,
   useReactTable,
 } from '@tanstack/react-table'
+import { useSearchInput } from '@/hooks/useSearchInput'
 import { addEthSuffix } from '@/utils/web3'
 import { toFixedNoTrailingZeros } from '@/utils/decimals'
 import { getBeaconChainExplorer } from '@/utils/config'
@@ -76,9 +78,21 @@ export function LatestBlocksTable({
   data,
   isLoading,
 }: LatestBlocksTableProps) {
+  const { searchInput, setSearchInput, debouncedSearchInput } = useSearchInput()
+
+  const filteredData = useMemo(
+    () =>
+      data?.filter((row) => {
+        const address = row.proposer.toLowerCase()
+        const search = debouncedSearchInput.toLowerCase()
+        return address.includes(search)
+      }),
+    [debouncedSearchInput, data]
+  )
+
   const table = useReactTable({
     columns: getColumns(chainId, blockExplorerUrl),
-    data: data ?? [],
+    data: filteredData ?? [],
     initialState: {
       pagination: {
         pageSize: PAGE_SIZE,
@@ -94,6 +108,9 @@ export function LatestBlocksTable({
     <TableLayout
       className="h-[510px]"
       data={data ?? []}
+      searchInput={searchInput}
+      searchPlaceholder="Search Proposer"
+      setSearchInput={setSearchInput}
       table={table}
       title="Latest Blocks to SP"
     />

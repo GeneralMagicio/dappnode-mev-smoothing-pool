@@ -4,6 +4,7 @@ import { NotConnectedWarning } from './components/NotConnectedWarning'
 import { headerTooltip, PAGE_SIZE } from './config'
 import { TableLayout } from '../components/Table'
 import { HeaderTooltip } from '../components/HeaderTooltip'
+import { useMemo } from 'react'
 import Link from 'next/link'
 import {
   createColumnHelper,
@@ -13,6 +14,7 @@ import {
 } from '@tanstack/react-table'
 import { SubscribeToMevDialog } from '@/components/dialogs/SubscribeToMevDialog'
 import { UnsubscribeToMevDialog } from '@/components/dialogs/UnsubscribeToMevDialog'
+import { useSearchInput } from '@/hooks/useSearchInput'
 import { addEthSuffix, shortenEthAddress } from '@/utils/web3'
 import { toFixedNoTrailingZeros } from '@/utils/decimals'
 import { getBeaconChainExplorer } from '@/utils/config'
@@ -88,9 +90,21 @@ export function MyValidatorsTable({
   isConnected,
   isLoading,
 }: MyValidatorsTableProps) {
+  const { searchInput, setSearchInput, debouncedSearchInput } = useSearchInput()
+
+  const filteredData = useMemo(
+    () =>
+      data?.filter((row) => {
+        const address = row.address.toLowerCase()
+        const search = debouncedSearchInput.toLowerCase()
+        return address.includes(search)
+      }),
+    [debouncedSearchInput, data]
+  )
+
   const table = useReactTable({
     columns: getColumns(chainId),
-    data: data ?? [],
+    data: filteredData ?? [],
     initialState: {
       pagination: {
         pageSize: PAGE_SIZE,
@@ -112,6 +126,9 @@ export function MyValidatorsTable({
     <TableLayout
       className="h-[440px]"
       data={data ?? []}
+      searchInput={searchInput}
+      searchPlaceholder="Search Validator"
+      setSearchInput={setSearchInput}
       table={table}
       title="My Validators"
     />

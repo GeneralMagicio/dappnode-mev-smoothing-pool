@@ -20,9 +20,9 @@ export function SearchInput({
 
   return (
     <div className="relative flex w-full items-center">
-      <AiOutlineSearch className="absolute top-1/2 left-4 h-6 w-6 -translate-y-1/2 text-DAppGray" />
+      <AiOutlineSearch className="absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2 text-DAppGray" />
       <input
-        className="rounded-md border border-DAppNeutral/100 py-3 pr-4 pl-11 font-normal text-DAppDeep placeholder:font-light placeholder:text-DAppGray focus:outline-none "
+        className="rounded-md border border-DAppNeutral/100 py-3 pr-4 pl-9 text-sm font-normal text-DAppDeep placeholder:font-light placeholder:text-DAppGray focus:outline-none "
         placeholder={placeholder}
         type="text"
         value={value}
