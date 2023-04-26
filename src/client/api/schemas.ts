@@ -7,7 +7,7 @@ export const BlockSchema = z.object({
   blockType: z.string(),
   rewardWei: z.number(),
   rewardType: z.union([z.literal('mev'), z.literal('vanila')]),
-  depositAddress: z.string(),
+  withdrawalAddress: z.string(),
 })
 
 export const ValidatorSchema = z.object({
@@ -15,7 +15,7 @@ export const ValidatorSchema = z.object({
   accumulatedRewardsWei: z.number().or(z.null()),
   pendingRewardsWei: z.number().or(z.null()),
   collateralWei: z.number().or(z.null()),
-  depositAddress: z.string(),
+  withdrawalAddress: z.string(),
   validatorIndex: z.number(),
   validatorKey: z.string(),
   proposedBlock: z.array(z.any()).or(z.null()),
@@ -43,7 +43,7 @@ export const StatisticsSchema = z.object({
 })
 
 export const onChainProofSchema = z.object({
-  leafDepositAddress: z.string(),
+  leafWithdrawalAddress: z.string(),
   leafAccumulatedBalance: z.number(),
   merkleroot: z.string(),
   checkpointSlot: z.number(),
@@ -63,7 +63,6 @@ export const ConfigSchema = z.object({
   updaterAddress: z.string(),
   deployedSlot: z.number(),
   checkpointSize: z.number(),
-  postgresEndpoint: z.string(),
   poolFeesPercent: z.number(),
   poolFeesAddress: z.string(),
   dryRun: z.boolean(),

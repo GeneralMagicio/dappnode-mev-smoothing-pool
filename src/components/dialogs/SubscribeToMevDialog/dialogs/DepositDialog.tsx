@@ -43,7 +43,7 @@ export function DepositDialog({
     address: '0x553BD5a94bcC09FFab6550274d5db140a95AE9bC',
     abi,
     mode: 'recklesslyUnprepared',
-    functionName: 'suscribeValidator',
+    functionName: 'subscribe',
     args: [validatorId],
     overrides: {
       from: address,

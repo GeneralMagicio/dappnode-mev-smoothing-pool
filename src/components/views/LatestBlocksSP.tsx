@@ -15,9 +15,9 @@ export function LatestBlocksSP() {
 
   if (data) {
     proposedBlocks = data.map(
-      ({ slot, depositAddress, rewardType, rewardWei }) => ({
+      ({ slot, withdrawalAddress, rewardType, rewardWei }) => ({
         slot,
-        proposer: depositAddress as `0x${string}`,
+        proposer: withdrawalAddress as `0x${string}`,
         rewardType,
         reward: weiToEth(rewardWei),
       })

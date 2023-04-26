@@ -5,7 +5,7 @@
       {
         "indexed": false,
         "internalType": "address",
-        "name": "depositAddress",
+        "name": "withdrawalAddress",
         "type": "address"
       },
       {
@@ -81,7 +81,7 @@
       {
         "indexed": false,
         "internalType": "address",
-        "name": "depositAddress",
+        "name": "withdrawalAddress",
         "type": "address"
       },
       {
@@ -99,18 +99,24 @@
     "inputs": [
       {
         "indexed": false,
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
+      },
+      {
+        "indexed": false,
         "internalType": "uint256",
-        "name": "suscriptionCollateral",
+        "name": "subscriptionCollateral",
         "type": "uint256"
       },
       {
         "indexed": false,
-        "internalType": "uint32",
+        "internalType": "uint64",
         "name": "validatorID",
-        "type": "uint32"
+        "type": "uint64"
       }
     ],
-    "name": "SuscribeValidator",
+    "name": "SubscribeValidator",
     "type": "event"
   },
   {
@@ -124,12 +130,12 @@
       },
       {
         "indexed": false,
-        "internalType": "uint32",
+        "internalType": "uint64",
         "name": "validatorID",
-        "type": "uint32"
+        "type": "uint64"
       }
     ],
-    "name": "UnsuscribeValidator",
+    "name": "UnsubscribeValidator",
     "type": "event"
   },
   {
@@ -164,11 +170,11 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "newSuscriptionCollateral",
+        "name": "newSubscriptionCollateral",
         "type": "uint256"
       }
     ],
-    "name": "UpdateSuscriptionCollateral",
+    "name": "UpdateSubscriptionCollateral",
     "type": "event"
   },
   { "stateMutability": "payable", "type": "fallback" },
@@ -176,7 +182,7 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "depositAddress",
+        "name": "withdrawalAddress",
         "type": "address"
       },
       {
@@ -207,7 +213,7 @@
       { "internalType": "address", "name": "_oracle", "type": "address" },
       {
         "internalType": "uint256",
-        "name": "_suscriptionCollateral",
+        "name": "_subscriptionCollateral",
         "type": "uint256"
       }
     ],
@@ -262,16 +268,16 @@
   },
   {
     "inputs": [
-      { "internalType": "uint32", "name": "validatorID", "type": "uint32" }
+      { "internalType": "uint64", "name": "validatorID", "type": "uint64" }
     ],
-    "name": "suscribeValidator",
+    "name": "subscribeValidator",
     "outputs": [],
     "stateMutability": "payable",
     "type": "function"
   },
   {
     "inputs": [],
-    "name": "suscriptionCollateral",
+    "name": "subscriptionCollateral",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
@@ -287,9 +293,9 @@
   },
   {
     "inputs": [
-      { "internalType": "uint32", "name": "validatorID", "type": "uint32" }
+      { "internalType": "uint64", "name": "validatorID", "type": "uint64" }
     ],
-    "name": "unsuscribeValidator",
+    "name": "unsubscribeValidator",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -298,7 +304,7 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "newSuscriptionCollateral",
+        "name": "newSubscriptionCollateral",
         "type": "uint256"
       }
     ],
