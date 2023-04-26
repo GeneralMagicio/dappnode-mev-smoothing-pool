@@ -19,7 +19,7 @@ interface UnsubscribeToMevDialogProps {
 export function UnsubscribeToMevDialog({
   validatorId,
 }: UnsubscribeToMevDialogProps) {
-  const [dialogState, setDialogState] = useState<IDialogStates>('success')
+  const [dialogState, setDialogState] = useState<IDialogStates>('initial')
 
   const { open, handleOpenChange, handleClose } = useDialog()
 

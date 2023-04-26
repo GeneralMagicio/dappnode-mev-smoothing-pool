@@ -35,7 +35,7 @@ export function WithdrawDialog({
     address: '0x553BD5a94bcC09FFab6550274d5db140a95AE9bC',
     abi,
     mode: 'recklesslyUnprepared',
-    functionName: 'unsuscribeValidator',
+    functionName: 'unsubscribeValidator',
     args: [validatorId],
   })
 
