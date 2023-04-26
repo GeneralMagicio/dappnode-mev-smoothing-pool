@@ -82,11 +82,13 @@ export function LatestBlocksTable({
 
   const filteredData = useMemo(
     () =>
-      data?.filter((row) => {
-        const address = row.proposer.toLowerCase()
-        const search = debouncedSearchInput.toLowerCase()
-        return address.includes(search)
-      }),
+      data
+        ?.filter((row) => {
+          const address = row.proposer.toLowerCase()
+          const search = debouncedSearchInput.toLowerCase()
+          return address.includes(search)
+        })
+        .sort((a, b) => b.slot - a.slot),
     [debouncedSearchInput, data]
   )
 
@@ -107,7 +109,7 @@ export function LatestBlocksTable({
   return (
     <TableLayout
       className="h-[510px]"
-      data={data ?? []}
+      data={filteredData ?? []}
       searchInput={searchInput}
       searchPlaceholder="Search Proposer"
       setSearchInput={setSearchInput}
