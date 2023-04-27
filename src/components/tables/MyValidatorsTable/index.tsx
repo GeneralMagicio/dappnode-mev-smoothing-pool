@@ -4,6 +4,8 @@ import { NotConnectedWarning } from './components/NotConnectedWarning'
 import { headerTooltip, PAGE_SIZE } from './config'
 import { TableLayout } from '../components/Table'
 import { HeaderTooltip } from '../components/HeaderTooltip'
+import { useMemo } from 'react'
+import Link from 'next/link'
 import {
   createColumnHelper,
   getCoreRowModel,
@@ -12,18 +14,33 @@ import {
 } from '@tanstack/react-table'
 import { SubscribeToMevDialog } from '@/components/dialogs/SubscribeToMevDialog'
 import { UnsubscribeToMevDialog } from '@/components/dialogs/UnsubscribeToMevDialog'
+import { useSearchInput } from '@/hooks/useSearchInput'
 import { addEthSuffix, shortenEthAddress } from '@/utils/web3'
 import { toFixedNoTrailingZeros } from '@/utils/decimals'
+import { getBeaconChainExplorer } from '@/utils/config'
 import type { Validator } from '../types'
 
 const columnHelper = createColumnHelper<Validator>()
 
-const columns = [
+const getColumns = (chainId: number) => [
   columnHelper.accessor('address', {
     header: () => (
       <HeaderTooltip header="Address" tooltip={headerTooltip.address} />
     ),
-    cell: (info) => shortenEthAddress(info.getValue(), 22, 0),
+    cell: (info) => {
+      const address = info.getValue()
+      const shortAddress = shortenEthAddress(address, 22, 0)
+
+      return (
+        <Link
+          className="font-medium underline"
+          href={getBeaconChainExplorer(chainId, 'validator', address)}
+          rel="noopener noreferrer"
+          target="_blank">
+          {shortAddress}
+        </Link>
+      )
+    },
   }),
   columnHelper.accessor('pending', {
     header: () => (
@@ -61,19 +78,33 @@ const columns = [
 ]
 
 interface MyValidatorsTableProps {
+  chainId: number
   data?: Validator[]
   isConnected?: boolean
   isLoading?: boolean
 }
 
 export function MyValidatorsTable({
+  chainId,
   data,
   isConnected,
   isLoading,
 }: MyValidatorsTableProps) {
+  const { searchInput, setSearchInput, debouncedSearchInput } = useSearchInput()
+
+  const filteredData = useMemo(
+    () =>
+      data?.filter((row) => {
+        const address = row.address.toLowerCase()
+        const search = debouncedSearchInput.toLowerCase()
+        return address.includes(search)
+      }),
+    [debouncedSearchInput, data]
+  )
+
   const table = useReactTable({
-    columns,
-    data: data ?? [],
+    columns: getColumns(chainId),
+    data: filteredData ?? [],
     initialState: {
       pagination: {
         pageSize: PAGE_SIZE,
@@ -95,6 +126,9 @@ export function MyValidatorsTable({
     <TableLayout
       className="h-[440px]"
       data={data ?? []}
+      searchInput={searchInput}
+      searchPlaceholder="Search Validator"
+      setSearchInput={setSearchInput}
       table={table}
       title="My Validators"
     />
