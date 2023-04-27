@@ -3,6 +3,7 @@ export const baseUrl = '/api/'
 export const endpoints = {
   config: 'config',
   statistics: 'memory/statistics/',
+  allBlocks: 'memory/allblocks',
   proposedBlocks: 'memory/proposedblocks',
   registeredRelays: (validatorKey: `0x${string}`) =>
     `registeredrelays/${validatorKey}`,

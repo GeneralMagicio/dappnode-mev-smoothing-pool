@@ -11,6 +11,16 @@ export const SOCIAL_TWITTER = 'dappnode'
 export const SOCIAL_GITHUB = 'dappnode'
 export const SOCIAL_LINKEDIN = 'dappnode'
 
+export const getBeaconChainExplorer = (
+  chainId: number,
+  type: 'slot' | 'validator',
+  endpoint: string | number
+) => {
+  const baseUrl =
+    chainId === 5 ? 'https://prater.beaconscan.com' : 'https://beaconscan.com'
+  return `${baseUrl}/${type}/${endpoint}`
+}
+
 export const WEB3_CHAINS = [mainnet, goerli]
 
 export const PAGES = [
