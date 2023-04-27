@@ -4,7 +4,11 @@ export const BlockSchema = z.object({
   slot: z.number(),
   validatorIndex: z.number(),
   validatorKey: z.string(),
-  blockType: z.string(),
+  blockType: z.union([
+    z.literal('okpoolproposal'),
+    z.literal('missedproposal'),
+    z.literal('wrongfeerecipient'),
+  ]),
   rewardWei: z.number(),
   rewardType: z.union([z.literal('mev'), z.literal('vanila')]),
   withdrawalAddress: z.string(),

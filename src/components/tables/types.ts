@@ -5,6 +5,7 @@ export interface Block {
   proposer: `0x${string}`
   rewardType: 'vanila' | 'mev'
   reward: number
+  blockType: 'okpoolproposal' | 'missedproposal' | 'wrongfeerecipient'
 }
 
 export interface Validator {

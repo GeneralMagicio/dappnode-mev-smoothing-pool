@@ -3,7 +3,7 @@ import { Skeleton } from './components/Skeleton'
 import { TableLayout } from '../components/Table'
 import { HeaderTooltip } from '../components/HeaderTooltip'
 import Link from 'next/link'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import {
   createColumnHelper,
   getCoreRowModel,
@@ -63,6 +63,19 @@ const getColumns = (chainId: number, blackExplorerUrl?: string) => [
     ),
     cell: (info) => addEthSuffix(toFixedNoTrailingZeros(info.getValue(), 4)),
   }),
+  columnHelper.accessor('blockType', {
+    header: () => <HeaderTooltip header="Block Type" />,
+    cell: (info) => {
+      const blockType = info.getValue()
+      const formattedBlockType =
+        blockType === 'okpoolproposal'
+          ? 'Proposed'
+          : blockType === 'missedproposal'
+          ? 'Missed'
+          : 'Wrong Free'
+      return formattedBlockType
+    },
+  }),
 ]
 
 interface LatestBlocksTableProps {
@@ -78,6 +91,7 @@ export function LatestBlocksTable({
   data,
   isLoading,
 }: LatestBlocksTableProps) {
+  const [filterValue, setFilterValue] = useState<string>(filterOptions[0].value)
   const { searchInput, setSearchInput, debouncedSearchInput } = useSearchInput()
 
   const filteredData = useMemo(
@@ -86,10 +100,13 @@ export function LatestBlocksTable({
         ?.filter((row) => {
           const address = row.proposer.toLowerCase()
           const search = debouncedSearchInput.toLowerCase()
-          return address.includes(search)
+          return (
+            address.includes(search) &&
+            (row.blockType === filterValue || filterValue === 'all')
+          )
         })
         .sort((a, b) => b.slot - a.slot),
-    [debouncedSearchInput, data]
+    [debouncedSearchInput, filterValue, data]
   )
 
   const table = useReactTable({
@@ -108,13 +125,37 @@ export function LatestBlocksTable({
 
   return (
     <TableLayout
+      hasFilter
       className="h-[510px]"
       data={filteredData ?? []}
+      filterOptions={filterOptions}
+      filterTitle="Block Type"
+      filterValue={filterValue}
       searchInput={searchInput}
       searchPlaceholder="Search Proposer"
+      setFilterValue={setFilterValue}
       setSearchInput={setSearchInput}
       table={table}
       title="Latest Blocks to SP"
     />
   )
 }
+
+const filterOptions = [
+  {
+    label: 'All',
+    value: 'all',
+  },
+  {
+    label: 'Proposed',
+    value: 'okpoolproposal',
+  },
+  {
+    label: 'Wrong Fee',
+    value: 'wrongfeerecipient',
+  },
+  {
+    label: 'Missed',
+    value: 'missedproposal',
+  },
+]
