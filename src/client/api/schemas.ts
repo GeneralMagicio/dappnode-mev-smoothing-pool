@@ -27,6 +27,26 @@ export const ValidatorSchema = z.object({
   wrongFeeBlocks: z.array(z.any()).or(z.null()),
 })
 
+export const StatusSchema = z.object({
+  isConsensusInSync: z.boolean(),
+  isExecutionInSync: z.boolean(),
+  isOracleInSync: z.boolean(),
+  latestProcessedSlot: z.number(),
+  latestProcessedBlock: z.number(),
+  latestFinalizedEpoch: z.number(),
+  latestFinalizedSlot: z.number(),
+  oracleSyncDistanceSlots: z.number(),
+  nextCheckpointSlot: z.number(),
+  nextCheckpointTime: z.string(),
+  nextCheckpointRemaining: z.string(),
+  previousCheckpointSlot: z.number(),
+  previousCheckpointTime: z.string(),
+  previousCheckpointAge: z.string(),
+  consensusChainid: z.string(),
+  executionChainid: z.string(),
+  depositcontract: z.string(),
+})
+
 export const StatisticsSchema = z.object({
   totalSubscribedValidators: z.number(),
   totalActiveValidators: z.number(),

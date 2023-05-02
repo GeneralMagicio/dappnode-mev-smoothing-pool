@@ -2,8 +2,8 @@ import { SummaryCard, SummaryCardProps } from '..'
 
 interface LastCheckpointCardProps
   extends Pick<SummaryCardProps, 'isError' | 'isLoading'> {
-  lastCheckpoint: number | undefined
-  nextCheckpoint: number | undefined
+  lastCheckpoint: string | undefined
+  nextCheckpoint: string | undefined
 }
 
 export function LastCheckpointCard({
