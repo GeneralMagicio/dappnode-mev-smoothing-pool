@@ -70,7 +70,7 @@ export function UserInfo() {
           isDisabled={
             onChainProofQuery.isLoading ||
             onChainProofQuery.isError ||
-            !onChainProofQuery.data?.claimableRewardsWei ||
+            onChainProofQuery.data?.claimableRewardsWei === '0' ||
             chain?.unsupported
           }
         />

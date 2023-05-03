@@ -33,10 +33,10 @@ export function ClaimableRewardsDialog({
   })
 
   const handleNextPage = () => {
-    if (onChainProofQuery.data?.claimableRewardsWei) {
-      handleChangeDialogState('withdraw')
-    } else {
+    if (onChainProofQuery.data?.claimableRewardsWei === '0') {
       handleChangeDialogState('unsubscribe')
+    } else {
+      handleChangeDialogState('withdraw')
     }
   }
 

@@ -13,9 +13,9 @@ export const AverageRewards: Story = {
   args: {
     title: 'Average Rewards',
     tooltip: 'Average rewards over the last 30 days',
-    ethRewardWei: Number('127222101808644357'),
+    ethRewardWei: '127222101808644357',
     secondaryRewardTitle: 'SP Average',
-    secondaryRewardWei: Number('227222101808644357'),
+    secondaryRewardWei: '227222101808644357',
     isError: false,
     isLoading: false,
   },
@@ -45,9 +45,9 @@ export const TotalRewardsPrimary: Story = {
   args: {
     title: 'Total Rewards',
     tooltip: 'Total rewards over the last 30 days',
-    ethRewardWei: Number('9549400000000000000'),
+    ethRewardWei: '9549400000000000000',
     secondaryRewardTitle: 'Last 7 days',
-    secondaryRewardWei: Number('1204000000000000000'),
+    secondaryRewardWei: '1204000000000000000',
     isError: false,
     isLoading: false,
   },

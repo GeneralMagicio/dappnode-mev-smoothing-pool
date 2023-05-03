@@ -58,11 +58,11 @@ export const StatisticsSchema = z.object({
   totalNotsubscribedValidators: z.number(),
   latestCheckpointSlot: z.number(),
   nextCheckpointSlot: z.number(),
-  totalAccumulatedRewardsWei: z.number(),
-  totalPendingRewardsWei: z.number(),
-  totalRewardsSentWei: z.number(),
-  totalDonationsWei: z.number(),
-  avgBlockRewardWei: z.number(),
+  totalAccumulatedRewardsWei: z.string(),
+  totalPendingRewardsWei: z.string(),
+  totalRewardsSentWei: z.string(),
+  totalDonationsWei: z.string(),
+  avgBlockRewardWei: z.string(),
   totalProposedBlocks: z.number(),
   totalMissedBlocks: z.number(),
   totalWrongfeeBlocks: z.number(),
@@ -70,20 +70,20 @@ export const StatisticsSchema = z.object({
 
 export const onChainProofSchema = z.object({
   leafWithdrawalAddress: z.string(),
-  leafAccumulatedBalance: z.number(),
+  leafAccumulatedBalance: z.string(),
   merkleroot: z.string(),
   checkpointSlot: z.number(),
   merkleProofs: z.array(z.string()),
   registeredValidators: z.array(z.number()),
-  totalAccumulatedRewardsWei: z.number().or(z.null()),
-  alreadyClaimedRewardsWei: z.number().or(z.null()),
-  claimableRewardsWei: z.number().or(z.null()),
-  pendingRewardsWei: z.number().or(z.null()),
+  totalAccumulatedRewardsWei: z.string().or(z.null()),
+  alreadyClaimedRewardsWei: z.string().or(z.null()),
+  claimableRewardsWei: z.string().or(z.null()),
+  pendingRewardsWei: z.string().or(z.null()),
 })
 
 export const ConfigSchema = z.object({
-  consensusEndpoint: z.string(),
-  executionEndpoint: z.string(),
+  consensusEndpoint: z.string().optional(),
+  executionEndpoint: z.string().optional(),
   network: z.string(),
   poolAddress: z.string(),
   deployedSlot: z.number(),
@@ -91,8 +91,8 @@ export const ConfigSchema = z.object({
   poolFeesPercent: z.number(),
   poolFeesAddress: z.string(),
   dryRun: z.boolean(),
-  numRetries: z.number(),
-  collateralInWei: z.number(),
+  numRetries: z.number().optional(),
+  collateralInWei: z.string(),
 })
 
 const relayerSchema = z.object({

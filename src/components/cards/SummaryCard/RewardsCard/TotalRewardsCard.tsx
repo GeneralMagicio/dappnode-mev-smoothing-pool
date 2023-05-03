@@ -1,10 +1,10 @@
 import { RewardsCard } from '.'
 
 interface TotalRewardsCardProps {
-  totalEthRewardWei: number | undefined
+  totalEthRewardWei: string | undefined
   isLoading: boolean
   isError: boolean
-  lastSevenDaysEthRewardWei: number | undefined
+  lastSevenDaysEthRewardWei: string | undefined
 }
 
 export function TotalRewardsCard({
