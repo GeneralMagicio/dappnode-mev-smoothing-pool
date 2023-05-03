@@ -8,9 +8,9 @@ interface RewardsCardProps
     SummaryCardProps,
     'children' | 'bottomLeftText' | 'bottomRightText'
   > {
-  ethRewardWei: number | undefined
+  ethRewardWei: string | undefined
   secondaryRewardTitle: string
-  secondaryRewardWei: number | undefined
+  secondaryRewardWei: string | undefined
 }
 
 export function RewardsCard({

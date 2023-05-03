@@ -1,10 +1,10 @@
 import { RewardsCard } from '.'
 
 interface AverageRewardsCardProps {
-  averageEthRewardWei: number | undefined
+  averageEthRewardWei: string | undefined
   isLoading: boolean
   isError: boolean
-  spAverageEthRewardWei: number | undefined
+  spAverageEthRewardWei: string | undefined
 }
 
 export function AverageRewardsCard({

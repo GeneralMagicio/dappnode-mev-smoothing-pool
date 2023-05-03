@@ -1,7 +1,6 @@
 import { DialogProps } from '../types'
 import { useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { utils } from 'ethers'
 import Link from 'next/link'
 import {
   useAccount,
@@ -12,7 +11,6 @@ import {
 import { AiOutlineInfoCircle } from 'react-icons/ai'
 import { fetchOnChainProof } from '@/client/api/queryFunctions'
 import { Button } from '@/components/common/Button'
-import { weiToEth } from '@/utils/web3'
 import { toFixedNoTrailingZeros } from '@/utils/decimals'
 import contractInterface from '@/contract/abi.json'
 
@@ -45,10 +43,8 @@ export function WithdrawDialog({
     functionName: 'claimRewards',
     args: [
       address,
-      utils.parseEther(
-        String(weiToEth(onChainProofQuery.data?.leafAccumulatedBalance || '0'))
-      ),
-      onChainProofQuery.data?.merkleProofs || [],
+      onChainProofQuery.data?.leafAccumulatedBalance,
+      onChainProofQuery.data?.merkleProofs,
     ],
   })
 

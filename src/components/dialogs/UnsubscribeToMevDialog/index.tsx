@@ -42,8 +42,6 @@ export function UnsubscribeToMevDialog({
     if (!newOpen) setDialogState('initial')
   }
 
-  console.log(dialogState)
-
   return (
     <BaseDialog
       disabledTrigger={chain?.unsupported}

@@ -2,7 +2,6 @@ import { DialogProps } from '../types'
 import Link from 'next/link'
 import { useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { utils } from 'ethers'
 import {
   useAccount,
   useNetwork,
@@ -42,9 +41,7 @@ export function WithdrawDialog({
     functionName: 'claimRewards',
     args: [
       address,
-      utils.parseEther(
-        String(weiToEth(onChainProofQuery.data?.leafAccumulatedBalance || '0'))
-      ),
+      onChainProofQuery.data?.leafAccumulatedBalance,
       onChainProofQuery.data?.merkleProofs || [],
     ],
   })
