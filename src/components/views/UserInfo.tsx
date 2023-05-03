@@ -56,7 +56,6 @@ export function UserInfo() {
     <div className="mt-8 grid w-full grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6 lg:grid-cols-4">
       <div className="order-1 col-span-4 sm:order-1 sm:col-span-2 lg:col-span-3">
         <MyValidatorsTable
-          chainId={chain?.id || 1}
           data={tableData}
           isConnected={isConnected}
           isLoading={validatorsQuery.isLoading}
@@ -71,7 +70,8 @@ export function UserInfo() {
           isDisabled={
             onChainProofQuery.isLoading ||
             onChainProofQuery.isError ||
-            !onChainProofQuery.data?.claimableRewardsWei
+            !onChainProofQuery.data?.claimableRewardsWei ||
+            chain?.unsupported
           }
         />
       </div>

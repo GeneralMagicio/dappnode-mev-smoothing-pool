@@ -18,7 +18,7 @@ import type { Block } from '../types'
 
 const columnHelper = createColumnHelper<Block>()
 
-const getColumns = (chainId: number, blackExplorerUrl?: string) => [
+const getColumns = (blackExplorerUrl?: string) => [
   columnHelper.accessor('slot', {
     header: () => <HeaderTooltip header="Slot" tooltip={headerTooltip.slot} />,
     cell: (info) => {
@@ -26,7 +26,7 @@ const getColumns = (chainId: number, blackExplorerUrl?: string) => [
       return (
         <Link
           className="font-medium underline"
-          href={getBeaconChainExplorer(chainId, 'slot', slot)}
+          href={getBeaconChainExplorer('slot', slot)}
           rel="noopener noreferrer"
           target="_blank">
           {slot.toLocaleString()}
@@ -80,14 +80,12 @@ const getColumns = (chainId: number, blackExplorerUrl?: string) => [
 
 interface LatestBlocksTableProps {
   blockExplorerUrl?: string
-  chainId: number
   data?: Block[]
   isLoading: boolean
 }
 
 export function LatestBlocksTable({
   blockExplorerUrl,
-  chainId,
   data,
   isLoading,
 }: LatestBlocksTableProps) {
@@ -110,7 +108,7 @@ export function LatestBlocksTable({
   )
 
   const table = useReactTable({
-    columns: getColumns(chainId, blockExplorerUrl),
+    columns: getColumns(blockExplorerUrl),
     data: filteredData ?? [],
     initialState: {
       pagination: {

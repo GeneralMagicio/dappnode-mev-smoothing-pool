@@ -6,6 +6,7 @@ import {
 } from './dialogs'
 import { BaseDialog } from '../BaseDialog'
 import { useState } from 'react'
+import { useNetwork } from 'wagmi'
 import { AnimatePresence } from 'framer-motion'
 import { useDialog } from '@/hooks/useDialog'
 import type { IDialogStates } from './types'
@@ -21,6 +22,7 @@ export function SubscribeToMevDialog({
   validatorId,
   validatorKey,
 }: SubscribeToMevDialogProps) {
+  const { chain } = useNetwork()
   const [dialogState, setDialogState] = useState<IDialogStates>('initial')
 
   const { open, handleOpenChange, handleClose } = useDialog()
@@ -37,6 +39,7 @@ export function SubscribeToMevDialog({
 
   return (
     <BaseDialog
+      disabledTrigger={chain?.unsupported}
       handleOpenChange={handleOpenChangeDialog}
       open={open}
       subtitle="Subscribe"
