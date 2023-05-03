@@ -32,6 +32,14 @@ export function ClaimableRewardsDialog({
     queryFn: () => fetchValidatorByIndex(validatorId),
   })
 
+  const handleNextPage = () => {
+    if (onChainProofQuery.data?.claimableRewardsWei) {
+      handleChangeDialogState('withdraw')
+    } else {
+      handleChangeDialogState('unsubscribe')
+    }
+  }
+
   return (
     <>
       <div className="-mt-2 text-DAppDeep">
@@ -82,7 +90,7 @@ export function ClaimableRewardsDialog({
       <div>
         <Button
           isDisabled={onChainProofQuery.isLoading || onChainProofQuery.isError}
-          onPress={() => handleChangeDialogState('loading')}>
+          onPress={handleNextPage}>
           Next
         </Button>
         <Button buttonType="secondary" className="mt-4" onPress={handleClose}>
