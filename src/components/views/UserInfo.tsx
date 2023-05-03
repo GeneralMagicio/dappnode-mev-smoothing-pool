@@ -43,7 +43,7 @@ export function UserInfo() {
       }) => ({
         address: validatorKey as `0x${string}`,
         pending: weiToEth(pendingRewardsWei || 0),
-        claimable: weiToEth(accumulatedRewardsWei || 0),
+        accumulated: weiToEth(accumulatedRewardsWei || 0),
         subscribed: status === 'active',
         validatorId: validatorIndex,
         validatorKey: validatorKey as `0x${string}`,

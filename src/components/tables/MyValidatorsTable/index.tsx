@@ -48,9 +48,9 @@ const columns = [
     ),
     cell: (info) => addEthSuffix(toFixedNoTrailingZeros(info.getValue(), 4)),
   }),
-  columnHelper.accessor('claimable', {
+  columnHelper.accessor('accumulated', {
     header: () => (
-      <HeaderTooltip header="Claimable" tooltip={headerTooltip.claimable} />
+      <HeaderTooltip header="Accumulated" tooltip={headerTooltip.accumulated} />
     ),
     cell: (info) => addEthSuffix(toFixedNoTrailingZeros(info.getValue(), 4)),
   }),
