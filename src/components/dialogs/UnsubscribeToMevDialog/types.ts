@@ -1,6 +1,11 @@
 import { StepProgressBarProps } from '@/components/common/StepProgressBar'
 
-export type IDialogStates = 'initial' | 'confirm' | 'loading' | 'success'
+export type IDialogStates =
+  | 'initial'
+  | 'confirm'
+  | 'withdraw'
+  | 'unsubscribe'
+  | 'success'
 
 export interface DialogProps extends Pick<StepProgressBarProps, 'steps'> {
   handleClose: () => void

@@ -2,7 +2,13 @@ import { DialogProps } from '../types'
 import { useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { utils } from 'ethers'
-import { useAccount, useContractWrite, useWaitForTransaction } from 'wagmi'
+import Link from 'next/link'
+import {
+  useAccount,
+  useNetwork,
+  useContractWrite,
+  useWaitForTransaction,
+} from 'wagmi'
 import { AiOutlineInfoCircle } from 'react-icons/ai'
 import { fetchOnChainProof } from '@/client/api/queryFunctions'
 import { Button } from '@/components/common/Button'
@@ -19,6 +25,7 @@ export function WithdrawDialog({
   handleClose,
   handleChangeDialogState,
 }: WithdrawDialogProps) {
+  const { chain } = useNetwork()
   const { address } = useAccount()
 
   const onChainProofQuery = useQuery({
@@ -70,6 +77,14 @@ export function WithdrawDialog({
               <div className="mx-auto flex w-fit items-center">
                 <AiOutlineInfoCircle />
                 <p className="ml-2">Your withdrawal is being processed.</p>
+              </div>
+              <div className="mx-auto mt-2 max-w-fit">
+                <Link
+                  className=" text-violet-500 underline"
+                  href={`${chain?.blockExplorers?.default.url}/tx/${contractWrite.data?.hash}`}
+                  target="_blank">
+                  Check the transaction on block explorer
+                </Link>
               </div>
             </div>
           )}
