@@ -1,4 +1,4 @@
-import { mainnet, goerli } from '@wagmi/chains'
+import { goerli } from '@wagmi/chains'
 
 export const SITE_NAME = 'Dappnode MEV Smoothing Pool'
 export const SITE_DESCRIPTION =
@@ -12,16 +12,15 @@ export const SOCIAL_GITHUB = 'dappnode'
 export const SOCIAL_LINKEDIN = 'dappnode'
 
 export const getBeaconChainExplorer = (
-  chainId: number,
   type: 'slot' | 'validator',
   endpoint: string | number
 ) => {
-  const baseUrl =
-    chainId === 5 ? 'https://prater.beaconscan.com' : 'https://beaconscan.com'
+  const baseUrl = 'https://prater.beaconcha.in/validator/'
+
   return `${baseUrl}/${type}/${endpoint}`
 }
 
-export const WEB3_CHAINS = [mainnet, goerli]
+export const WEB3_CHAINS = [goerli]
 
 export const PAGES = [
   {

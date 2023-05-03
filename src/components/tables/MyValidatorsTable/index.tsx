@@ -22,7 +22,7 @@ import type { Validator } from '../types'
 
 const columnHelper = createColumnHelper<Validator>()
 
-const getColumns = (chainId: number) => [
+const columns = [
   columnHelper.accessor('address', {
     header: () => (
       <HeaderTooltip header="Address" tooltip={headerTooltip.address} />
@@ -34,7 +34,7 @@ const getColumns = (chainId: number) => [
       return (
         <Link
           className="font-medium underline"
-          href={getBeaconChainExplorer(chainId, 'validator', address)}
+          href={getBeaconChainExplorer('validator', address)}
           rel="noopener noreferrer"
           target="_blank">
           {shortAddress}
@@ -78,14 +78,12 @@ const getColumns = (chainId: number) => [
 ]
 
 interface MyValidatorsTableProps {
-  chainId: number
   data?: Validator[]
   isConnected?: boolean
   isLoading?: boolean
 }
 
 export function MyValidatorsTable({
-  chainId,
   data,
   isConnected,
   isLoading,
@@ -103,7 +101,7 @@ export function MyValidatorsTable({
   )
 
   const table = useReactTable({
-    columns: getColumns(chainId),
+    columns,
     data: filteredData ?? [],
     initialState: {
       pagination: {

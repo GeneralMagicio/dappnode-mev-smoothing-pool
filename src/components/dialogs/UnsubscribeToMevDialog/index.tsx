@@ -6,6 +6,7 @@ import {
 } from './dialogs'
 import { BaseDialog } from '../BaseDialog'
 import { useState } from 'react'
+import { useNetwork } from 'wagmi'
 import { AnimatePresence } from 'framer-motion'
 import { useDialog } from '@/hooks/useDialog'
 import type { IDialogStates } from './types'
@@ -19,6 +20,7 @@ interface UnsubscribeToMevDialogProps {
 export function UnsubscribeToMevDialog({
   validatorId,
 }: UnsubscribeToMevDialogProps) {
+  const { chain } = useNetwork()
   const [dialogState, setDialogState] = useState<IDialogStates>('initial')
 
   const { open, handleOpenChange, handleClose } = useDialog()
@@ -35,6 +37,7 @@ export function UnsubscribeToMevDialog({
 
   return (
     <BaseDialog
+      disabledTrigger={chain?.unsupported}
       handleOpenChange={handleOpenChangeDialog}
       open={open}
       subtitle="Unsubscribe and Claim rewards"
