@@ -2,6 +2,7 @@ export const baseUrl = '/api/'
 
 export const endpoints = {
   config: 'config',
+  status: 'status',
   statistics: 'memory/statistics/',
   allBlocks: 'memory/allblocks',
   proposedBlocks: 'memory/proposedblocks',
