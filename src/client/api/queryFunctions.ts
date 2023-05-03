@@ -3,6 +3,7 @@ import { endpoints } from './config'
 import {
   BlockSchema,
   ConfigSchema,
+  StatusSchema,
   StatisticsSchema,
   ValidatorSchema,
   onChainProofSchema,
@@ -37,6 +38,11 @@ export const fetchAllBlocks = async () => {
 export const fetchProposedBlocks = async () => {
   const response = await apiClient.get(endpoints.proposedBlocks)
   return BlockSchema.array().parse(convertKeysToCamelCase(response.data))
+}
+
+export const fetchStatus = async () => {
+  const response = await apiClient.get(endpoints.status)
+  return StatusSchema.parse(convertKeysToCamelCase(response.data))
 }
 
 export const fetchStatistics = async () => {
