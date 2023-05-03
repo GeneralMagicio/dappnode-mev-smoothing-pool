@@ -1,7 +1,7 @@
 import { MyRewards } from '../cards/MyRewards'
 import { MyValidatorsTable } from '../tables/MyValidatorsTable'
 import { useQuery } from '@tanstack/react-query'
-import { useAccount } from 'wagmi'
+import { useAccount, useNetwork } from 'wagmi'
 import { weiToEth } from '@/utils/web3'
 import type { Validator } from '@/components/tables/types'
 import {
@@ -11,6 +11,7 @@ import {
 
 export function UserInfo() {
   const { isConnected, address } = useAccount()
+  const { chain } = useNetwork()
 
   const validatorsQuery = useQuery({
     queryKey: ['user-validators', 'address'],
@@ -69,7 +70,8 @@ export function UserInfo() {
           isDisabled={
             onChainProofQuery.isLoading ||
             onChainProofQuery.isError ||
-            !onChainProofQuery.data?.claimableRewardsWei
+            !onChainProofQuery.data?.claimableRewardsWei ||
+            chain?.unsupported
           }
         />
       </div>
