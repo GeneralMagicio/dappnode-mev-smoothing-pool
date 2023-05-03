@@ -47,9 +47,7 @@ export function DepositDialog({
     args: [validatorId],
     overrides: {
       from: address,
-      value: utils.parseEther(
-        String(weiToEth(configQuery.data?.collateralInWei || '0'))
-      ),
+      value: utils.parseUnits(configQuery.data?.collateralInWei || '0', 'wei'),
     },
   })
 
