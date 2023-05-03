@@ -13,7 +13,7 @@ export interface Validator {
   pending: number
   validatorId: number
   validatorKey: `0x${string}`
-  claimable: number
+  accumulated: number
   warning: Warnings
   subscribed: boolean
 }
