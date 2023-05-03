@@ -31,8 +31,8 @@ export function Statistics() {
       <LastCheckpointCard
         isError={statusQuery.isError}
         isLoading={statusQuery.isLoading}
-        lastCheckpoint={statusQuery.data?.previousCheckpointAge}
-        nextCheckpoint={statusQuery.data?.nextCheckpointRemaining}
+        lastCheckpoint={statusQuery.data?.previousCheckpointAgeUnix}
+        nextCheckpoint={statusQuery.data?.nextCheckpointRemainingUnix}
       />
     </div>
   )
