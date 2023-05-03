@@ -4,6 +4,7 @@ import {
   WithdrawDialog,
   SuccessDialog,
 } from './dialogs'
+import { UnsubscribeDialog } from './dialogs/UnsubscribeDialog'
 import { BaseDialog } from '../BaseDialog'
 import { useState } from 'react'
 import { useNetwork } from 'wagmi'
@@ -11,7 +12,13 @@ import { AnimatePresence } from 'framer-motion'
 import { useDialog } from '@/hooks/useDialog'
 import type { IDialogStates } from './types'
 
-const steps = ['Confirmation', 'Claimable rewards', 'Withdraw', 'Done']
+const steps = [
+  'Confirmation',
+  'Claimable rewards',
+  'Withdraw',
+  'Unsubscribe',
+  'Done',
+]
 
 interface UnsubscribeToMevDialogProps {
   validatorId: number
@@ -34,6 +41,8 @@ export function UnsubscribeToMevDialog({
     handleOpenChange(newOpen)
     if (!newOpen) setDialogState('initial')
   }
+
+  console.log(dialogState)
 
   return (
     <BaseDialog
@@ -58,8 +67,14 @@ export function UnsubscribeToMevDialog({
               steps={steps}
               validatorId={validatorId}
             />
-          ) : dialogState === 'loading' ? (
+          ) : dialogState === 'withdraw' ? (
             <WithdrawDialog
+              handleChangeDialogState={setDialogState}
+              handleClose={handleCloseDialog}
+              steps={steps}
+            />
+          ) : dialogState === 'unsubscribe' ? (
+            <UnsubscribeDialog
               handleChangeDialogState={setDialogState}
               handleClose={handleCloseDialog}
               steps={steps}

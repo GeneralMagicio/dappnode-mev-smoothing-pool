@@ -86,7 +86,6 @@ export const ConfigSchema = z.object({
   executionEndpoint: z.string(),
   network: z.string(),
   poolAddress: z.string(),
-  updaterAddress: z.string(),
   deployedSlot: z.number(),
   checkpointSize: z.number(),
   poolFeesPercent: z.number(),

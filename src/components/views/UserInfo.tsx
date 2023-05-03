@@ -14,7 +14,7 @@ export function UserInfo() {
   const { chain } = useNetwork()
 
   const validatorsQuery = useQuery({
-    queryKey: ['user-validators', 'address'],
+    queryKey: ['user-validators', address],
     queryFn: () => fetchValidatorsByDepositor(address),
     enabled: !!address,
   })
