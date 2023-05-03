@@ -30,7 +30,6 @@ export function LatestBlocksSP() {
     <div className="mt-8">
       <LatestBlocksTable
         blockExplorerUrl={chain?.blockExplorers?.default.url}
-        chainId={chain?.id || 1}
         data={blocks}
         isLoading={isLoading}
       />

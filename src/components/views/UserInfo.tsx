@@ -1,7 +1,7 @@
 import { MyRewards } from '../cards/MyRewards'
 import { MyValidatorsTable } from '../tables/MyValidatorsTable'
 import { useQuery } from '@tanstack/react-query'
-import { useAccount, useNetwork } from 'wagmi'
+import { useAccount } from 'wagmi'
 import { weiToEth } from '@/utils/web3'
 import type { Validator } from '@/components/tables/types'
 import {
@@ -11,7 +11,6 @@ import {
 
 export function UserInfo() {
   const { isConnected, address } = useAccount()
-  const { chain } = useNetwork()
 
   const validatorsQuery = useQuery({
     queryKey: ['user-validators', 'address'],
@@ -56,7 +55,6 @@ export function UserInfo() {
     <div className="mt-8 grid w-full grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6 lg:grid-cols-4">
       <div className="order-1 col-span-4 sm:order-1 sm:col-span-2 lg:col-span-3">
         <MyValidatorsTable
-          chainId={chain?.id || 1}
           data={tableData}
           isConnected={isConnected}
           isLoading={validatorsQuery.isLoading}
