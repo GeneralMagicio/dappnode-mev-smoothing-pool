@@ -15,7 +15,7 @@ export const getBeaconChainExplorer = (
   type: 'slot' | 'validator',
   endpoint: string | number
 ) => {
-  const baseUrl = 'https://prater.beaconcha.in/validator/'
+  const baseUrl = 'https://prater.beaconcha.in/validator'
 
   return `${baseUrl}/${type}/${endpoint}`
 }
