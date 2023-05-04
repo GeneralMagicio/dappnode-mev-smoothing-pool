@@ -1,4 +1,4 @@
-import { goerli } from '@wagmi/chains'
+import { goerli, mainnet } from '@wagmi/chains'
 
 export const SITE_NAME = 'Dappnode MEV Smoothing Pool'
 export const SITE_DESCRIPTION =
@@ -11,16 +11,40 @@ export const SOCIAL_TWITTER = 'dappnode'
 export const SOCIAL_GITHUB = 'dappnode'
 export const SOCIAL_LINKEDIN = 'dappnode'
 
+const SUPPORTED_CHAINS = ['mainnet', 'goerli']
+
+if (!process.env.NEXT_PUBLIC_SMOOTHING_POOL_ADDRESS) {
+  throw new Error('NEXT_PUBLIC_SMOOTHING_POOL_ADDRESS is not set')
+}
+
+if (!process.env.NEXT_PUBLIC_SELECTED_CHAIN) {
+  throw new Error('NEXT_PUBLIC_SELECTED_CHAIN is not set')
+}
+
+if (!SUPPORTED_CHAINS.includes(process.env.NEXT_PUBLIC_SELECTED_CHAIN)) {
+  throw new Error(
+    'NEXT_PUBLIC_SELECTED_CHAIN is not one of the supported chains'
+  )
+}
+
+export const SELECTED_CHAIN = process.env.NEXT_PUBLIC_SELECTED_CHAIN
+
+export const SMOOTHING_POOL_ADDRESS = process.env
+  .NEXT_PUBLIC_SMOOTHING_POOL_ADDRESS as `0x${string}`
+
+export const WEB3_CHAINS = [SELECTED_CHAIN === 'mainnet' ? mainnet : goerli]
+
 export const getBeaconChainExplorer = (
   type: 'slot' | 'validator',
   endpoint: string | number
 ) => {
-  const baseUrl = 'https://prater.beaconcha.in/validator'
+  const baseUrl =
+    SELECTED_CHAIN === 'mainnet'
+      ? 'https://beacon.gnosischain.com'
+      : 'https://prater.beaconcha.in'
 
   return `${baseUrl}/${type}/${endpoint}`
 }
-
-export const WEB3_CHAINS = [goerli]
 
 export const PAGES = [
   {

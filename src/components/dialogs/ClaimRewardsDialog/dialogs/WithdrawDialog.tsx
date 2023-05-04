@@ -12,6 +12,7 @@ import { AiOutlineInfoCircle } from 'react-icons/ai'
 import { fetchOnChainProof } from '@/client/api/queryFunctions'
 import { Button } from '@/components/common/Button'
 import { toFixedNoTrailingZeros } from '@/utils/decimals'
+import { SMOOTHING_POOL_ADDRESS } from '@/utils/config'
 import contractInterface from '@/contract/abi.json'
 
 interface WithdrawDialogProps extends DialogProps {
@@ -37,7 +38,7 @@ export function WithdrawDialog({
   const abi = [...contractInterface] as const
 
   const contractWrite = useContractWrite({
-    address: '0x553BD5a94bcC09FFab6550274d5db140a95AE9bC',
+    address: SMOOTHING_POOL_ADDRESS,
     abi,
     mode: 'recklesslyUnprepared',
     functionName: 'claimRewards',
