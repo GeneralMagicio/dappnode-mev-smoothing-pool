@@ -13,6 +13,7 @@ import { utils } from 'ethers'
 import { useState, useEffect } from 'react'
 import { useDebounce } from 'use-debounce'
 import { Button } from '@/components/common/Button'
+import { SMOOTHING_POOL_ADDRESS } from '@/utils/config'
 
 export function InitialDialog({
   handleClose,
@@ -29,7 +30,7 @@ export function InitialDialog({
 
   const { config } = usePrepareSendTransaction({
     request: {
-      to: '0x553BD5a94bcC09FFab6550274d5db140a95AE9bC',
+      to: SMOOTHING_POOL_ADDRESS,
       value: debouncedEthAmount
         ? utils.parseEther(debouncedEthAmount)
         : undefined,
