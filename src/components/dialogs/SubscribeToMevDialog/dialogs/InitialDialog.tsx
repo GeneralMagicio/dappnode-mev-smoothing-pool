@@ -2,6 +2,9 @@ import { DialogProps } from '../types'
 import Link from 'next/link'
 import { useQuery } from '@tanstack/react-query'
 import { AiOutlineInfoCircle } from 'react-icons/ai'
+import CopyToClipboard from 'react-copy-to-clipboard'
+import toast, { Toaster } from 'react-hot-toast'
+import { FaCopy } from 'react-icons/fa'
 import { StepProgressBar } from '@/components/common/StepProgressBar'
 import { Button } from '@/components/common/Button'
 import {
@@ -42,6 +45,7 @@ export function InitialDialog({
 
   return (
     <>
+      <Toaster />
       <div className="-mt-2 text-DAppDeep">
         <h3 className="mb-6 text-left text-2xl font-bold">Warning</h3>
         <StepProgressBar currentStep={0} steps={steps} />
@@ -91,9 +95,18 @@ export function InitialDialog({
             <h4 className="mt-3 font-bold">Fee recipient error!</h4>
             <p className="mt-2 font-normal">
               The fee recipient address is not set as{' '}
-              <span className="overflow-scroll font-semibold">
-                {shortenEthAddress(configQuery.data?.poolAddress, 16, 16)}
-              </span>{' '}
+              <CopyToClipboard
+                text={configQuery.data?.poolAddress || ''}
+                onCopy={() =>
+                  toast('Address copied to clipboard', { icon: '✂️' })
+                }>
+                <div className="flex cursor-pointer items-center justify-center">
+                  <span className="overflow-scroll font-semibold">
+                    {shortenEthAddress(configQuery.data?.poolAddress, 16, 16)}
+                  </span>
+                  <FaCopy className="ml-1 h-4 w-4" />
+                </div>
+              </CopyToClipboard>{' '}
               Please{' '}
               <Link
                 className="inline font-medium underline-offset-2 hover:underline"
