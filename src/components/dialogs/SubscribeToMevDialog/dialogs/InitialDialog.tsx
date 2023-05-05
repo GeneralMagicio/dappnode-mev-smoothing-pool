@@ -1,4 +1,5 @@
 import { DialogProps } from '../types'
+import Link from 'next/link'
 import { useQuery } from '@tanstack/react-query'
 import { AiOutlineInfoCircle } from 'react-icons/ai'
 import { StepProgressBar } from '@/components/common/StepProgressBar'
@@ -93,7 +94,15 @@ export function InitialDialog({
               <span className="overflow-scroll font-semibold">
                 {configQuery.data?.poolAddress}
               </span>{' '}
-              Please change the fee recipient and try again.
+              Please{' '}
+              <Link
+                className="inline font-medium underline-offset-2 hover:underline"
+                href="https://ethereum.org/en/community/research/#liquid-staking-and-derivatives"
+                rel="noopener noreferrer"
+                target="_blank">
+                follow these instructions
+              </Link>{' '}
+              to change the fee recipient and try again.
             </p>
           </div>
         )}
