@@ -77,18 +77,9 @@ export function InitialDialog({
                 </p>
               )}
             </div>
-            <div className="mt-8">
-              <h4 className="mb-2 text-DAppNeutral/500">
-                NEW Fee Recipient address
-              </h4>
-              {configQuery.isLoading ? (
-                <div className="h-8 w-96 animate-pulse rounded bg-SkeletonGray" />
-              ) : (
-                <p className="h-8 overflow-scroll">
-                  {shortenEthAddress(configQuery.data?.poolAddress, 16, 16)}
-                </p>
-              )}
-              <div />
+            <div className="mt-4 font-semibold">
+              {!registeredRelaysQuery.isLoading &&
+                'Great, your fee recipient is already set to the MEV Smoothing Pool!'}
             </div>
           </>
         ) : (
