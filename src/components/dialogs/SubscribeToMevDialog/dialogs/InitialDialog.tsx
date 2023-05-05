@@ -92,7 +92,7 @@ export function InitialDialog({
             <p className="mt-2 font-normal">
               The fee recipient address is not set as{' '}
               <span className="overflow-scroll font-semibold">
-                {configQuery.data?.poolAddress}
+                {shortenEthAddress(configQuery.data?.poolAddress, 16, 16)}
               </span>{' '}
               Please{' '}
               <Link
