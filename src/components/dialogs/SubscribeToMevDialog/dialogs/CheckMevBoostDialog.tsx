@@ -1,5 +1,6 @@
 import { DialogProps } from '../types'
 import { useQuery } from '@tanstack/react-query'
+import { RxDotFilled } from 'react-icons/rx'
 import { StepProgressBar } from '@/components/common/StepProgressBar'
 import { Button } from '@/components/common/Button'
 import { fetchValidatorRegisteredRelays } from '@/client/api/queryFunctions'
@@ -45,16 +46,21 @@ export function CheckMevBoostDialog({
                 {shortenEthAddress(validatorKey, 20, 20)}
               </p>
             </div>
-            <div className="mt-8">
+            <div>
               <h4 className="mb-2 text-DAppNeutral/500">Mev Boost Relayers</h4>
               {registeredRelaysQuery.isLoading ? (
                 <div className="h-8 w-96 animate-pulse rounded bg-SkeletonGray" />
               ) : (
-                <p>
-                  {registeredRelaysQuery.data?.correctFeeRelayers
-                    ?.map(({ relayAddress }) => relayAddress)
-                    .join(', ')}
-                </p>
+                <ul className="flex h-36 flex-col gap-y-1 overflow-scroll rounded-lg border p-1">
+                  {registeredRelaysQuery.data?.correctFeeRelayers?.map(
+                    ({ relayAddress }) => (
+                      <li key={relayAddress} className="flex items-center">
+                        <RxDotFilled className="h-6 w-6 text-green-500" />
+                        {relayAddress}
+                      </li>
+                    )
+                  )}
+                </ul>
               )}
             </div>
           </div>
