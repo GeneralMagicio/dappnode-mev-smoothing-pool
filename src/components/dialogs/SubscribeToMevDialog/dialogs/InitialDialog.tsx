@@ -50,7 +50,7 @@ export function InitialDialog({
         <div>
           <h4 className="mb-2 text-DAppNeutral/500">Your Validator</h4>
           <p className="h-8 overflow-scroll">
-            {shortenEthAddress(validatorKey, 20, 20)}
+            {shortenEthAddress(validatorKey, 16, 16)}
           </p>
         </div>
         {registeredRelaysQuery.isLoading ||
