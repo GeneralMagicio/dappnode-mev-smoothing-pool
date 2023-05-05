@@ -113,11 +113,13 @@ export function InitialDialog({
           onPress={handleNext}>
           {registeredRelaysQuery.isLoading || isCorrectFeeRecipient
             ? 'Next'
-            : 'Change Fee Recipient Address'}
+            : 'I will change the Fee Recipient in my validator'}
         </Button>
-        <Button buttonType="secondary" className="mt-4" onPress={handleClose}>
-          Cancel
-        </Button>
+        {(registeredRelaysQuery.isLoading || isCorrectFeeRecipient) && (
+          <Button buttonType="secondary" className="mt-4" onPress={handleClose}>
+            Cancel
+          </Button>
+        )}
       </div>
     </>
   )
