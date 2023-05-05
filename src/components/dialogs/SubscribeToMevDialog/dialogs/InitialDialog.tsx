@@ -68,10 +68,12 @@ export function InitialDialog({
                 <div className="h-8 w-96 animate-pulse rounded bg-SkeletonGray" />
               ) : (
                 <p className="h-8 overflow-scroll">
-                  {
+                  {shortenEthAddress(
                     registeredRelaysQuery.data?.correctFeeRelayers?.[0]
-                      .feeRecipient
-                  }
+                      .feeRecipient,
+                    16,
+                    16
+                  )}
                 </p>
               )}
             </div>
@@ -83,7 +85,7 @@ export function InitialDialog({
                 <div className="h-8 w-96 animate-pulse rounded bg-SkeletonGray" />
               ) : (
                 <p className="h-8 overflow-scroll">
-                  {configQuery.data?.poolAddress}
+                  {shortenEthAddress(configQuery.data?.poolAddress, 16, 16)}
                 </p>
               )}
               <div />
