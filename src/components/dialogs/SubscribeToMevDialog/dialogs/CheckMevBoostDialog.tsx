@@ -51,11 +51,11 @@ export function CheckMevBoostDialog({
               {registeredRelaysQuery.isLoading ? (
                 <div className="h-8 w-96 animate-pulse rounded bg-SkeletonGray" />
               ) : (
-                <ul className="flex h-36 flex-col gap-y-1 overflow-scroll rounded-lg border p-1">
+                <ul className="flex h-36 flex-col gap-y-1 overflow-scroll">
                   {registeredRelaysQuery.data?.correctFeeRelayers?.map(
                     ({ relayAddress }) => (
                       <li key={relayAddress} className="flex items-center">
-                        <RxDotFilled className="h-6 w-6 text-green-500" />
+                        <RxDotFilled className="-ml-1 h-6 w-6 text-green-500" />
                         {relayAddress}
                       </li>
                     )
