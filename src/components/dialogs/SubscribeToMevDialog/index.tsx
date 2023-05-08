@@ -11,7 +11,7 @@ import { AnimatePresence } from 'framer-motion'
 import { useDialog } from '@/hooks/useDialog'
 import type { IDialogStates } from './types'
 
-const steps = ['Fee recipient', 'Check MevBoost', 'Deposit', 'Done']
+const steps = ['Fee recipient', 'MEV Blocks check', 'Deposit', 'Done']
 
 interface SubscribeToMevDialogProps {
   validatorId: number

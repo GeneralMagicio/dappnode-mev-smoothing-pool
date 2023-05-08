@@ -24,7 +24,7 @@ export function CheckMevBoostDialog({
   return (
     <>
       <div className="-mt-2 text-DAppDeep">
-        <h3 className="mb-6 text-left text-2xl font-bold">Check MevBoost</h3>
+        <h3 className="mb-6 text-left text-2xl font-bold">MEV Blocks check</h3>
         <StepProgressBar currentStep={1} steps={steps} />
       </div>
       <div className="sm:px-6">
@@ -46,8 +46,10 @@ export function CheckMevBoostDialog({
                 {shortenEthAddress(validatorKey, 16, 16)}
               </p>
             </div>
-            <div>
-              <h4 className="mb-2 text-DAppNeutral/500">Mev Boost Relayers</h4>
+            <div className="mt-3">
+              <h4 className="mb-2 text-DAppNeutral/500">
+                Receiving MEV opportunities from
+              </h4>
               {registeredRelaysQuery.isLoading ? (
                 <div className="h-8 w-96 animate-pulse rounded bg-SkeletonGray" />
               ) : (
