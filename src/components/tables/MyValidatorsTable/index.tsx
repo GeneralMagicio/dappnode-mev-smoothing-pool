@@ -92,11 +92,25 @@ export function MyValidatorsTable({
 
   const filteredData = useMemo(
     () =>
-      data?.filter((row) => {
-        const address = row.address.toLowerCase()
-        const search = debouncedSearchInput.toLowerCase()
-        return address.includes(search)
-      }),
+      data
+        ?.filter((row) => {
+          const address = row.address.toLowerCase()
+          const search = debouncedSearchInput.toLowerCase()
+          return address.includes(search)
+        })
+        // Sort by address
+        .sort((a, b) => {
+          if (a.address.toLowerCase() < b.address.toLowerCase()) return -1
+          if (a.address.toLowerCase() > b.address.toLowerCase()) return 1
+          return 0
+        })
+        // Sort by subscribed
+        .sort((a, b) => {
+          if (a.subscribed && !b.subscribed) return -1
+          if (!a.subscribed && b.subscribed) return 1
+          return 0
+        }),
+
     [debouncedSearchInput, data]
   )
 
