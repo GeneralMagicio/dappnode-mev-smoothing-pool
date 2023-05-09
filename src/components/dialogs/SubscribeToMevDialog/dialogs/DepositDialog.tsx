@@ -13,6 +13,7 @@ import { utils } from 'ethers'
 import { fetchConfig } from '@/client/api/queryFunctions'
 import { StepProgressBar } from '@/components/common/StepProgressBar'
 import { Button } from '@/components/common/Button'
+import { Tooltip } from '@/components/common/Tooltip'
 import contractInterface from '@/contract/abi.json'
 import { weiToEth } from '@/utils/web3'
 import { SMOOTHING_POOL_ADDRESS } from '@/utils/config'
@@ -69,7 +70,9 @@ export function DepositDialog({
       </div>
       {!waitForTransaction.isError ? (
         <div className="text-center">
-          <h4 className="mb-4 text-lg font-normal">You are Depositing</h4>
+          <h4 className="mb-4 text-lg font-normal">
+            To start earning rewards, please deposit
+          </h4>
           {configQuery.isLoading ? (
             <div className="mx-auto h-8 w-20 animate-pulse rounded bg-SkeletonGray" />
           ) : (
@@ -77,9 +80,19 @@ export function DepositDialog({
               {weiToEth(configQuery.data?.collateralInWei)} ETH
             </p>
           )}
-          <p className="mt-4 text-lg font-normal tracking-wide">
-            to The MEV Smoothing Pool
-          </p>
+          <div className="mt-4 flex items-center justify-center text-lg font-normal tracking-wide">
+            <p>to The MEV Smoothing Pool </p>{' '}
+            <Link
+              className="ml-2 flex items-center"
+              href="https://dappnode.com/"
+              rel="noopener noreferrer"
+              target="_blank">
+              <Tooltip
+                iconType="question"
+                tooltip="To learn more about the required collateral for the smoothing pool click the ?"
+              />
+            </Link>
+          </div>
           {waitForTransaction.isLoading && (
             <div className="mt-6 w-full rounded-lg bg-violet-50 px-4 py-7 text-sm font-normal text-DAppDeep">
               <div className="mx-auto mb-2 flex w-fit flex-col items-center sm:flex-row">
@@ -110,15 +123,23 @@ export function DepositDialog({
           </div>
         </div>
       )}
+
       <div>
-        <Button
-          isDisabled={contractWrite.isLoading || waitForTransaction.isLoading}
-          onPress={() => contractWrite.write?.()}>
-          {waitForTransaction.isError ? 'Try again' : 'Deposit'}
-        </Button>
-        <Button buttonType="secondary" className="mt-4" onPress={handleClose}>
-          Cancel
-        </Button>
+        {!waitForTransaction.isLoading && (
+          <>
+            <Button
+              isDisabled={contractWrite.isLoading}
+              onPress={() => contractWrite.write?.()}>
+              {waitForTransaction.isError ? 'Try again' : 'Deposit'}
+            </Button>
+            <Button
+              buttonType="secondary"
+              className="mt-4"
+              onPress={handleClose}>
+              Cancel
+            </Button>
+          </>
+        )}
       </div>
     </>
   )

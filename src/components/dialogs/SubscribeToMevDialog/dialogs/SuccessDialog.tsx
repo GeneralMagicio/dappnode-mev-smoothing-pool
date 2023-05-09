@@ -19,7 +19,7 @@ export function SuccessDialog({ steps, handleClose }: DialogProps) {
         <h3 className="mb-6 text-left text-2xl font-bold">Success!</h3>
         <StepProgressBar currentStep={3} steps={steps} />
       </div>
-      <div className="mx-auto flex flex-col items-center gap-y-4 px-4 text-center text-lg">
+      <div className="mx-auto flex flex-col items-center gap-y-3 px-4 text-center text-lg">
         <CongratulationsIcon />
         <h4 className="font-bold">Congratulations!</h4>
         <p>You have successfully subscribed and deposited an upfront bond of</p>
@@ -31,6 +31,10 @@ export function SuccessDialog({ steps, handleClose }: DialogProps) {
           )}
         </p>
         <p>to The MEV Smoothing Pool</p>
+        <p>
+          You are now accumulating rewards from the Smoothing Pool. Claim them
+          after you successfully propose a block!
+        </p>
       </div>
       <Button buttonType="secondary" className="mt-4" onPress={handleClose}>
         Done

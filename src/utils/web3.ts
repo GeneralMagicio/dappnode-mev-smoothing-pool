@@ -16,7 +16,7 @@ import { BigNumber, utils } from 'ethers'
  */
 // Add the possibility for the user to select the amount of characters to show on each side of the ellipsis
 export const shortenEthAddress = (
-  address: `0x${string}`,
+  address: `0x${string}` | string | undefined,
   leftSideLength = 4,
   rightSideLength = 4
 ) => {
