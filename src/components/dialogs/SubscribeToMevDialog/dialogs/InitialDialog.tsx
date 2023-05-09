@@ -103,10 +103,10 @@ export function InitialDialog({
               Please{' '}
               <Link
                 className="inline font-medium underline-offset-2 hover:underline"
-                href="https://ethereum.org/en/community/research/#liquid-staking-and-derivatives"
+                href="https://usedappnode.notion.site/How-to-change-your-fee-recipient-85ca6d30bfba4ae1a093d5e63e09c9e8"
                 rel="noopener noreferrer"
                 target="_blank">
-                follow these instructions
+                follow these instructions ↗
               </Link>{' '}
               to change the fee recipient and try again.
             </p>
