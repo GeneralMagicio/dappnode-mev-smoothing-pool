@@ -85,14 +85,21 @@ export function UnsubscribeDialog({
         </div>
       )}
       <div>
-        <Button
-          isDisabled={contractWrite.isLoading || waitForTransaction.isLoading}
-          onPress={() => contractWrite.write?.()}>
-          {waitForTransaction.isError ? 'Try again' : 'Unsubscribe'}
-        </Button>
-        <Button buttonType="secondary" className="mt-4" onPress={handleClose}>
-          Cancel
-        </Button>
+        {!waitForTransaction.isLoading && (
+          <>
+            <Button
+              isDisabled={contractWrite.isLoading}
+              onPress={() => contractWrite.write?.()}>
+              {waitForTransaction.isError ? 'Try again' : 'Unsubscribe'}
+            </Button>
+            <Button
+              buttonType="secondary"
+              className="mt-4"
+              onPress={handleClose}>
+              Cancel
+            </Button>
+          </>
+        )}
       </div>
     </>
   )

@@ -123,15 +123,23 @@ export function DepositDialog({
           </div>
         </div>
       )}
+
       <div>
-        <Button
-          isDisabled={contractWrite.isLoading || waitForTransaction.isLoading}
-          onPress={() => contractWrite.write?.()}>
-          {waitForTransaction.isError ? 'Try again' : 'Deposit'}
-        </Button>
-        <Button buttonType="secondary" className="mt-4" onPress={handleClose}>
-          Cancel
-        </Button>
+        {!waitForTransaction.isLoading && (
+          <>
+            <Button
+              isDisabled={contractWrite.isLoading}
+              onPress={() => contractWrite.write?.()}>
+              {waitForTransaction.isError ? 'Try again' : 'Deposit'}
+            </Button>
+            <Button
+              buttonType="secondary"
+              className="mt-4"
+              onPress={handleClose}>
+              Cancel
+            </Button>
+          </>
+        )}
       </div>
     </>
   )
