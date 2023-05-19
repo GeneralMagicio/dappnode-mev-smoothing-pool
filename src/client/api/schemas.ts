@@ -10,7 +10,7 @@ export const BlockSchema = z.object({
     z.literal('wrongfeerecipient'),
   ]),
   rewardWei: z.number(),
-  rewardType: z.union([z.literal('mev'), z.literal('vanila')]),
+  rewardType: z.union([z.literal('mev'), z.literal('vanila'), z.literal('')]),
   withdrawalAddress: z.string(),
 })
 
