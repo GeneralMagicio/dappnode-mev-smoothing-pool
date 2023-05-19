@@ -8,6 +8,7 @@ interface MyRewardsSectionProps {
   rewards: number
   title: string
   tooltip: string
+  type?: 'default' | 'pending'
 }
 
 export function MyRewardsSection({
@@ -16,7 +17,10 @@ export function MyRewardsSection({
   rewards,
   title,
   tooltip,
+  type = 'default',
 }: MyRewardsSectionProps) {
+  const trimmedReward = toFixedNoTrailingZeros(rewards, 4)
+
   return (
     <section
       className={clsx(
@@ -35,7 +39,12 @@ export function MyRewardsSection({
         />
       </div>
       <p className="text-lg font-bold leading-8 sm:mt-5 sm:text-base md:text-2xl">
-        {toFixedNoTrailingZeros(rewards, 4)}
+        {type === 'pending' ? (
+          <span className="text-green-600/80">+{trimmedReward}</span>
+        ) : (
+          trimmedReward
+        )}
+
         <span className="ml-2 text-base font-normal text-DAppGray sm:text-sm md:text-lg">
           ETH
         </span>

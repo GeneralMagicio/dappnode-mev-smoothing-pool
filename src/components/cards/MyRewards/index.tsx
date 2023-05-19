@@ -33,28 +33,30 @@ export function MyRewards({
             My Rewards
           </h3>
           <MyRewardsSection
-            icon={<AccumulatedRewardsIcon />}
-            rewards={totalAccumulatedRewards}
-            title="Total Accumulated"
-            tooltip="Total rewards earned from all your staking pools"
-          />
-          <MyRewardsSection
-            className="my-6"
+            className="pb-2 sm:border-none sm:pb-0"
             icon={<ClaimableRewardsIcon />}
             rewards={claimableRewards}
             title="Claimable"
-            tooltip="Rewards that are ready to be claimed"
-          />
-          <MyRewardsSection
-            className="mb-8"
-            icon={<PendingRewardsIcon />}
-            rewards={pendingRewards}
-            title="Pending"
-            tooltip="Rewards that are still pending to be claimed"
+            tooltip="Rewards ready to be claimed from all your validators"
           />
           <ClaimRewardsDialog
             claimableRewards={claimableRewards}
             disabledTrigger={isDisabled}
+          />
+          <MyRewardsSection
+            className="mb-6 mt-2 pt-2 sm:border-t sm:pt-6"
+            icon={<PendingRewardsIcon />}
+            rewards={+pendingRewards}
+            title="Pending"
+            tooltip="Non-confirmed rewards that will become claimable after proposing a block"
+            type="pending"
+          />
+          <MyRewardsSection
+            className="mb-8"
+            icon={<AccumulatedRewardsIcon />}
+            rewards={totalAccumulatedRewards}
+            title="Lifetime earned"
+            tooltip="Claimable now + already claimed in the past"
           />
         </>
       )}
