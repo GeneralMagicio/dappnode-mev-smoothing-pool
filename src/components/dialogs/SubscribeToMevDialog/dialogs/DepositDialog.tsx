@@ -1,7 +1,6 @@
 import { DialogProps } from '../types'
-import { useEffect } from 'react'
 import Link from 'next/link'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import {
   useContractWrite,
   useWaitForTransaction,
@@ -20,27 +19,27 @@ import { SMOOTHING_POOL_ADDRESS } from '@/utils/config'
 
 interface DepositDialogProps extends DialogProps {
   validatorId: number
+  setShowCloseButton: (show: boolean) => void
 }
 
 export function DepositDialog({
   steps,
   validatorId,
+  setShowCloseButton,
   handleClose,
   handleChangeDialogState,
 }: DepositDialogProps) {
   const { address } = useAccount()
   const { chain } = useNetwork()
+  const queryClient = useQueryClient()
 
   const configQuery = useQuery({
     queryKey: ['config'],
     queryFn: fetchConfig,
   })
 
-  // eslint-disable-next-line
-  // @ts-ignore
   const abi = [...contractInterface] as const
 
-  // eslint-disable-next-line
   const contractWrite = useContractWrite({
     address: SMOOTHING_POOL_ADDRESS,
     abi,
@@ -51,16 +50,22 @@ export function DepositDialog({
       from: address,
       value: utils.parseUnits(configQuery.data?.collateralInWei || '0', 'wei'),
     },
+    onSuccess: () => {
+      setShowCloseButton(false)
+    },
   })
 
   const waitForTransaction = useWaitForTransaction({
     hash: contractWrite.data?.hash,
+    confirmations: 2,
+    onSuccess: () => {
+      setShowCloseButton(true)
+      handleChangeDialogState('success')
+      queryClient.invalidateQueries({
+        queryKey: ['validators', address],
+      })
+    },
   })
-
-  useEffect(() => {
-    if (!waitForTransaction.isSuccess) return
-    handleChangeDialogState('success')
-  }, [waitForTransaction.isSuccess, handleChangeDialogState])
 
   return (
     <>
