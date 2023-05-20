@@ -49,6 +49,7 @@ export function WithdrawDialog({
 
   const waitForTransaction = useWaitForTransaction({
     hash: contractWrite.data?.hash,
+    confirmations: 2,
   })
 
   useEffect(() => {
