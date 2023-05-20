@@ -1,7 +1,7 @@
 import { DialogProps } from '../types'
 import { useEffect } from 'react'
 import Link from 'next/link'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import {
   useContractWrite,
   useWaitForTransaction,
@@ -30,17 +30,15 @@ export function DepositDialog({
 }: DepositDialogProps) {
   const { address } = useAccount()
   const { chain } = useNetwork()
+  const queryClient = useQueryClient()
 
   const configQuery = useQuery({
     queryKey: ['config'],
     queryFn: fetchConfig,
   })
 
-  // eslint-disable-next-line
-  // @ts-ignore
   const abi = [...contractInterface] as const
 
-  // eslint-disable-next-line
   const contractWrite = useContractWrite({
     address: SMOOTHING_POOL_ADDRESS,
     abi,
@@ -56,6 +54,11 @@ export function DepositDialog({
   const waitForTransaction = useWaitForTransaction({
     hash: contractWrite.data?.hash,
     confirmations: 2,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['validators', address],
+      })
+    },
   })
 
   useEffect(() => {

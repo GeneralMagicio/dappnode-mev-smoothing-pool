@@ -20,8 +20,7 @@ export function UnsubscribeDialog({
   handleClose,
 }: UnsubscribeDialogProps) {
   const { chain } = useNetwork()
-  // eslint-disable-next-line
-  // @ts-ignore
+
   const abi = [...contractInterface] as const
 
   const contractWrite = useContractWrite({
