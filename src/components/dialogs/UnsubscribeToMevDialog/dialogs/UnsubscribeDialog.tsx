@@ -1,9 +1,14 @@
 import { DialogProps } from '../types'
 import Link from 'next/link'
-import { useEffect } from 'react'
-import { useNetwork, useContractWrite, useWaitForTransaction } from 'wagmi'
+import {
+  useAccount,
+  useNetwork,
+  useContractWrite,
+  useWaitForTransaction,
+} from 'wagmi'
 import { AiOutlineInfoCircle } from 'react-icons/ai'
 
+import { useQueryClient } from '@tanstack/react-query'
 import { StepProgressBar } from '@/components/common/StepProgressBar'
 import { Button } from '@/components/common/Button'
 import contractInterface from '@/contract/abi.json'
@@ -11,17 +16,20 @@ import { SMOOTHING_POOL_ADDRESS } from '@/utils/config'
 
 interface UnsubscribeDialogProps extends DialogProps {
   validatorId: number
+  setShowCloseButton: (show: boolean) => void
 }
 
 export function UnsubscribeDialog({
-  validatorId,
   steps,
+  validatorId,
+  setShowCloseButton,
   handleChangeDialogState,
   handleClose,
 }: UnsubscribeDialogProps) {
+  const { address } = useAccount()
   const { chain } = useNetwork()
-  // eslint-disable-next-line
-  // @ts-ignore
+  const queryClient = useQueryClient()
+
   const abi = [...contractInterface] as const
 
   const contractWrite = useContractWrite({
@@ -30,16 +38,22 @@ export function UnsubscribeDialog({
     mode: 'recklesslyUnprepared',
     functionName: 'unsubscribeValidator',
     args: [validatorId],
+    onSuccess: () => {
+      setShowCloseButton(false)
+    },
   })
 
   const waitForTransaction = useWaitForTransaction({
     hash: contractWrite.data?.hash,
+    confirmations: 2,
+    onSuccess: () => {
+      setShowCloseButton(true)
+      handleChangeDialogState('success')
+      queryClient.invalidateQueries({
+        queryKey: ['validators', address],
+      })
+    },
   })
-
-  useEffect(() => {
-    if (!waitForTransaction.isSuccess) return
-    handleChangeDialogState('success')
-  }, [waitForTransaction.isSuccess, handleChangeDialogState])
 
   return (
     <>

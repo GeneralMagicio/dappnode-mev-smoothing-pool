@@ -24,7 +24,7 @@ export function SubscribeToMevDialog({
 }: SubscribeToMevDialogProps) {
   const { chain } = useNetwork()
   const [dialogState, setDialogState] = useState<IDialogStates>('initial')
-
+  const [showCloseButton, setShowCloseButton] = useState<boolean>(true)
   const { open, handleOpenChange, handleClose } = useDialog()
 
   const handleCloseDialog = () => {
@@ -42,6 +42,7 @@ export function SubscribeToMevDialog({
       disabledTrigger={chain?.unsupported}
       handleOpenChange={handleOpenChangeDialog}
       open={open}
+      showCloseButton={showCloseButton}
       subtitle="Subscribe"
       triggerButtonProp="outline"
       triggerText="Subscribe">
@@ -65,6 +66,7 @@ export function SubscribeToMevDialog({
             <DepositDialog
               handleChangeDialogState={setDialogState}
               handleClose={handleCloseDialog}
+              setShowCloseButton={setShowCloseButton}
               steps={steps}
               validatorId={validatorId}
             />
