@@ -29,6 +29,7 @@ export function UnsubscribeToMevDialog({
 }: UnsubscribeToMevDialogProps) {
   const { chain } = useNetwork()
   const [dialogState, setDialogState] = useState<IDialogStates>('initial')
+  const [showCloseButton, setShowCloseButton] = useState<boolean>(true)
 
   const { open, handleOpenChange, handleClose } = useDialog()
 
@@ -47,6 +48,7 @@ export function UnsubscribeToMevDialog({
       disabledTrigger={chain?.unsupported}
       handleOpenChange={handleOpenChangeDialog}
       open={open}
+      showCloseButton={showCloseButton}
       subtitle="Unsubscribe and Claim rewards"
       triggerButtonProp="outline"
       triggerText="Unsubscribe">
@@ -75,6 +77,7 @@ export function UnsubscribeToMevDialog({
             <UnsubscribeDialog
               handleChangeDialogState={setDialogState}
               handleClose={handleCloseDialog}
+              setShowCloseButton={setShowCloseButton}
               steps={steps}
               validatorId={validatorId}
             />

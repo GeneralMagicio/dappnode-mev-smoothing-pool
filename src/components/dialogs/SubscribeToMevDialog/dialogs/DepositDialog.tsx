@@ -1,5 +1,4 @@
 import { DialogProps } from '../types'
-import { useEffect } from 'react'
 import Link from 'next/link'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import {
@@ -20,11 +19,13 @@ import { SMOOTHING_POOL_ADDRESS } from '@/utils/config'
 
 interface DepositDialogProps extends DialogProps {
   validatorId: number
+  setShowCloseButton: (show: boolean) => void
 }
 
 export function DepositDialog({
   steps,
   validatorId,
+  setShowCloseButton,
   handleClose,
   handleChangeDialogState,
 }: DepositDialogProps) {
@@ -49,22 +50,22 @@ export function DepositDialog({
       from: address,
       value: utils.parseUnits(configQuery.data?.collateralInWei || '0', 'wei'),
     },
+    onSuccess: () => {
+      setShowCloseButton(false)
+    },
   })
 
   const waitForTransaction = useWaitForTransaction({
     hash: contractWrite.data?.hash,
     confirmations: 2,
     onSuccess: () => {
+      setShowCloseButton(true)
+      handleChangeDialogState('success')
       queryClient.invalidateQueries({
         queryKey: ['validators', address],
       })
     },
   })
-
-  useEffect(() => {
-    if (!waitForTransaction.isSuccess) return
-    handleChangeDialogState('success')
-  }, [waitForTransaction.isSuccess, handleChangeDialogState])
 
   return (
     <>

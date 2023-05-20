@@ -10,7 +10,7 @@ import {
 } from 'wagmi'
 import { AiOutlineInfoCircle } from 'react-icons/ai'
 import { utils } from 'ethers'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useDebounce } from 'use-debounce'
 import { Button } from '@/components/common/Button'
 import { SMOOTHING_POOL_ADDRESS } from '@/utils/config'
@@ -41,16 +41,14 @@ export function InitialDialog({
 
   const waitForTransaction = useWaitForTransaction({
     hash: contractWrite.data?.hash,
+    onSuccess: () => {
+      handleChangeDialogState('success')
+    },
   })
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEthAmount(Number(e.target.value))
   }
-
-  useEffect(() => {
-    if (!waitForTransaction.isSuccess) return
-    handleChangeDialogState('success')
-  }, [waitForTransaction.isSuccess, handleChangeDialogState])
 
   return (
     <>

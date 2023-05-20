@@ -1,6 +1,5 @@
 import { DialogProps } from '../types'
-import { useEffect } from 'react'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import Link from 'next/link'
 import {
   useAccount,
@@ -26,6 +25,7 @@ export function WithdrawDialog({
 }: WithdrawDialogProps) {
   const { chain } = useNetwork()
   const { address } = useAccount()
+  const queryClient = useQueryClient()
 
   const onChainProofQuery = useQuery({
     queryKey: ['onchain-proof', address],
@@ -33,8 +33,6 @@ export function WithdrawDialog({
     enabled: !!address,
   })
 
-  // eslint-disable-next-line
-  // @ts-ignore
   const abi = [...contractInterface] as const
 
   const contractWrite = useContractWrite({
@@ -52,12 +50,13 @@ export function WithdrawDialog({
   const waitForTransaction = useWaitForTransaction({
     hash: contractWrite.data?.hash,
     confirmations: 2,
+    onSuccess: () => {
+      handleChangeDialogState('success')
+      queryClient.invalidateQueries({
+        queryKey: ['onchain-proof', address],
+      })
+    },
   })
-
-  useEffect(() => {
-    if (!waitForTransaction.isSuccess) return
-    handleChangeDialogState('success')
-  }, [waitForTransaction.isSuccess, handleChangeDialogState])
 
   return (
     <>
