@@ -1,4 +1,3 @@
-import { AxiosError } from 'axios'
 import { apiClient } from './client'
 import { endpoints } from './config'
 import {
@@ -10,6 +9,7 @@ import {
   onChainProofSchema,
   registeredRelaysSchema,
 } from './schemas'
+import { AxiosError } from 'axios'
 import { convertKeysToCamelCase } from '@/utils/case'
 
 export const validateServerStatus = async () => {
