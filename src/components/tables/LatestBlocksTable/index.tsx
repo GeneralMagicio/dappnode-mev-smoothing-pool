@@ -11,10 +11,9 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import { useSearchInput } from '@/hooks/useSearchInput'
-import { addEthSuffix } from '@/utils/web3'
+import { addEthSuffix, shortenEthAddress } from '@/utils/web3'
 import { toFixedNoTrailingZeros } from '@/utils/decimals'
 import { getBeaconChainExplorer } from '@/utils/config'
-import { shortenEthAddress } from '@/utils/web3'
 import type { Block } from '../types'
 
 const columnHelper = createColumnHelper<Block>()

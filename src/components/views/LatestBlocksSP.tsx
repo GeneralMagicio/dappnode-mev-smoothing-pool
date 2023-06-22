@@ -1,12 +1,10 @@
 import { LatestBlocksTable } from '../tables/LatestBlocksTable'
 import { useQuery } from '@tanstack/react-query'
-import { useNetwork } from 'wagmi'
 import type { Block } from '@/components/tables/types'
 import { fetchAllBlocks } from '@/client/api/queryFunctions'
 import { weiToEth } from '@/utils/web3'
 
 export function LatestBlocksSP() {
-  const { chain } = useNetwork()
   const { data, isLoading } = useQuery({
     queryKey: ['latest-blocks'],
     queryFn: fetchAllBlocks,
@@ -41,7 +39,7 @@ export function LatestBlocksSP() {
   return (
     <div className="mt-8">
       <LatestBlocksTable
-        blockExplorerUrl={'https://prater.beaconcha.in'}
+        blockExplorerUrl="https://prater.beaconcha.in"
         data={blocks}
         isLoading={isLoading}
       />
