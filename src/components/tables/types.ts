@@ -2,10 +2,16 @@ import type { Warnings } from './MyValidatorsTable/components/WarningIcon'
 
 export interface Block {
   slot: number
-  proposer: `0x${string}`
+  proposer: Proposer
   rewardType: 'vanila' | 'mev' | ''
   reward: number
   blockType: 'okpoolproposal' | 'missedproposal' | 'wrongfeerecipient'
+}
+
+interface Proposer {
+  withdrawalAddress: `0x${string}`
+  validatorKey: `0x${string}`
+  validatorIndex: number
 }
 
 export interface Validator {
