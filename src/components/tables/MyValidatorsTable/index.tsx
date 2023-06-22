@@ -1,6 +1,7 @@
 import { WarningIcon } from './components/WarningIcon'
 import { Skeleton } from './components/Skeleton'
 import { NotConnectedWarning } from './components/NotConnectedWarning'
+import { ServerErrorWarning } from './components/ServerErrorWarning'
 import { headerTooltip, PAGE_SIZE } from './config'
 import { TableLayout } from '../components/Table'
 import { HeaderTooltip } from '../components/HeaderTooltip'
@@ -81,15 +82,16 @@ interface MyValidatorsTableProps {
   data?: Validator[]
   isConnected?: boolean
   isLoading?: boolean
+  serverError?: boolean
 }
 
 export function MyValidatorsTable({
   data,
   isConnected,
   isLoading,
+  serverError,
 }: MyValidatorsTableProps) {
   const { searchInput, setSearchInput, debouncedSearchInput } = useSearchInput()
-
   const filteredData = useMemo(
     () =>
       data
@@ -132,6 +134,10 @@ export function MyValidatorsTable({
 
   if (isLoading) {
     return <Skeleton title="My Validators" />
+  }
+
+  if (serverError) {
+    return <ServerErrorWarning title="My Validators" />
   }
 
   return (
