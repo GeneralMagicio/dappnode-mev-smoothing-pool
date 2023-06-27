@@ -3,7 +3,7 @@ import type { Warnings } from './MyValidatorsTable/components/WarningIcon'
 export interface Block {
   slot: number
   proposer: Proposer
-  rewardType: 'vanila' | 'mev' | ''
+  rewardType: 'vanila' | 'mev' | 'unknownrewardtype' | ''
   reward: number
   blockType: 'okpoolproposal' | 'missedproposal' | 'wrongfeerecipient'
 }
