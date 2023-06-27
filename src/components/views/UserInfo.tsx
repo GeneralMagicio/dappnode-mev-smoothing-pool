@@ -7,6 +7,7 @@ import type { Validator } from '@/components/tables/types'
 import {
   fetchOnChainProof,
   fetchValidatorsByDepositor,
+  validateServerStatus,
 } from '@/client/api/queryFunctions'
 
 export function UserInfo() {
@@ -23,6 +24,7 @@ export function UserInfo() {
     queryFn: () => fetchOnChainProof(address),
     enabled: !!address,
   })
+  const serverStatus = useQuery(['serverStatus'], validateServerStatus)
 
   const totalAccumulatedRewards = weiToEth(
     onChainProofQuery.data?.totalAccumulatedRewardsWei
@@ -59,12 +61,13 @@ export function UserInfo() {
           data={tableData}
           isConnected={isConnected}
           isLoading={validatorsQuery.isLoading}
+          serverError={!serverStatus.data?.ready}
         />
       </div>
       <div className="col-span-4 sm:order-2 sm:col-span-1">
         <MyRewards
           claimableRewards={claimableRewards}
-          isLoading={!isConnected}
+          isLoading={!serverStatus.data?.ready || !isConnected}
           pendingRewards={pendingRewards}
           totalAccumulatedRewards={totalAccumulatedRewards}
           isDisabled={
