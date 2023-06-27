@@ -14,6 +14,15 @@ const data: Validator[] = [
     subscribed: true,
   },
   {
+    address: '0x95222290DD7278Aa3Ddd389Cc1E1d165CC4BAfe5',
+    pending: 1.21,
+    accumulated: 0.12,
+    warning: 'banned',
+    validatorId: 1,
+    validatorKey: '0x95222290DD7278Aa3Ddd389Cc1E1d165CC4BAfe5',
+    subscribed: true,
+  },
+  {
     address: '0x388C818CA8B9251b393131C08a736A67ccB19297',
     pending: 1.21,
     accumulated: 0.12,
