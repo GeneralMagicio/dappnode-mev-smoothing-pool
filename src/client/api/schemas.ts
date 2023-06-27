@@ -22,9 +22,6 @@ export const ValidatorSchema = z.object({
   withdrawalAddress: z.string(),
   validatorIndex: z.number(),
   validatorKey: z.string(),
-  proposedBlock: z.array(z.any()).or(z.null()),
-  missedBlocks: z.array(z.any()).or(z.null()),
-  wrongFeeBlocks: z.array(z.any()).or(z.null()),
 })
 
 export const StatusSchema = z.object({
