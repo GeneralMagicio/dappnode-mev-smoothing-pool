@@ -72,7 +72,7 @@ const getColumns = (blackExplorerUrl?: string) => [
           ? 'Proposed'
           : blockType === 'missedproposal'
           ? 'Missed'
-          : 'Wrong Free'
+          : 'Wrong Fee'
       return formattedBlockType
     },
   }),
