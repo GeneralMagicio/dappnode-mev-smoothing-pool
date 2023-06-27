@@ -9,16 +9,21 @@ export const BlockSchema = z.object({
     z.literal('missedproposal'),
     z.literal('wrongfeerecipient'),
   ]),
-  rewardWei: z.number(),
-  rewardType: z.union([z.literal('mev'), z.literal('vanila'), z.literal('')]),
+  rewardWei: z.string(),
+  rewardType: z.union([
+    z.literal('vanila'),
+    z.literal('mev'),
+    z.literal('unknownrewardtype'),
+    z.literal(''),
+  ]),
   withdrawalAddress: z.string(),
 })
 
 export const ValidatorSchema = z.object({
   status: z.string(),
-  accumulatedRewardsWei: z.number().or(z.null()),
-  pendingRewardsWei: z.number().or(z.null()),
-  collateralWei: z.number().or(z.null()),
+  accumulatedRewardsWei: z.string().or(z.null()),
+  pendingRewardsWei: z.string().or(z.null()),
+  collateralWei: z.string().or(z.null()),
   withdrawalAddress: z.string(),
   validatorIndex: z.number(),
   validatorKey: z.string(),
