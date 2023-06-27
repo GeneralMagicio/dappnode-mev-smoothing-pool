@@ -11,7 +11,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import { useSearchInput } from '@/hooks/useSearchInput'
-import { addEthSuffix } from '@/utils/web3'
+import { addEthSuffix, shortenEthAddress } from '@/utils/web3'
 import { toFixedNoTrailingZeros } from '@/utils/decimals'
 import { getBeaconChainExplorer } from '@/utils/config'
 import type { Block } from '../types'
@@ -43,10 +43,10 @@ const getColumns = (blackExplorerUrl?: string) => [
       return (
         <Link
           className="font-medium underline"
-          href={`${blackExplorerUrl}/address/${proposer}`}
+          href={`${blackExplorerUrl}/validator/${proposer.validatorIndex}`}
           rel="noopener noreferrer"
           target="_blank">
-          {proposer.toLocaleString()}
+          {shortenEthAddress(proposer.validatorKey.toLocaleString())}
         </Link>
       )
     },
@@ -96,7 +96,7 @@ export function LatestBlocksTable({
     () =>
       data
         ?.filter((row) => {
-          const address = row.proposer.toLowerCase()
+          const address = row.proposer.withdrawalAddress.toLowerCase()
           const search = debouncedSearchInput.toLowerCase()
           return (
             address.includes(search) &&
