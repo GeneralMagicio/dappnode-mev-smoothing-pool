@@ -33,7 +33,6 @@ export function UserInfo() {
   const pendingRewards = weiToEth(onChainProofQuery.data?.pendingRewardsWei)
 
   let tableData: Validator[] = []
-
   if (validatorsQuery.data) {
     tableData = validatorsQuery.data.map(
       ({
@@ -61,7 +60,7 @@ export function UserInfo() {
           data={tableData}
           isConnected={isConnected}
           isLoading={validatorsQuery.isLoading}
-          serverError={!serverStatus.data?.ready}
+          serverError={validatorsQuery.isError || !serverStatus.data?.ready}
         />
       </div>
       <div className="col-span-4 sm:order-2 sm:col-span-1">
