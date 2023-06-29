@@ -32,6 +32,19 @@ export function UserInfo() {
   const claimableRewards = weiToEth(onChainProofQuery.data?.claimableRewardsWei)
   const pendingRewards = weiToEth(onChainProofQuery.data?.pendingRewardsWei)
 
+  const setWarning = (status: string) => {
+    switch (status) {
+      case 'yellowcard':
+        return 'yellow'
+      case 'redcard':
+        return 'red'
+      case 'banned':
+        return 'banned'
+      default:
+        return 'none'
+    }
+  }
+
   let tableData: Validator[] = []
   if (validatorsQuery.data) {
     tableData = validatorsQuery.data.map(
@@ -48,7 +61,7 @@ export function UserInfo() {
         subscribed: status === 'active',
         validatorId: validatorIndex,
         validatorKey: validatorKey as `0x${string}`,
-        warning: 'none',
+        warning: setWarning(status),
       })
     )
   }
