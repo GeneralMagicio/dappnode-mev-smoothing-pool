@@ -65,7 +65,9 @@ const columns = [
     header: '',
     cell: (info) => {
       const isSubscribed = info.getValue()
-      const { validatorKey, validatorId } = info.row.original
+      const { validatorKey, validatorId, warning } = info.row.original
+      const isBanned = warning === 'banned'
+      if (isBanned) return null
       return isSubscribed ? (
         <UnsubscribeToMevDialog validatorId={validatorId} />
       ) : (
